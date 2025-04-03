@@ -14,7 +14,7 @@ global.owner = [
 ]
 
 global.creadorbot = [
-   ['51927238856', 'Cristian Escobar', true]
+   ['584242773183', 'Cristian Escobar', true]
 ]
 
 global.mods = ['51990841568', '51965911060']
@@ -22,7 +22,7 @@ global.prems = ['51965911060']
 
 
 global.packname = 'ShadowUtra'
-global.botname = '(✦◠‿◠)ShadowBot-MD'
+global.botname = '(✦◠‿◠)Shadow'
 global.wm = '⏤͟͟͞͞⋆⬪࣪ꥈ☕★ ׄ ꒱ Shadow ୭'
 global.author = 'By Criss'
 global.dev = '© Powered by Moon Force Team'
