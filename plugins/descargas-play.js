@@ -1,87 +1,68 @@
-import yts from 'yt-search';
-import fetch from 'node-fetch';
-import { prepareWAMessageMedia, generateWAMessageFromContent } from '@whiskeysockets/baileys';
+import fetch from "node-fetch";
+import yts from "yt-search";
 
-const handler = async (m, { conn, args, usedPrefix }) => {
-    if (!args[0]) return conn.reply(m.chat, '*[ ℹ️ ] Ingresa un título de Youtube.*\n\n*[ 💡 ] Ejemplo:* Corazón Serrano - Mix Poco Yo', m);
+// API en formato Base64
+const encodedApi = "aHR0cHM6Ly9hcGkudnJlZGVuLndlYi5pZC9hcGkveXRtcDM=";
 
-    await m.react('🕓');
+// Función para decodificar la URL de la API
+const getApiUrl = () => Buffer.from(encodedApi, "base64").toString("utf-8");
+
+// Función para obtener datos de la API con reintentos
+const fetchWithRetries = async (url, maxRetries = 2) => {
+  for (let attempt = 0; attempt <= maxRetries; attempt++) {
     try {
-        let searchResults = await searchVideos(args.join(" "));
-
-        if (!searchResults.length) throw new Error('No se encontraron resultados.');
-
-        let video = searchResults[0];
-        let thumbnail = await (await fetch(video.miniatura)).buffer();
-
-        let messageText = `\`DESCARGAS - PLAY\`\n\n`;
-        messageText += `${video.titulo}\n\n`;
-        messageText += `*⌛ Duración:* ${video.duracion || 'No disponible'}\n`;
-        messageText += `*👤 Autor:* ${video.canal || 'Desconocido'}\n`;
-        messageText += `*📆 Publicado:* ${convertTimeToSpanish(video.publicado)}\n`;
-        messageText += `*🖇️ Url:* ${video.url}\n`;
-
-        await conn.sendMessage(m.chat, {
-            image: thumbnail,
-            caption: messageText,
-            footer: dev,
-            contextInfo: {
-                mentionedJid: [m.sender],
-                forwardingScore: 999,
-                isForwarded: true
-            },
-            buttons: [
-                {
-                    buttonId: `${usedPrefix}ytmp3 ${video.url}`,
-                    buttonText: { displayText: 'Audio' },
-                    type: 1,
-                },
-                {
-                    buttonId: `${usedPrefix}ytmp4 ${video.url}`,
-                    buttonText: { displayText: 'Vídeo' },
-                    type: 1,
-                }
-            ],
-            headerType: 1,
-            viewOnce: true
-        }, { quoted: m });
-
-        await m.react('✅');
-    } catch (e) {
-        console.error(e);
-        await m.react('✖️');
-        conn.reply(m.chat, '*`Error al buscar el video.`*', m);
+      const response = await fetch(url);
+      const data = await response.json();
+      if (data?.status === 200 && data.result?.download?.url) {
+        return data.result;
+      }
+    } catch (error) {
+      console.error(`Intento ${attempt + 1} fallido:`, error.message);
     }
+  }
+  throw new Error("No se pudo obtener la música después de varios intentos.");
 };
 
+// Handler principal
+let handler = async (m, { conn, text }) => {
+  if (!text || !text.trim()) return;
+
+  try {
+    // Reaccionar al mensaje inicial con 🕒
+    await conn.sendMessage(m.chat, { react: { text: "🕒", key: m.key } });
+
+    // Buscar en YouTube
+    const searchResults = await yts(text.trim());
+    const video = searchResults.videos[0];
+    if (!video) throw new Error("No se encontraron resultados.");
+
+    // Obtener datos de descarga
+    const apiUrl = `${getApiUrl()}?url=${encodeURIComponent(video.url)}`;
+    const apiData = await fetchWithRetries(apiUrl);
+
+    // Enviar solo el audio sin mensaje adicional
+    const audioMessage = {
+      audio: { url: apiData.download.url },
+      mimetype: "audio/mpeg",
+      fileName: `${video.title}.mp3`,
+    };
+
+    await conn.sendMessage(m.chat, audioMessage, { quoted: m });
+
+    // Reaccionar al mensaje original con ✅
+    await conn.sendMessage(m.chat, { react: { text: "✅", key: m.key } });
+
+  } catch (error) {
+    console.error("Error:", error);
+
+    // Reaccionar al mensaje original con ❌
+    await conn.sendMessage(m.chat, { react: { text: "❌", key: m.key } });
+  }
+};
+
+// Cambia el Regex para que reconozca ".play"
+handler.command = ['play', 'mp3'];
 handler.help = ['play'];
-handler.tags = ['descargas'];
-handler.command = ['play'];
+handler.tags = ['play'];
+
 export default handler;
-
-async function searchVideos(query) {
-    try {
-        const res = await yts(query);
-        return res.videos.slice(0, 10).map(video => ({
-            titulo: video.title,
-            url: video.url,
-            miniatura: video.thumbnail,
-            canal: video.author.name,
-            publicado: video.timestamp || 'No disponible',
-            vistas: video.views || 'No disponible',
-            duracion: video.duration.timestamp || 'No disponible'
-        }));
-    } catch (error) {
-        console.error('Error en yt-search:', error.message);
-        return [];
-    }
-}
-
-function convertTimeToSpanish(timeText) {
-    return timeText
-        .replace(/year/, 'año').replace(/years/, 'años')
-        .replace(/month/, 'mes').replace(/months/, 'meses')
-        .replace(/day/, 'día').replace(/days/, 'días')
-        .replace(/hour/, 'hora').replace(/hours/, 'horas')
-        .replace(/minute/, 'minuto').replace(/minutes/, 'minutos');
-}
