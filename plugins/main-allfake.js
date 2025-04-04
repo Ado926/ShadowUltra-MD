@@ -133,12 +133,12 @@ global.packsticker = `ꨴ ☁꣺ꤪ꤬꤯ꨬꨶ ̷̸̲̼̈́ Mᴏᴏɴ Fᴏʀᴄ�
 //FAKES
 global.fkontak = { key: { participants:"0@s.whatsapp.net", "remoteJid": "status@broadcast", "fromMe": false, "id": "Halo" }, "message": { "contactMessage": { "vcard": `BEGIN:VCARD\nVERSION:3.0\nN:Sy;Bot;;;\nFN:y\nitem1.TEL;waid=${m.sender.split('@')[0]}:${m.sender.split('@')[0]}\nitem1.X-ABLabel:Ponsel\nEND:VCARD` }}, "participant": "0@s.whatsapp.net" }
 
-global.fake = { contextInfo: { isForwarded: true, forwardedNewsletterMessageInfo: { newsletterJid: '120363318267632676@newsletter', newsletterName: "˚₊·͟͟͟͟͟͟͞͞͞͞͞͞𝑴𝒐𝒐𝒏 𝑭𝒐𝒓𝒄𝒆 - 𝑻𝒆𝒂𝒎 ೃ࿔₊•", serverMessageId: -1 }
+global.fake = { contextInfo: { isForwarded: true, forwardedNewsletterMessageInfo: { newsletterJid: '120363417092486861@newsletter', newsletterName: "˚₊·͟͟͟͟͟͟͞͞͞͞͞͞𝑴𝒐𝒐𝒏 𝑭𝒐𝒓𝒄𝒆 - 𝑻𝒆𝒂𝒎 ೃ࿔₊•", serverMessageId: -1 }
 }}, { quoted: m }
 
 //ID CANALES
 global.idchannel = '120363417092486861@newsletter'
-global.canalIdM = ["120363417092486861@newsletter", "120363357231409846@newsletter", "120363357231409846@newsletter"]
+global.canalIdM = ["120363417092486861@newsletter", "120363417092486861@newsletter", "120363417092486861@newsletter"]
 global.canalNombreM = ["⏤͟͟͞͞𝖲𝗁ᥲძ𝗈ա  ⚡︎  𝖴𝗅𝗍𝗋𝖺۵࿐", "𝑺𝒉𝒂𝒅𝒐𝒘 𝑼𝒍𝒕𝒓𝒂 - 𝑴𝑫", "⏤͟͟͞͞☆ 𝑺𝒉𝒂𝒅𝒐𝒘 - 𝑻𝒆𝒔𝒕"]
 global.channelRD = await getRandomChannel()
 // global.estilo = { key: {  fromMe: false, participant: `0@s.whatsapp.net`, ...(false ? { remoteJid: "3876577197-120363302285079181@g.us" } : {}) }, message: { orderMessage: { itemCount : -999999, status: 1, surface : 1, message: `${packname}`, orderTitle: 'Bang', thumbnail: icons, sellerJid: '0@s.whatsapp.net'}}}
