@@ -1,13 +1,10 @@
 import fetch from "node-fetch";
 import yts from "yt-search";
 
-// API en formato Base64
+// API 😎
 const encodedApi = "aHR0cHM6Ly9hcGkudnJlZGVuLndlYi5pZC9hcGkveXRtcDM=";
-
-// Función para decodificar la URL de la API
 const getApiUrl = () => Buffer.from(encodedApi, "base64").toString("utf-8");
 
-// Función para obtener datos de la API con reintentos
 const fetchWithRetries = async (url, maxRetries = 2) => {
   for (let attempt = 0; attempt <= maxRetries; attempt++) {
     try {
@@ -23,47 +20,69 @@ const fetchWithRetries = async (url, maxRetries = 2) => {
   throw new Error("No se pudo obtener la música después de varios intentos.");
 };
 
-// Handler principal
 let handler = async (m, { conn, text }) => {
-  if (!text || !text.trim()) return;
+  if (!text || !text.trim()) {
+    await conn.sendMessage(m.chat, { react: { text: "❓", key: m.key } });
+    return conn.reply(
+      m.chat,
+      '*[ ℹ️ ] Ingresa el nombre de una rola.*\n\n*[ 💡 ] Ejemplo:* Tren al sur',
+      m
+    );
+  }
 
   try {
-    // Reaccionar al mensaje inicial con 🕒
     await conn.sendMessage(m.chat, { react: { text: "🕒", key: m.key } });
 
-    // Buscar en YouTube
     const searchResults = await yts(text.trim());
     const video = searchResults.videos[0];
     if (!video) throw new Error("No se encontraron resultados.");
 
-    // Obtener datos de descarga
     const apiUrl = `${getApiUrl()}?url=${encodeURIComponent(video.url)}`;
     const apiData = await fetchWithRetries(apiUrl);
 
-    // Enviar solo el audio sin mensaje adicional
-    const audioMessage = {
+    // Mensaje de espera decorado
+    const waitMessage = `
+「✦」Descargando *<${video.title}>*
+
+> ✦ Canal » *${video.author.name}*
+> ✰ Vistas » *${video.views.toLocaleString()}*
+> ⴵ Duración » *${video.timestamp}*
+> ✐ Publicación » *${video.ago}*
+> 🜸 Link » ${video.url}`.trim();
+
+    // Enviar mensaje decorado rápido
+    conn.sendMessage(m.chat, { text: waitMessage }, { quoted: m });
+
+    // Enviar audio como PTT (nota de voz)
+    await conn.sendMessage(m.chat, {
       audio: { url: apiData.download.url },
       mimetype: "audio/mpeg",
+      ptt: true,
       fileName: `${video.title}.mp3`,
-    };
+      contextInfo: {
+        externalAdReply: {
+          title: video.title,
+          body: "Shadow Ultra 💚",
+          thumbnailUrl: video.thumbnail,
+          mediaType: 2,
+          mediaUrl: video.url,
+          sourceUrl: video.url,
+          showAdAttribution: true
+        }
+      }
+    }, { quoted: m });
 
-    await conn.sendMessage(m.chat, audioMessage, { quoted: m });
-
-    // Reaccionar al mensaje original con ✅
     await conn.sendMessage(m.chat, { react: { text: "✅", key: m.key } });
 
   } catch (error) {
     console.error("Error:", error);
-
-    // Reaccionar al mensaje original con ❌
     await conn.sendMessage(m.chat, { react: { text: "❌", key: m.key } });
+    conn.reply(m.chat, "*[ ❌ ] Error al procesar tu solicitud.*", m);
   }
 };
 
-// Cambia el Regex para que reconozca ".play"
-handler.command = ['play', 'mp3'];
-handler.help = ['play'];
+handler.command = ['playaudio'];
+handler.help = ['playaudio'];
 handler.tags = ['play'];
 
 export default handler;
-        
