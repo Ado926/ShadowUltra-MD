@@ -1,42 +1,42 @@
-//Codígo creado por Destroy wa.me/584120346669
-
 import fs from 'fs';
 import path from 'path';
 
 let handler = async (m, { conn }) => {
-    m.react('☀️');
+    m.react('🌟'); // Reacción al mensaje
 
     const messages = [
-        "¡Buenos días! 🌞 Espero que tu día esté lleno de alegría y oportunidades brillantes.",
-        "¡Buenos días! 🔆 Que este nuevo día te traiga sonrisas y momentos inolvidables.",
-        "¡Buenos días! 🌤️ Espero que hoy encuentres belleza en cada pequeño detalle.",
-        "¡Buenos días! ✨ Que este día esté lleno de inspiración y que cada paso te acerque a tus sueños.",
-        "¡Buenos días! 🌅 Espero que hoy sea un día lleno de luz y amor.",
-        "¡Buenos días! 🌄 Que el día de hoy esté lleno de alegría y oportunidades para crecer."
+        "¡Hola! 🌟 Que este momento esté lleno de felicidad y energía positiva.",
+        "¡Qué gusto verte! 🌈 Recuerda que cada día es una nueva oportunidad.",
+        "¡Espero que estés disfrutando! 🦋 La vida está llena de pequeñas maravillas.",
+        "¡Hola! 🌼 Hoy puede ser el comienzo de algo increíble.",
+        "¡Saludos! 🌺 Recuerda que eres más fuerte de lo que piensas.",
+        "¡Hola! 🌞 Siempre hay un motivo para sonreír, ¡encuéntralo!"
     ];
 
     let randomMessage = messages[Math.floor(Math.random() * messages.length)];
 
     if (m.isGroup) {
-        let videos = [
-            'https://qu.ax/ZVcM.mp4', 
-            'https://qu.ax/tCblW.mp4', 
-            'https://qu.ax/kGzZr.mp4',
-            'https://qu.ax/iioMV.mp4',
-            'https://qu.ax/JgSvx.mp4',
-            'https://qu.ax/dvrKi.mp4',
-            'https://qu.ax/TZuhK.mp4'
+        let images = [
+            'https://example.com/image1.jpg', 
+            'https://example.com/image2.jpg', 
+            'https://example.com/image3.jpg',
+            'https://example.com/image4.jpg',
+            'https://example.com/image5.jpg',
+            'https://example.com/image6.jpg'
         ];
 
-        const video = videos[Math.floor(Math.random() * videos.length)];
+        const image = images[Math.floor(Math.random() * images.length)];
 
-        conn.sendMessage(m.chat, { video: { url: video }, gifPlayback: true, caption: randomMessage }, { quoted: m });
+        conn.sendMessage(m.chat, { image: { url: image }, caption: randomMessage }, { quoted: m });
+    } else {
+        conn.sendMessage(m.chat, { text: randomMessage }, { quoted: m });
     }
-}
+};
 
-handler.help = ['dias/days'];
+handler.help = ['saludo/greeting'];
 handler.tags = ['grupo'];
-handler.command = ['dias', 'dia', 'days'];
+handler.command = ['saludo', 'greet', 'hi'];
 handler.group = true;
 
 export default handler;
+            
