@@ -1,3 +1,5 @@
+//Codígo creado por Destroy wa.me/584120346669
+
 import fs from 'fs';
 import path from 'path';
 
