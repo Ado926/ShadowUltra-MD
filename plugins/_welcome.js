@@ -27,7 +27,7 @@ export async function before(m, { conn, participants, groupMetadata }) {
 
 const despMessage = global.db.data.chats[m.chat]?.despMessage || '👁️👄👁️ Ya se fue otro pendejo ojalá se vaya otro pronto😂 se fue pero no lloren que seguro otro pendejo aparecerá✨';
 
-     let bye = `𓆩°»｡˚ ∾･⁙･ ღ ➵ ⁘ ➵ ღ ･⁙･∾ ˚ ｡«°𓆪\n❍⌇─➭ *Sᴇᴇ ʏᴏᴜ Lᴀᴛᴇʀ ::*\n๑ ˚ ͙۪۪̥@${m.messageStubParameters[0].split`@`[0]} 👁️👄👁️꒱\n\n┌ *\`ᴘᴜᴛᴀ ᴇʟɪᴍɪɴᴀᴅᴀ\`*\n└┬ *ᴇx ᴍᴇᴍʙᴇʀ*\n    ︱·˚Adiós , ya no serás el pendejo del grupo. ¡Buena suerte! 😆,.\n    └╾ׅ╴ׂꨪ╌╼᪶╾᪶ ۪〫┄ׅ⃯፝֟╌╼᪶֘╾᪶╌ׅꨪ╶۪╼┘\n\n> © ᴘᴏᴡᴇʀᴇᴅ ʙʏ ᴍᴏᴏɴ ғᴏʀᴄᴇ ᴛᴇᴀᴍ`
+     let bye = `𓆩°»｡˚ ∾･⁙･ ღ ➵ ⁘ ➵ ღ ･⁙･∾ ˚ ｡«°𓆪\n❍⌇─➭ *Sᴇᴇ ʏᴏᴜ Lᴀᴛᴇʀ ::*\n๑ ˚ ͙۪۪̥@${m.messageStubParameters[0].split`@`[0]} pero no lloren de seguro vendra otro pendejo acubrir su lugar👁️👄👁️꒱\n\n┌ *\`ᴘᴜᴛᴀ ᴇʟɪᴍɪɴᴀᴅᴀ\`*\n└┬ *ᴇx ᴍᴇᴍʙᴇʀ*\n    ︱·˚Adiós , ya no serás el pendejo del grupo. ¡Buena suerte! 😆,.\n    └╾ׅ╴ׂꨪ╌╼᪶╾᪶ ۪〫┄ׅ⃯፝֟╌╼᪶֘╾᪶╌ׅꨪ╶۪╼┘\n\n> © ᴘᴏᴡᴇʀᴇᴅ ʙʏ ᴍᴏᴏɴ ғᴏʀᴄᴇ ᴛᴇᴀᴍ`
       await conn.sendMessage(m.chat, { image: img, caption: bye, mentions: [who] }, { quoted: fkontak })
     }
   }
