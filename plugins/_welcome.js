@@ -25,9 +25,9 @@ export async function before(m, { conn, participants, groupMetadata }) {
       await conn.sendMessage(m.chat, { image: img, caption: bienvenida, mentions: [who] }, { quoted: fkontak })
     } else if (m.messageStubType === WAMessageStubType.GROUP_PARTICIPANT_REMOVE || m.messageStubType === WAMessageStubType.GROUP_PARTICIPANT_LEAVE) {
 
-const despMessage = global.db.data.chats[m.chat]?.despMessage || 'Se Fue😹';
+const despMessage = global.db.data.chats[m.chat]?.despMessage || '👁️👄👁️ Ya se fue otro pendejo... ojalá se vaya otro pronto.😂 👁️👄👁️ '${name}'se fue, pero no lloren, que seguro otro pendejo aparecerá. ✨,';
 
-     let bye = `𓆩°»｡˚ ∾･⁙･ ღ ➵ ⁘ ➵ ღ ･⁙･∾ ˚ ｡«°𓆪\n❍⌇─➭ *Sᴇᴇ ʏᴏᴜ Lᴀᴛᴇʀ ::*\n๑ ˚ ͙۪۪̥@${m.messageStubParameters[0].split`@`[0]} 🖕🏻꒱\n\n┌ *\`ᴘᴜᴛᴀ ᴇʟɪᴍɪɴᴀᴅᴀ\`*\n└┬ *ᴇx ᴍᴇᴍʙᴇʀ*\n    ︱·˚👻 Ojalá y lo violen los ngros.\n    └╾ׅ╴ׂꨪ╌╼᪶╾᪶ ۪〫┄ׅ⃯፝֟╌╼᪶֘╾᪶╌ׅꨪ╶۪╼┘\n\n> © ᴘᴏᴡᴇʀᴇᴅ ʙʏ ᴍᴏᴏɴ ғᴏʀᴄᴇ ᴛᴇᴀᴍ`
+     let bye = `𓆩°»｡˚ ∾･⁙･ ღ ➵ ⁘ ➵ ღ ･⁙･∾ ˚ ｡«°𓆪\n❍⌇─➭ *Sᴇᴇ ʏᴏᴜ Lᴀᴛᴇʀ ::*\n๑ ˚ ͙۪۪̥@${m.messageStubParameters[0].split`@`[0]} 👁️👄👁️꒱\n\n┌ *\`ᴘᴜᴛᴀ ᴇʟɪᴍɪɴᴀᴅᴀ\`*\n└┬ *ᴇx ᴍᴇᴍʙᴇʀ*\n    ︱·˚Adiós ${name}, ya no serás el pendejo del grupo. ¡Buena suerte! 😆,.\n    └╾ׅ╴ׂꨪ╌╼᪶╾᪶ ۪〫┄ׅ⃯፝֟╌╼᪶֘╾᪶╌ׅꨪ╶۪╼┘\n\n> © ᴘᴏᴡᴇʀᴇᴅ ʙʏ ᴍᴏᴏɴ ғᴏʀᴄᴇ ᴛᴇᴀᴍ`
       await conn.sendMessage(m.chat, { image: img, caption: bye, mentions: [who] }, { quoted: fkontak })
     }
   }
