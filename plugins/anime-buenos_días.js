@@ -2,7 +2,8 @@ import fs from 'fs';
 import path from 'path';
 
 let handler = async (m, { conn }) => {
-    m.react('🌟'); // Reacción al mensaje
+    // Si tu entorno permite reacciones así, perfecto. Si no, cámbialo a await conn.sendMessage react.
+    m.react?.('🌟'); 
 
     const messages = [
         "¡Hola! 🌟 Que este momento esté lleno de felicidad y energía positiva.",
@@ -13,23 +14,26 @@ let handler = async (m, { conn }) => {
         "¡Hola! 🌞 Siempre hay un motivo para sonreír, ¡encuéntralo!"
     ];
 
-    let randomMessage = messages[Math.floor(Math.random() * messages.length)];
+    const randomMessage = messages[Math.floor(Math.random() * messages.length)];
 
     if (m.isGroup) {
-        let images = [
+        const gifs = [
             'https://files.catbox.moe/p5ohdf.mp4', 
             'https://files.catbox.moe/b8attz.mp4', 
-            'https://files.catbox.moe/s0317p.mp4',
             'https://files.catbox.moe/s0317p.mp4',
             'https://files.catbox.moe/esipij.mp4',
             'https://files.catbox.moe/088r37.mp4'
         ];
 
-        const image = images[Math.floor(Math.random() * images.length)];
+        const gif = gifs[Math.floor(Math.random() * gifs.length)];
 
-        conn.sendMessage(m.chat, { image: { url: image }, caption: randomMessage }, { quoted: m });
+        await conn.sendMessage(m.chat, {
+            video: { url: gif },
+            caption: randomMessage,
+            gifPlayback: true
+        }, { quoted: m });
     } else {
-        conn.sendMessage(m.chat, { text: randomMessage }, { quoted: m });
+        await conn.sendMessage(m.chat, { text: randomMessage }, { quoted: m });
     }
 };
 
