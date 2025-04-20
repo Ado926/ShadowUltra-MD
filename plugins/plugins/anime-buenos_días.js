@@ -17,12 +17,12 @@ let handler = async (m, { conn }) => {
 
     if (m.isGroup) {
         let images = [
-            'https://example.com/image1.jpg', 
-            'https://example.com/image2.jpg', 
-            'https://example.com/image3.jpg',
-            'https://example.com/image4.jpg',
-            'https://example.com/image5.jpg',
-            'https://example.com/image6.jpg'
+            'https://files.catbox.moe/p5ohdf.mp4', 
+            'https://files.catbox.moe/b8attz.mp4', 
+            'https://files.catbox.moe/s0317p.mp4',
+            'https://files.catbox.moe/s0317p.mp4',
+            'https://files.catbox.moe/esipij.mp4',
+            'https://files.catbox.moe/088r37.mp4'
         ];
 
         const image = images[Math.floor(Math.random() * images.length)];
@@ -39,4 +39,3 @@ handler.command = ['saludo', 'greet', 'hi'];
 handler.group = true;
 
 export default handler;
-            
