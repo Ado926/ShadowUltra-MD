@@ -17,12 +17,12 @@ let handler = async (m, { conn }) => {
 
     if (m.isGroup) {
         let images = [
-            'https://files.catbox.moe/p5ohdf.mp4', 
-            'https://files.catbox.moe/b8attz.mp4', 
-            'https://files.catbox.moe/s0317p.mp4',
-            'https://files.catbox.moe/s0317p.mp4',
-            'https://files.catbox.moe/esipij.mp4',
-            'https://files.catbox.moe/088r37.mp4'
+            'https://files.catbox.moe/6zr7md.jpg', 
+            'https://files.catbox.moe/oi142u.jpg', 
+            'https://files.catbox.moe/ss3hve.jpg',
+            'https://files.catbox.moe/9wbsvg.jpg',
+            'https://files.catbox.moe/c8dyrr.jpg',
+            'https://files.catbox.moe/slgyh7.jpg'
         ];
 
         const image = images[Math.floor(Math.random() * images.length)];
