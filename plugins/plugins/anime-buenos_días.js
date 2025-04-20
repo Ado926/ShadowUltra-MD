@@ -33,9 +33,9 @@ let handler = async (m, { conn }) => {
     }
 };
 
-handler.help = ['saludo/greeting'];
+handler.help = ['buenos dias/greeting'];
 handler.tags = ['grupo'];
-handler.command = ['saludo', 'greet', 'hi'];
+handler.command = ['buenos dias', 'greet', 'hi'];
 handler.group = true;
 
 export default handler;
