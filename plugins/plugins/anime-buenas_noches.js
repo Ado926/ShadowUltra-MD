@@ -2,40 +2,40 @@ import fs from 'fs';
 import path from 'path';
 
 let handler = async (m, { conn }) => {
-    m.react('🌕');
-    
+    m.react('🌙'); // Reacción al mensaje
+
     const messages = [
-        "¡Buenas noches! 🌜 Espero que tengas un descanso reparador y sueñes con cosas hermosas.",
-        "¡Buenas noches! 🌟 Que la tranquilidad de la noche te envuelva y te prepare para un nuevo día.",
-        "¡Buenas noches! 🌌 Recuerda que cada estrella en el cielo es un sueño esperando a hacerse realidad.",
-        "¡Buenas noches! 🌙 Deja atrás las preocupaciones de hoy y abraza la paz de la noche.",
-        "¡Buenas noches! 🌠 Espero que tus sueños sean tan brillantes como las estrellas que iluminan el cielo.",
-        "¡Buenas noches! 💤 Que encuentres serenidad en el silencio de la noche y te despiertes renovado."
+        "🌜 ¡Buenas noches! Que el descanso te renueve y los sueños te guíen a un mejor mañana.",
+        "🌌 La noche es el lienzo donde los sueños toman forma. ¡Que tengas un descanso reparador!",
+        "✨ Relájate y deja que la calma de la noche te envuelva. ¡Dulces sueños!",
+        "🌠 Hoy puede haber sido un día difícil, pero el descanso traerá nuevas oportunidades mañana.",
+        "🌙 ¡Buenas noches! Que las estrellas iluminen tu camino en tus sueños.",
+        "💤 Cierra los ojos, respira profundo y deja que el mundo descanse contigo."
     ];
 
     let randomMessage = messages[Math.floor(Math.random() * messages.length)];
 
     if (m.isGroup) {
         const videos = [
-            'https://files.catbox.moe/0n2bf5.mp4',
-            'https://files.catbox.moe/zua131.mp4',
-            'https://files.catbox.moe/0im4vk.mp4',
-            'https://files.catbox.moe/9cm0x9.mp4',
-            'https://files.catbox.moe/7kxjhv.mp4',
-            'https://files.catbox.moe/id09sr.mp4',
-            'https://files.catbox.moe/3kyhf0.mp4',
-            'https://files.catbox.moe/4qokmi.mp4'
+            'https://files.catbox.moe/u0ezkl.mp4',
+            'https://files.catbox.moe/e63yib.mp4',
+            'https://files.catbox.moe/4jj0pq.mp4',
+            'https://files.catbox.moe/q8lkyy.mp4',
+            'https://files.catbox.moe/4tpkt3.mp4',
+            'https://files.catbox.moe/0z5pav.mp4'
         ];
-     
+
         const video = videos[Math.floor(Math.random() * videos.length)];
 
         conn.sendMessage(m.chat, { video: { url: video }, gifPlayback: true, caption: randomMessage }, { quoted: m });
+    } else {
+        conn.sendMessage(m.chat, { text: randomMessage }, { quoted: m });
     }
-}
+};
 
-handler.help = ['nights/noches'];
+handler.help = ['buenasnoches/night'];
 handler.tags = ['grupo'];
-handler.command = ['nights', 'noche', 'noches'];
+handler.command = ['buenasnoches', 'noche', 'night'];
 handler.group = true;
 
 export default handler;
