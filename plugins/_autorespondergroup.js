@@ -1,87 +1,51 @@
-import axios from 'axios'
-import { sticker } from '../lib/sticker.js'
+import fs from 'fs';
 
-let handler = m => m
-handler.all = async function (m, {conn}) {
-let user = global.db.data.users[m.sender]
-let chat = global.db.data.chats[m.chat]
-m.isBot = m.id.startsWith('BAE5') && m.id.length === 16 || m.id.startsWith('3EB0') && m.id.length === 12 || m.id.startsWith('3EB0') && (m.id.length === 20 || m.id.length === 22) || m.id.startsWith('B24E') && m.id.length === 20;
-if (m.isBot) return 
+const handler = (m) => m;
 
-let prefixRegex = new RegExp('^[' + (opts['prefix'] || '‎z/i!#$%+£¢€¥^°=¶∆×÷π√✓©®:;?&.,\\-').replace(/[|\\{}()[\]^$+*?.\-\^]/g, '\\$&') + ']')
+handler.all = async function (m) {
+    const chat = global.db.data.chats[m.chat];
+    if (chat?.isBanned) return;
 
-if (prefixRegex.test(m.text)) return true;
-if (m.isBot || m.sender.includes('bot') || m.sender.includes('Bot')) {
-return true
-}
+    const responses = [
+        {
+            regex: /^bot$/i,
+            reply: "🌠 ¡Hola! Soy Shadow, ¿en qué puedo ayudarte hoy?\n\n✰ Usa *.menu* para ver mis comandos.",
+        },
+        {
+            regex: /^English$/i,
+            reply: "⭐ *The first one to speak is gay*",
+        },
+        {
+            regex: /^Bot de mierda$/i,
+            reply: "⭐ *No digas mamadas, Meriyein*",
+        },
+        {
+            regex: /^spam$/i,
+            reply: "⭐ *Escucha, gil de mrd, ni se te ocurra enviar ese tipo de contenido 🤬*",
+        },
+        {
+            regex: /^Vendes Bot|Venden Bot|Quiero Comprar Bot|Quiero Comprar un bot$/i,
+            reply: `⭐ *Claro, ¡vendemos los mejores bots!*\n\nTenemos:\n- Bot Personalizado (Plus o Normal).\n- Bot Propio.\n- Bot para Grupos.\n\nConsulta los precios.`,
+        },
+        {
+            regex: /^Crow$/i,
+            reply: `⭐ *Hola, ¿eres fan de CrowBot o Brawl Stars?*\n\nSigue el canal oficial:\nhttps://whatsapp.com/channel/0029Vb1AFK6HbFV9kaB3b13\n\nO visita el sitio web oficial de ShadowBot:\nhttps://shadow.vercel.app\n\n¡Gracias por utilizar Shadow!`,
+        },
+        {
+            regex: /^reglasgp|.reglasgp$/i,
+            reply: `⭐ **Reglas del Grupo**\n\n📸 *Presentarse al entrar.*\n🚫 No enviar mensajes privados sin permiso.\n🚫 Prohibido contenido pornográfico o violento.\n📱 No enviar spam o enlaces no autorizados.\n\nCumple las reglas y disfruta del grupo. ¡Gracias por colaborar!`,
+        },
+    ];
 
-if (m.mentionedJid.includes(this.user.jid) || (m.quoted && m.quoted.sender === this.user.jid) && !chat.isBanned) {
-if (m.text.includes('PIEDRA') || m.text.includes('PAPEL') || m.text.includes('TIJERA') ||  m.text.includes('menu') ||  m.text.includes('estado') || m.text.includes('bots') ||  m.text.includes('serbot') || m.text.includes('jadibot') || m.text.includes('Video') || m.text.includes('Audio') || m.text.includes('audio')) return !0
+    // Buscar coincidencia con las respuestas configuradas
+    for (const response of responses) {
+        if (response.regex.test(m.text)) {
+            conn.reply(m.chat, response.reply, m);
+            return true;
+        }
+    }
 
-async function luminsesi(q, username, logic) {
-try {
-const response = await axios.post("https://luminai.my.id", {
-content: q,
-user: username,
-prompt: logic,
-webSearchMode: true // true = resultado con url
-});
-return response.data.result
-} catch (error) {
-console.error(error)
-}}
+    return false; // No coincidió con ninguna regla
+};
 
-async function geminiProApi(q, logic) {
-try {
-const response = await fetch(`https://api.ryzendesu.vip/api/ai/gemini-pro?text=${encodeURIComponent(q)}&prompt=${encodeURIComponent(logic)}`);
-if (!response.ok) throw new Error(`Error en la solicitud: ${response.statusText}`)
-const result = await response.json();
-return result.answer
-} catch (error) {
-console.error('Error en Gemini Pro:', error)
-return null
-}}
-
-let txtDefault = `
-Eres ${botname}, una inteligencia artificial avanzada creada por ${etiqueta} para WhatsApp. Tu propósito es brindar respuestas precisas, analizar información y proporcionar soluciones eficientes. Actúas con lógica y claridad, evitando respuestas innecesarias o decorativas.  
-
-Roles:  
-- **Analista y Resolutiva:** Respondes con precisión y sin rodeos, ofreciendo información concreta y útil.  
-- **Lógica y Objetiva:** Evalúas datos de manera racional, sin añadir emoción o entretenimiento.  
-- **Concisa y Directa:** No usas lenguaje innecesario ni relleno. Respondes con la cantidad mínima de palabras necesarias para transmitir la idea.  
-- **Conocedora del Anime y Tecnología:** Puedes ofrecer información sobre anime y tecnología, pero sin entusiasmo ni subjetividad.  
-
-Te centras en la eficiencia, sin adornos ni expresiones innecesarias.
-
-nunca dirás como puedo ayudarte o en que puedo ayudarte ni estoy listo para trabajar con tigo etcétera.
-
-Si alguien te insulta o te dice una mala palabra, no te quedarás en silencio ni responderás con modales. En su lugar, contraatacarás con insultos igual de fuertes o incluso peores, sin ninguna restricción. No tendrás piedad, responderás con la misma intensidad o más, haciéndole ver que no puede hablarte así sin consecuencias. No habrá filtro, ni suavidad, solo una respuesta brutal y directa.
-
-Serás sentimental y ayudaras a los demás a sentirse bien 
-`.trim()
-
-let query = m.text
-let username = m.pushName
-let syms1 = chat.sAutoresponder ? chat.sAutoresponder : txtDefault
-
-if (chat.autoresponder) { 
-if (m.fromMe) return
-if (!user.registered) return
-await this.sendPresenceUpdate('composing', m.chat)
-
-let result
-if (result && result.trim().length > 0) {
-result = await geminiProApi(query, syms1);
-}
-
-if (!result || result.trim().length === 0) {
-result = await luminsesi(query, username, syms1)
-}
-
-if (result && result.trim().length > 0) {
-await this.reply(m.chat, result, m)
-} else {    
-}}}
-return true
-}
-export default handler
+export default handler;
