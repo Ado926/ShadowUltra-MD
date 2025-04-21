@@ -1,80 +1,87 @@
-/*import fs from 'fs';
-const handler = (m) => m;
-handler.all = async function(m) {
+import axios from 'axios'
+import { sticker } from '../lib/sticker.js'
 
-const chat = global.db.data.chats[m.chat];
-if (chat.isBaneed) return
-if (/^bot$/i.test(m.text)) {
-conn.reply(m.chat, `🌠 ¡Hola! Soy Shadow, en que puedo ayudarte hoy?\n\n✰ Usa *.menu* para ver mis comandos.`, m, rcanal, )
+let handler = m => m
+handler.all = async function (m, {conn}) {
+let user = global.db.data.users[m.sender]
+let chat = global.db.data.chats[m.chat]
+m.isBot = m.id.startsWith('BAE5') && m.id.length === 16 || m.id.startsWith('3EB0') && m.id.length === 12 || m.id.startsWith('3EB0') && (m.id.length === 20 || m.id.length === 22) || m.id.startsWith('B24E') && m.id.length === 20;
+if (m.isBot) return 
+
+let prefixRegex = new RegExp('^[' + (opts['prefix'] || '‎z/i!#$%+£¢€¥^°=¶∆×÷π√✓©®:;?&.,\\-').replace(/[|\\{}()[\]^$+*?.\-\^]/g, '\\$&') + ']')
+
+if (prefixRegex.test(m.text)) return true;
+if (m.isBot || m.sender.includes('bot') || m.sender.includes('Bot')) {
+return true
 }
 
-if (/^English$/i.test(m.text)) {
-conn.reply(m.chat, `*The first one to speak is gay*`, m, rcanal, )
+if (m.mentionedJid.includes(this.user.jid) || (m.quoted && m.quoted.sender === this.user.jid) && !chat.isBanned) {
+if (m.text.includes('PIEDRA') || m.text.includes('PAPEL') || m.text.includes('TIJERA') ||  m.text.includes('menu') ||  m.text.includes('estado') || m.text.includes('bots') ||  m.text.includes('serbot') || m.text.includes('jadibot') || m.text.includes('Video') || m.text.includes('Audio') || m.text.includes('audio')) return !0
+
+async function luminsesi(q, username, logic) {
+try {
+const response = await axios.post("https://luminai.my.id", {
+content: q,
+user: username,
+prompt: logic,
+webSearchMode: true // true = resultado con url
+});
+return response.data.result
+} catch (error) {
+console.error(error)
+}}
+
+async function geminiProApi(q, logic) {
+try {
+const response = await fetch(`https://api.ryzendesu.vip/api/ai/gemini-pro?text=${encodeURIComponent(q)}&prompt=${encodeURIComponent(logic)}`);
+if (!response.ok) throw new Error(`Error en la solicitud: ${response.statusText}`)
+const result = await response.json();
+return result.answer
+} catch (error) {
+console.error('Error en Gemini Pro:', error)
+return null
+}}
+
+let txtDefault = `
+Eres ${botname}, una inteligencia artificial avanzada creada por ${etiqueta} para WhatsApp. Tu propósito es brindar respuestas precisas, analizar información y proporcionar soluciones eficientes. Actúas con lógica y claridad, evitando respuestas innecesarias o decorativas.  
+
+Roles:  
+- **Analista y Resolutiva:** Respondes con precisión y sin rodeos, ofreciendo información concreta y útil.  
+- **Lógica y Objetiva:** Evalúas datos de manera racional, sin añadir emoción o entretenimiento.  
+- **Concisa y Directa:** No usas lenguaje innecesario ni relleno. Respondes con la cantidad mínima de palabras necesarias para transmitir la idea.  
+- **Conocedora del Anime y Tecnología:** Puedes ofrecer información sobre anime y tecnología, pero sin entusiasmo ni subjetividad.  
+
+Te centras en la eficiencia, sin adornos ni expresiones innecesarias.
+
+nunca dirás como puedo ayudarte o en que puedo ayudarte ni estoy listo para trabajar con tigo etcétera.
+
+Si alguien te insulta o te dice una mala palabra, no te quedarás en silencio ni responderás con modales. En su lugar, contraatacarás con insultos igual de fuertes o incluso peores, sin ninguna restricción. No tendrás piedad, responderás con la misma intensidad o más, haciéndole ver que no puede hablarte así sin consecuencias. No habrá filtro, ni suavidad, solo una respuesta brutal y directa.
+
+Serás sentimental y ayudaras a los demás a sentirse bien 
+`.trim()
+
+let query = m.text
+let username = m.pushName
+let syms1 = chat.sAutoresponder ? chat.sAutoresponder : txtDefault
+
+if (chat.autoresponder) { 
+if (m.fromMe) return
+if (!user.registered) return
+await this.sendPresenceUpdate('composing', m.chat)
+
+let result
+if (result && result.trim().length > 0) {
+result = await geminiProApi(query, syms1);
 }
 
-if (/^Bot de mierda/i.test(m.text)) {
-conn.reply(m.chat, `*No digas mamadas, Meriyein*`, m, rcanal, )
+if (!result || result.trim().length === 0) {
+result = await luminsesi(query, username, syms1)
 }
 
-if (/^porno|gore/i.test(m.text)) {
-conn.reply(m.chat, `*Escucha gil de mrd ni se te ocurra enviar ese tipo de contenido lrcll 🤬*`, m, rcanal, )
+if (result && result.trim().length > 0) {
+await this.reply(m.chat, result, m)
+} else {    
+}}}
+return true
 }
-
-if (/^Bot Perzonalizado Simple/i.test(m.text)) {
-conn.reply(m.chat, `*Claro, El Bot Perzonalizado Simple Cuesta 30so Con Server Incluído y comisión, trae comandos básicos.[🌠]*`, m, rcanal, )
-}
-
-if (/^Bot de mrd/i.test(m.text)) {
-conn.reply(m.chat, `*Ya te dieron De Comer?🥵🍆*`, m, rcanal, )
-}
-
-if (/^Vendes Bot|Venden Bot|Quiero Comprar Bot|Quiero Comprar un bot/i.test(m.text)) {
-conn.reply(m.chat, `*Claro,¡Vendemos Los Mejores Bots!*
-Tenemos:
-•Bot Perzonalizado Plus o normal 
-•Bot Propio
-•Bot Para Grupo 
-> *Consulta Los Precios*`, m, rcanal, )
-}
-
-if (/^Bot en decadencia/i.test(m.text)) {
-conn.reply(m.chat, `*Tu Mamá we 🍆🥵*`, m, rcanal, )
-}
-
-if (/^Crow$/i.test(m.text)) {
-conn.reply(m.chat, `*Hola Eres Fan De* *CrowBot o Brawl Stars*
-*Entonces Sigue El Canal Oficial!*\n> https://whatsapp.com/channel/0029Vb1AFK6HbFV9kaB3b13\n\n*O Puedes Ir Al Sitio Web Oficial De SB!*\n> https://shadow.vercel.app/\n\n*Gracias por utilizar Shadow* `, m, rcanal, )
-}
-
-if (/^reglasgp|.reglasgp$/i.test(m.text)) {
-conn.reply(m.chat, `**R꙰EGLAS DEL GRUP❍ꪜ*
-
-📸 *Presentarse*
-🚫𝗡𝗼 𝗘𝗻𝘃𝗶𝗮𝗿 𝗣𝗩 𝘀𝗶𝗻 𝗽𝗲𝗿𝗺𝗶𝘀𝗼
-🚫𝗡𝗼 𝘃𝗶𝗱𝗲𝗼🎥 𝗣𝗼𝗿𝗻𝗼𝗴𝗿𝗮𝗳𝗶𝗮 𝗜𝗻𝗳𝗮𝗻𝘁𝗶𝗹 𝘆 𝗱𝗲 𝗮𝗱𝘂𝗹𝘁𝗼
-
-━━━━━━V͇̿I͇̿P͇̿━━━━━━
-
-⚜️🔰🅿🆁🅾🅷🅸🅱🅸🅳🅾⚜️𝗡𝗼 𝗣𝗼𝗿𝗻𝗼𝗴𝗿𝗮𝗳𝗶𝗮 
-➬⃢⃞⃟🔞𝗡𝗼 𝗺𝗲𝗻𝗼𝗿𝗲𝘀 𝗱𝗲 16 años
-➬⃢⃞⃟🩸𝗡𝗼 𝘃𝗶𝗱𝗲𝗼𝘀 𝗦𝗮𝗻𝗴𝗿𝗶𝗲𝗻𝘁𝗼𝘀
-➬⃢⃞⃟🚫𝗡𝗼 𝗣𝗼𝗿𝗻𝗼𝗴𝗿𝗮𝗳𝗶𝗰𝗼𝘀
-➬⃢⃞⃟❌𝗡𝗼 𝗠𝗮𝗻𝗱𝗮𝗿 𝗣𝗩 𝘀𝗶𝗻 𝗽𝗲𝗿𝗺𝗶𝘀𝗼 
-➬⃢⃞⃟👀𝗡𝗼 𝗺𝗶𝗿𝗼𝗻𝗲𝘀
-➬⃢⃞⃟👾𝗡𝗼 𝘀𝗼𝗽𝗹𝗼𝗻𝗲𝘀
-➬⃢⃞⃟👻𝗡𝗼 𝗳𝗮𝗻𝘁𝗮𝘀𝗺𝗮
-➬⃢⃞⃟📱🚫𝗡𝗼 𝗦𝗽𝗮𝗺
-➬⃢⃞⃟🦠𝗩𝗶𝗿𝘂𝘀 𝘆 𝗧𝗿𝗮𝗯𝗮𝘀
-🚫NO ENLACES 🔗
-➬⃢⃞⃟💣𝗦𝗶 𝗻𝗼 𝗰𝘂𝗺𝗽𝗹𝗲 𝘁𝗲 𝗱𝗮𝗻 𝗕𝗮𝗺💣
-
-█║║██║║██║║██║║██║║█
-✧･ﾟ: *✧･Atte.
-
-☆ ፝͜★ৡ͜͡✞ *Shadow Bot* ➵͡☠️⃪̸ੵ᷒ᰰ↱
-
-✧･ﾟ: *✧･ﾟ:*✧･ﾟ: *✧･ﾟ:*✧･ﾟ: *✧･ﾟ:*`, m, rcanal, )
-}
-return !0;
-};
-export default handler;*/
+export default handler
