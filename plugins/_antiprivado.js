@@ -14,11 +14,12 @@ export async function before(m, { conn, isAdmin, isBotAdmin, isOwner, isROwner }
 
   // Bloqueo de chats privados si la opción está activada
   if (bot.antiPrivate && !isOwner && !isROwner) {
-    const mensajeBloqueo = `⚠️ *Hola @${m.sender.split`@`[0]}*, mi creador ha desactivado los comandos en chats privados.\n\n🔗 *Únete al grupo oficial para usar el bot:* ${https://chat.whatsapp.com/BjxHLM1Ca8P4JPJ0gHl1tD}`;
+    const grupoURL = 'https://chat.whatsapp.com/BjxHLM1Ca8P4JPJ0gHl1tD'; // Define el enlace del grupo
+    const mensajeBloqueo = `⚠️ *Hola @${m.sender.split`@`[0]}*, mi creador ha desactivado los comandos en chats privados.\n\n🔗 *Únete al grupo oficial para usar el bot:* ${grupoURL}`;
     
     await conn.sendMessage(m.chat, { text: mensajeBloqueo, mentions: [m.sender] });
     await conn.updateBlockStatus(m.chat, 'block');
   }
 
   return false;
-      }
+}
