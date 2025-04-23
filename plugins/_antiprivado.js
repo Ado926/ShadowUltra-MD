@@ -16,8 +16,10 @@ export async function before(m, { conn, isAdmin, isBotAdmin, isOwner, isROwner }
   if (bot.antiPrivate && !isOwner && !isROwner) {
     const grupoURL = 'https://chat.whatsapp.com/BjxHLM1Ca8P4JPJ0gHl1tD'; // Define el enlace del grupo
     const mensajeBloqueo = `⚠️ *Hola @${m.sender.split`@`[0]}*, mi creador ha desactivado los comandos en chats privados.\n\n🔗 *Únete al grupo oficial para usar el bot:* ${grupoURL}`;
-    
-    await conn.sendMessage(m.chat, { text: mensajeBloqueo, mentions: [m.sender] });
+    const imagenURL = 'https://files.catbox.moe/l2ok2m.jpg'; // URL de la imagen
+
+    // Enviar la imagen junto con el mensaje de bloqueo
+    await conn.sendFile(m.chat, imagenURL, 'antiprivado.jpg', mensajeBloqueo, m, false, { mentions: [m.sender] });
     await conn.updateBlockStatus(m.chat, 'block');
   }
 
