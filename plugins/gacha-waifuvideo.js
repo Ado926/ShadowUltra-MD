@@ -34,30 +34,3 @@ let handler = async (m, { conn, args }) => {
         const character = characters.find(c => c.name.toLowerCase() === characterName);
 
         // Verificar si el personaje existe
-        if (!character) {
-            await conn.reply(m.chat, `《✧》No se ha encontrado el personaje *${characterName}*. Asegúrate de que el nombre esté correcto.`, m);
-            return;
-        }
-
-        // Seleccionar un video aleatorio del personaje
-        const randomVideo = character.vid[Math.floor(Math.random() * character.vid.length)];
-
-        const message = `❀ Nombre » *${character.name}*
-⚥ Género » *${character.gender}*
-❖ Fuente » *${character.source}*`;
-
-        // Enviar el video al chat
-        await conn.sendFile(m.chat, randomVideo, `${character.name}.mp4`, message, m);
-    } catch (error) {
-        console.error('Error al ejecutar waifuvideo:', error.message); // Log detallado en la consola
-        await conn.reply(m.chat, `✘ Error al cargar el video del personaje: ${error.message}`, m);
-    }
-};
-
-handler.help = ['waifuvideo <nombre del personaje>'];
-handler.tags = ['anime'];
-handler.command = ['waifuvideo', 'wvideo', 'charvideo', 'cvideo']; // Comandos disponibles
-handler.group = true;
-handler.register = true;
-
-export default handler;
