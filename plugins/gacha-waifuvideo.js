@@ -15,7 +15,8 @@ let handler = async (m, { conn, args }) => {
             ],
             vid: [
                 "https://files.catbox.moe/fyd68k.mp4",
-                "https://files.catbox.moe/l2txfh.mp4"
+                "https://files.catbox.moe/l2txfh.mp4",
+                "https://files.catbox.moe/extraAika.mp4" // URL adicional
             ],
             user: null,
             status: "Libre",
@@ -31,7 +32,8 @@ let handler = async (m, { conn, args }) => {
                 "https://qu.ax/r2dJc.jpg"
             ],
             vid: [
-                "https://files.catbox.moe/rj2tqv.mp4"
+                "https://files.catbox.moe/rj2tqv.mp4",
+                "https://files.catbox.moe/extraMariya.mp4" // URL adicional
             ],
             user: null,
             status: "Libre",
@@ -43,11 +45,12 @@ let handler = async (m, { conn, args }) => {
             value: "2500",
             source: "Re:Zero",
             img: [
-                "https://qu.ax/RemPic1.jpg",
-                "https://qu.ax/RemPic2.jpg"
+                "https://files.catbox.moe/15pfw9.jpg",
+                "https://files.catbox.moe/jb7jss.jpg"
             ],
             vid: [
-                "https://files.catbox.moe/RemVideo1.mp4"
+                "https://files.catbox.moe/5dahh9.mp4",
+                "https://files.catbox.moe/dela39.mp4" // URL adicional
             ],
             user: null,
             status: "Libre",
