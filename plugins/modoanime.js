@@ -1,52 +1,42 @@
-let isOtakuMode = false; // Variable para almacenar el estado del modo Otaku
+let isOtakuMode = false; // Variable para almacenar el estado del modo anime
 
-let handler = async (m, { conn, command }) => {
-    // Comando para alternar el modo Otaku
-    if (command === 'modianime') {
-        isOtakuMode = !isOtakuMode; // Alternar entre modo normal y modo Otaku
+let handler = async (m, { conn }) => {
+    // Activar/desactivar el modo anime con `.modoanime`
+    if (m.text.toLowerCase() === '.modoanime') {
+        isOtakuMode = !isOtakuMode; // Alternar entre modo normal y modo anime
 
-        const estado = isOtakuMode ? '🌸 ¡Modo Otaku Activado! 🌸' : '💼 Modo Normal Activado 💼';
+        const estado = isOtakuMode ? '🌸 ¡Modo Anime Activado! 🌸' : '💼 Modo Normal Activado 💼';
         const mensaje = isOtakuMode 
-            ? `¡Ohayo, nakama! 🌸 Ahora responderé con un estilo sugoi~ ¡Usa palabras clave para activar mi energía kawaii! ✨`
-            : `He vuelto a mi modo normal... ¡pero siempre tendrás mi poder nakama! 🌌`;
+            ? `¡Ohayo, nakama! 🌸 Ahora hablaré como un verdadero personaje de anime~ ¡Usa palabras clave para activar mis respuestas kawaii! ✨`
+            : `He vuelto a mi modo normal... ¡pero seguiré siendo tu nakama! 🌌`;
 
         await conn.reply(m.chat, `${estado}\n\n${mensaje}`, m);
         return;
     }
 
-    // Si el modo Otaku está activo, monitorear todos los mensajes
+    // Si el modo anime está activado, responder a las palabras clave automáticamente
     if (isOtakuMode) {
-        const palabrasClave = [
-            'hola eres otaku?',
-            'quién',
-            'eres',
-            'que',
-            'puedes',
-            'hacer',
-            'quieres ir al cuarto',
-            'conmigo'
-        ]; // Lista de palabras clave
-
+        const palabrasClave = ['hola', 'cómo estás?', 'eres Otaku', 'podemos ir a cuarto 👉👈']; // Lista de palabras clave
         const textoMensaje = m.text.toLowerCase(); // Convertir mensaje a minúsculas para comparar
 
         // Verificar si el mensaje contiene alguna palabra clave
         if (palabrasClave.some((palabra) => textoMensaje.includes(palabra))) {
-            const respuestasOtaku = [
-                '¡Konnichiwa, nakama! 🌸 ¿Cómo puedo ayudarte en esta aventura épica desu~?',
-                '¡Sugoi! Tu energía me inspira para ser el héroe de este shonen. 🔥✨',
-                '¡Hajimemashite, senpai! ¿Qué necesitas en este universo kawaii? 🌟',
-                '¡Baka baka! Parece que necesitas mi ayuda. Desu~ 😏',
-                '¡El poder de los nakama siempre triunfa! ¿Qué puedo hacer por ti? 🌸',
-                '¡Ohayo, senpai! Estoy listo para la siguiente misión, ¡cuenta conmigo! 🌟'
+            const respuestasAnime = [
+                '¡Konnichiwa, nakama! 🌸 Soy un auténtico Otaku, listo para una gran aventura desu~',
+                '¡Sugoi! Tu energía me inspira, ¿qué misión épica tienes en mente? 🔥✨',
+                '¡Hajimemashite, senpai! ¿Cómo puedo hacer este día más kawaii para ti? 🌟',
+                '¡Baka baka! Parece que necesitas mi ayuda. ¡Cuenta conmigo, nakama! 😏',
+                '¡Ohayo, nakama! Estoy listo para divertirnos, ¿qué quieres hacer hoy? 👉👈'
             ];
-            const respuestaAleatoria = respuestasOtaku[Math.floor(Math.random() * respuestasOtaku.length)];
+            const respuestaAleatoria = respuestasAnime[Math.floor(Math.random() * respuestasAnime.length)];
             await conn.reply(m.chat, respuestaAleatoria, m);
             return;
         }
     }
 };
-handler.help = ['modianime']; // Ayuda para el comando
-handler.tags = ['fun', 'anime']; // Etiquetas del comando
-handler.command = ['modianime']; // Comandos disponibles
+
+// Configuración para interceptar todos los mensajes
+handler.customPrefix = /.*/; 
+handler.command = []; // No depende de comandos específicos
 
 export default handler;
