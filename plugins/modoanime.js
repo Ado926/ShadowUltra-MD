@@ -14,7 +14,7 @@ let handler = async (m, { conn, command }) => {
         return;
     }
 
-    // Responder usando palabras clave si el modo Otaku está activado
+    // Si el modo Otaku está activo, monitorear todos los mensajes
     if (isOtakuMode) {
         const palabrasClave = [
             'hola eres otaku?',
@@ -26,6 +26,7 @@ let handler = async (m, { conn, command }) => {
             'quieres ir al cuarto',
             'conmigo'
         ]; // Lista de palabras clave
+
         const textoMensaje = m.text.toLowerCase(); // Convertir mensaje a minúsculas para comparar
 
         // Verificar si el mensaje contiene alguna palabra clave
@@ -36,20 +37,14 @@ let handler = async (m, { conn, command }) => {
                 '¡Hajimemashite, senpai! ¿Qué necesitas en este universo kawaii? 🌟',
                 '¡Baka baka! Parece que necesitas mi ayuda. Desu~ 😏',
                 '¡El poder de los nakama siempre triunfa! ¿Qué puedo hacer por ti? 🌸',
-                '¡Ohayo! Creo que esta aventura será increíble, ¡cuenta conmigo senpai! 🌟'
+                '¡Ohayo, senpai! Estoy listo para la siguiente misión, ¡cuenta conmigo! 🌟'
             ];
             const respuestaAleatoria = respuestasOtaku[Math.floor(Math.random() * respuestasOtaku.length)];
             await conn.reply(m.chat, respuestaAleatoria, m);
             return;
         }
     }
-    
-    // Respuesta normal si no hay palabras clave y el modo Otaku no está activado
-    if (!isOtakuMode) {
-        await conn.reply(m.chat, 'Estoy en modo normal, ¿qué puedo hacer por ti?', m);
-    }
 };
-
 handler.help = ['modianime']; // Ayuda para el comando
 handler.tags = ['fun', 'anime']; // Etiquetas del comando
 handler.command = ['modianime']; // Comandos disponibles
