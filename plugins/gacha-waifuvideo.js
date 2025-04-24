@@ -4,7 +4,7 @@ let handler = async (m, { conn, args }) => {
     // Base de datos de personajes directamente en el código
     const characters = [
         {
-            name: "Aika Sano",
+            name: "aika sano", // Convertido a minúsculas
             gender: "Mujer",
             value: "2000",
             source: "Ane wa Yanmama Junyuu-chuu",
@@ -22,36 +22,32 @@ let handler = async (m, { conn, args }) => {
             votes: 0
         },
         {
-            name: "Mariya Mikhailovna Kujou",
+            name: "mariya mikhailovna kujou", // Convertido a minúsculas
             gender: "Mujer",
             value: "1700",
             source: "Roshidere",
             img: [
                 "https://qu.ax/mxYOb.jpg",
-                "https://qu.ax/LpTBD.jpg",
-                "https://qu.ax/nqcqy.jpg"
+                "https://qu.ax/r2dJc.jpg"
             ],
             vid: [
-                "https://qu.ax/BRMGc.mp4",
-                "https://qu.ax/zRjHm.mp4"
+                "https://files.catbox.moe/rj2tqv.mp4"
             ],
             user: null,
             status: "Libre",
             votes: 0
         },
         {
-            name: "Umaru Doma",
+            name: "rem", // Personaje añadido
             gender: "Mujer",
-            value: "1000",
-            source: "Himouto! Umaru-chan",
+            value: "2500",
+            source: "Re:Zero",
             img: [
-                "https://files.catbox.moe/8e24l4.jpg",
-                "https://files.catbox.moe/8dnp1r.jpg",
-                "https://files.catbox.moe/bhvatf.jpg"
+                "https://qu.ax/RemPic1.jpg",
+                "https://qu.ax/RemPic2.jpg"
             ],
             vid: [
-                "https://files.catbox.moe/8e24l4.mp4",
-                "https://files.catbox.moe/8dnp1r.mp4"
+                "https://files.catbox.moe/RemVideo1.mp4"
             ],
             user: null,
             status: "Libre",
@@ -59,35 +55,35 @@ let handler = async (m, { conn, args }) => {
         }
     ];
 
-    try {
-        // Buscar el personaje por nombre
-        const character = characters.find(c => c.name.toLowerCase() === characterName);
+    // Buscar el personaje en la base de datos
+    const character = characters.find(c => c.name === characterName);
 
-        // Verificar si el personaje existe
-        if (!character) {
-            await conn.reply(m.chat, `《✧》No se ha encontrado el personaje *${characterName}*. Asegúrate de que el nombre esté correcto.`, m);
-            return;
-        }
+    if (!character) {
+        await conn.reply(m.chat, `⚠️ No se ha encontrado el personaje *${args.join(' ')}*. Asegúrate de que el nombre esté correcto.`, m);
+        return;
+    }
 
-        // Seleccionar un video aleatorio del personaje
-        const randomVideo = character.vid[Math.floor(Math.random() * character.vid.length)];
+    // Respuesta con los datos del personaje
+    const respuesta = `
+✨ *${character.name}* ✨
+📖 Fuente: *${character.source}*
+💎 Valor: *${character.value}*
+📂 Estado: *${character.status}*
+`;
 
-        const message = `❀ Nombre » *${character.name}*
-⚥ Género » *${character.gender}*
-❖ Fuente » *${character.source}*`;
+    // Enviar imágenes del personaje
+    for (const img of character.img) {
+        await conn.sendFile(m.chat, img, 'image.jpg', respuesta, m);
+    }
 
-        // Enviar el video al chat
-        await conn.sendFile(m.chat, randomVideo, `${character.name}.mp4`, message, m);
-    } catch (error) {
-        console.error('Error al ejecutar waifuvideo:', error.message); // Log detallado en la consola
-        await conn.reply(m.chat, `✘ Error al cargar el video del personaje: ${error.message}`, m);
+    // Enviar videos del personaje
+    for (const vid of character.vid) {
+        await conn.sendFile(m.chat, vid, 'video.mp4', '', m);
     }
 };
 
-handler.help = ['waifuvideo <nombre del personaje>'];
-handler.tags = ['anime'];
-handler.command = ['waifuvideo', 'wvideo', 'charvideo', 'cvideo']; // Comandos disponibles
-handler.group = true;
-handler.register = true;
+handler.help = ['character <nombre>'];
+handler.tags = ['fun', 'anime'];
+handler.command = ['waifuvideo', 'waifu']; // Comandos disponibles
 
 export default handler;
