@@ -1,8 +1,9 @@
 let isOtakuMode = false; // Variable para almacenar el estado del modo Otaku
 
-let handler = async (m, { conn, command }) => {
-    // Comando para alternar el modo Otaku
-    if (command === 'modianime') {
+// Función que interceptará TODOS los mensajes recibidos en el chat
+let handler = async (m, { conn }) => {
+    // Verifica si el usuario activó el modo Otaku con `.modianime`
+    if (m.text.toLowerCase() === '.modianime') {
         isOtakuMode = !isOtakuMode; // Alternar entre modo normal y modo Otaku
 
         const estado = isOtakuMode ? '🌸 ¡Modo Otaku Activado! 🌸' : '💼 Modo Normal Activado 💼';
@@ -14,7 +15,7 @@ let handler = async (m, { conn, command }) => {
         return;
     }
 
-    // Si el modo Otaku está activo, monitorear todos los mensajes
+    // Si el modo Otaku está activado, el bot analizará TODOS los mensajes recibidos
     if (isOtakuMode) {
         const palabrasClave = [
             'hola eres otaku?',
@@ -45,8 +46,9 @@ let handler = async (m, { conn, command }) => {
         }
     }
 };
-handler.help = ['modianime']; // Ayuda para el comando
-handler.tags = ['fun', 'anime']; // Etiquetas del comando
-handler.command = ['modianime']; // Comandos disponibles
+
+// Configuración del handler para que **intercepte todos los mensajes**
+handler.customPrefix = /.*/; // Esto permite que el bot analice TODOS los mensajes
+handler.command = []; // No depende de comandos específicos
 
 export default handler;
