@@ -1,20 +1,21 @@
 let handler = async (m, { conn }) => {
-    const mensajeUsuario = m.text.toLowerCase().trim();
+    // URL del audio que se enviará
+    const audioUrl = "https://files.catbox.moe/s2c6vi.mp3"; // Reemplaza con tu enlace de audio válido
 
-    if (mensajeUsuario === "yo soy antomico") {
-        const audioUrl = "https://files.catbox.moe/s2c6vi.mp3"; // Reemplázalo con un enlace válido
-        const mensaje = "🔊 *¡Antomico ha hablado! Escucha su audio:*";
+    // Mensaje que acompaña el audio
+    const mensaje = "🔊 *¡I am atomic! Escucha el audio épico:*";
 
-        try {
-            await conn.sendFile(m.chat, audioUrl, "antomico.mp3", mensaje, m);
-        } catch (error) {
-            console.error("Error al enviar el audio:", error);
-            await conn.reply(m.chat, "⚠️ Ocurrió un error al intentar enviar el audio.", m);
-        }
+    // Enviar el audio al usuario
+    try {
+        await conn.sendFile(m.chat, audioUrl, "atomic.mp3", mensaje, m);
+    } catch (error) {
+        console.error("Error al enviar el audio:", error);
+        await conn.reply(m.chat, "⚠️ Ocurrió un error al intentar enviar el audio. Por favor, intenta de nuevo más tarde.", m);
     }
 };
 
-handler.customPrefix = /yo soy antomico/i;
-handler.command = [];
+handler.help = ['I am atomic'];
+handler.tags = ['fun', 'audio'];
+handler.command = ['I am atomic']; // Comando disponible
 
 export default handler;
