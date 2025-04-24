@@ -1,6 +1,6 @@
 let handler = async (m, { conn }) => {
     // URL del video directo (verifica que esté disponible)
-    const videoUrl = "https://files.catbox.moe/p4ciwk.mp4"; // Cambia si el link falla
+    const videoUrl = "https://files.catbox.moe/7o53or.mp4"; // Cambia si el link falla
 
     // Mensaje de respuesta con emoji
     const mensaje = "👻 *¡I AM ATOMIC!* 💥 Aquí tienes tu video épico:";
