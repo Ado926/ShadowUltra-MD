@@ -9,14 +9,14 @@ let handler = async (m, { conn, args }) => {
             value: "2000",
             source: "Ane wa Yanmama Junyuu-chuu",
             img: [
-                "https://qu.ax/AgFoz.jpg",
-                "https://qu.ax/ERAVo.jpg",
-                "https://qu.ax/kyqxu.jpg"
+                "https://files.catbox.moe/4ea1lz.jpg",
+                "https://files.catbox.moe/4g2twd.jpg",
+                "https://files.catbox.moe/4g2twd.jpg"
             ],
             vid: [
-                "https://files.catbox.moe/fyd68k.mp4",
-                "https://files.catbox.moe/l2txfh.mp4",
-                "https://files.catbox.moe/extraAika.mp4" // URL adicional
+                "https://files.catbox.moe/vsm42i.mp4",
+                "https://files.catbox.moe/gqb6pn.mp4",
+                "https://files.catbox.moe/a0ay0u.mp4" // URL adicional
             ],
             user: null,
             status: "Libre",
@@ -49,8 +49,10 @@ let handler = async (m, { conn, args }) => {
                 "https://files.catbox.moe/jb7jss.jpg"
             ],
             vid: [
-                "https://files.catbox.moe/5dahh9.mp4",
-                "https://files.catbox.moe/dela39.mp4" // URL adicional
+                "https://files.catbox.moe/8t3fsz.mp4",
+
+"https://files.catbox.moe/nsp6d2.mp4",
+                "https://files.catbox.moe/wuchhp.mp4" // URL adicional
             ],
             user: null,
             status: "Libre",
