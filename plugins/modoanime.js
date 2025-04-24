@@ -16,7 +16,16 @@ let handler = async (m, { conn, command }) => {
 
     // Responder usando palabras clave si el modo Otaku está activado
     if (isOtakuMode) {
-        const palabrasClave = ['sugoi', 'kawaii', 'nakama', 'baka', 'senpai']; // Lista de palabras clave
+        const palabrasClave = [
+            'hola eres otaku?',
+            'quién',
+            'eres',
+            'que',
+            'puedes',
+            'hacer',
+            'quieres ir al cuarto',
+            'conmigo'
+        ]; // Lista de palabras clave
         const textoMensaje = m.text.toLowerCase(); // Convertir mensaje a minúsculas para comparar
 
         // Verificar si el mensaje contiene alguna palabra clave
@@ -26,7 +35,8 @@ let handler = async (m, { conn, command }) => {
                 '¡Sugoi! Tu energía me inspira para ser el héroe de este shonen. 🔥✨',
                 '¡Hajimemashite, senpai! ¿Qué necesitas en este universo kawaii? 🌟',
                 '¡Baka baka! Parece que necesitas mi ayuda. Desu~ 😏',
-                '¡El poder de los nakama siempre triunfa! ¿Qué puedo hacer por ti? 🌸'
+                '¡El poder de los nakama siempre triunfa! ¿Qué puedo hacer por ti? 🌸',
+                '¡Ohayo! Creo que esta aventura será increíble, ¡cuenta conmigo senpai! 🌟'
             ];
             const respuestaAleatoria = respuestasOtaku[Math.floor(Math.random() * respuestasOtaku.length)];
             await conn.reply(m.chat, respuestaAleatoria, m);
