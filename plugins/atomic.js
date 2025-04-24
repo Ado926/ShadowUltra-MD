@@ -1,6 +1,6 @@
 let handler = async (m, { conn }) => {
     // URL del audio que se enviará
-    const audioUrl = "https://files.catbox.moe/s2c6vi.mp3"; // Reemplaza con tu enlace de audio válido
+    const audioUrl = "https://files.catbox.moe/mjpong.mp4"; // Reemplaza con tu enlace de audio válido
 
     // Mensaje que acompaña el audio
     const mensaje = "🔊 *¡I am atomic! Escucha el audio épico:*";
