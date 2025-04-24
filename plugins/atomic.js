@@ -1,16 +1,19 @@
 let handler = async (m, { conn }) => {
-    // Video directo para enviar
-    const videoUrl = "https://files.catbox.moe/p4ciwk.mp4"; // Reemplaza con una URL válida de tu video
+    // URL del video directo
+    const videoUrl = "https://files.catbox.moe/tuvideo.mp4"; // Reemplaza con un enlace válido de tu video
 
     // Respuesta al usuario
     const mensaje = "👻 *¡I AM ATOMIC!* 💥";
 
     try {
-        // Responder al usuario con el mensaje y enviar el video
+        console.log("Comando detectado: Enviando respuesta y video..."); // Mensaje de depuración
+        // Responder al usuario con un mensaje
         await conn.reply(m.chat, mensaje, m);
+        // Enviar el video al usuario
         await conn.sendFile(m.chat, videoUrl, "atomic.mp4", "", m);
     } catch (error) {
-        console.error("Error al enviar el video:", error.message);
+        console.error("Error al enviar el video:", error.message); // Registrar el error
+        // Enviar un mensaje de error al usuario
         await conn.reply(m.chat, "⚠️ Ocurrió un error al enviar el video. Inténtalo nuevamente más tarde.", m);
     }
 };
