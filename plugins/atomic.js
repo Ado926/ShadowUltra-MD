@@ -1,12 +1,12 @@
 let handler = async (m, { conn }) => {
     // URL del video directo
-    const videoUrl = "https://files.catbox.moe/tuvideo.mp4"; // Reemplaza con un enlace válido de tu video
+    const videoUrl = "https://files.catbox.moe/tuvideo.mp4"; // Reemplaza con una URL válida de tu video
 
     // Respuesta al usuario
     const mensaje = "👻 *¡I AM ATOMIC!* 💥";
 
     try {
-        console.log("Comando detectado: Enviando respuesta y video..."); // Mensaje de depuración
+        console.log("Intentando enviar el video..."); // Depuración
         // Responder al usuario con un mensaje
         await conn.reply(m.chat, mensaje, m);
         // Enviar el video al usuario
@@ -18,8 +18,8 @@ let handler = async (m, { conn }) => {
     }
 };
 
-handler.help = ['I am atomic']; // Ayuda para el comando
-handler.tags = ['fun', 'anime']; // Categoría del comando
-handler.command = ['I am atomic']; // Nombre del comando
+handler.help = ['I am atomic'];
+handler.tags = ['fun', 'anime'];
+handler.command = ['I am atomic'];
 
 export default handler;
