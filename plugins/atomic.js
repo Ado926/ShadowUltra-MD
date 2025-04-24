@@ -7,7 +7,7 @@ let handler = async (m, { conn }) => {
         "https://files.catbox.moe/nummx7.mp4", // Video 4
         "https://files.catbox.moe/eggcfo.mp4", // Video 5
         "https://files.catbox.moe/eggcfo.mp4", // Video 6
-        "https://files.catbox.moe/yz988u.mp4"  // Video 7
+        "https://files.catbox.moe/eggcfo.mp4"  // Video 7
     ];
 
     // Seleccionar un video aleatorio
