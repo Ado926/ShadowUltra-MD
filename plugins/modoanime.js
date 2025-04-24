@@ -1,10 +1,21 @@
-let isOtakuMode = false; // Variable para almacenar el estado del modo Otaku
+import fs from 'fs';
 
-// Función que interceptará TODOS los mensajes recibidos en el chat
+const estadoFile = './src/database/estado_otaku.json'; // Archivo para almacenar el estado del modo Otaku
+
+// Cargar estado del modo Otaku desde el archivo
+let isOtakuMode = false;
+if (fs.existsSync(estadoFile)) {
+    const data = fs.readFileSync(estadoFile, 'utf-8');
+    isOtakuMode = JSON.parse(data).isOtakuMode;
+}
+
 let handler = async (m, { conn }) => {
     // Verifica si el usuario activó el modo Otaku con `.modianime`
     if (m.text.toLowerCase() === '.modianime') {
         isOtakuMode = !isOtakuMode; // Alternar entre modo normal y modo Otaku
+        
+        // Guardar estado en el archivo
+        fs.writeFileSync(estadoFile, JSON.stringify({ isOtakuMode }), 'utf-8');
 
         const estado = isOtakuMode ? '🌸 ¡Modo Otaku Activado! 🌸' : '💼 Modo Normal Activado 💼';
         const mensaje = isOtakuMode 
@@ -18,15 +29,9 @@ let handler = async (m, { conn }) => {
     // Si el modo Otaku está activado, el bot analizará TODOS los mensajes recibidos
     if (isOtakuMode) {
         const palabrasClave = [
-            'hola eres otaku?',
-            'quién',
-            'eres',
-            'que',
-            'puedes',
-            'hacer',
-            'quieres ir al cuarto',
-            'conmigo'
-        ]; // Lista de palabras clave
+            'hola eres otaku?', 'quién', 'eres', 'que', 'puedes', 
+            'hacer', 'quieres ir al cuarto', 'conmigo'
+        ];
 
         const textoMensaje = m.text.toLowerCase(); // Convertir mensaje a minúsculas para comparar
 
@@ -47,8 +52,8 @@ let handler = async (m, { conn }) => {
     }
 };
 
-// Configuración del handler para que **intercepte todos los mensajes**
-handler.customPrefix = /.*/; // Esto permite que el bot analice TODOS los mensajes
+// Configuración para interceptar todos los mensajes
+handler.customPrefix = /.*/; 
 handler.command = []; // No depende de comandos específicos
 
 export default handler;
