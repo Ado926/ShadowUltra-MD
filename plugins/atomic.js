@@ -1,27 +1,26 @@
 let handler = async (m, { conn }) => {
-    // URL del video directo (asegúrate de que sea válida)
-    const videoUrl = "https://files.catbox.moe/ogjqzc.mp4"; // Reemplázala con tu enlace de video
+    // URL del video directo (verifica que esté disponible)
+    const videoUrl = "https://files.catbox.moe/p4ciwk.mp4"; // Cambia si el link falla
 
     // Mensaje de respuesta con emoji
-    const mensaje = `👻 *¡I AM ATOMIC!* 💥`;
+    const mensaje = "👻 *¡I AM ATOMIC!* 💥 Aquí tienes tu video épico:";
 
     try {
-        console.log("Ejecutando el comando .I am atomic..."); // Mensaje de depuración
+        console.log("Ejecutando el comando .iamatomic...");
         
-        // Responder al usuario con el emoji 👻
+        // Responder al usuario con el mensaje
         await conn.reply(m.chat, mensaje, m);
 
-        // Enviar el video con parámetros correctos
-        await conn.sendFile(m.chat, videoUrl, "atomic.mp4", null, m, false, { mimetype: "video/mp4" });
-        
+        // Enviar el video
+        await conn.sendFile(m.chat, videoUrl, 'atomic.mp4', '🔥 Video enviado con éxito', m);
     } catch (error) {
         console.error("Error al enviar el video:", error.message);
         await conn.reply(m.chat, "⚠️ Ocurrió un error al enviar el video. Inténtalo nuevamente más tarde.", m);
     }
 };
 
-handler.help = ['I am atomic'];
+handler.help = ['iamatomic'];
 handler.tags = ['fun', 'anime'];
-handler.command = ['I am atomic'];
+handler.command = ['iamatomic']; // sin espacios
 
 export default handler;
