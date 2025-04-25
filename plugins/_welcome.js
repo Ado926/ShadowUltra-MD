@@ -14,7 +14,7 @@ export async function before(m, { conn, participants, groupMetadata }) {
   let user = global.db.data.users[who];
   let userName = user ? user.name : await conn.getName(who);
 
-  const thumbnail = await (await fetch('https://files.catbox.moe/elx34q.jpg')).buffer();
+  const thumbnail = await (await fetch('https://files.catbox.moe/uak1qu.jpg')).buffer();
   const redes = 'https://chat.whatsapp.com/tu-grupo'; // Ajustá si querés un link real
 
   if (chat.welcome && m.messageStubType === 27) {
@@ -72,4 +72,4 @@ export async function before(m, { conn, participants, groupMetadata }) {
       fileName: `despedida.mp3`
     }, { quoted: fkontak, ephemeralExpiration: 24 * 60 * 100, disappearingMessagesInChat: 24 * 60 * 100 });
   }
-  }
+            }
