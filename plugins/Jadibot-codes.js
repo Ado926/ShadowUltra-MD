@@ -80,9 +80,9 @@ const handler = async (msg, { conn, command, sock }) => {
             await conn.sendMessage(msg.key.remoteJid, {
               text: `╭───〔 *🤖 SUBBOT CONECTADO* 〕───╮
 │
-│ ✅ *Bienvenido a Azura Ultra 2.0*
+│ ✅ *Bienvenido a Shadow Bot*
 │
-│ Ya eres parte del mejor sistema de juegos RPG
+│ Ya eres parte del mejor sistema multifuncional.
 │
 │ 🛠️ Usa los siguientes comandos para comenzar:
 │
@@ -90,7 +90,7 @@ const handler = async (msg, { conn, command, sock }) => {
 │ ${global.prefix}menu
 │
 │ ⚔️ Disfruta de las funciones del subbot
-│ y conquista el mundo digital
+│ y optimiza tus tareas.
 │
 │ ℹ️ Por defecto, el subbot está en *modo privado*,
 │ lo que significa que *solo tú puedes usarlo*.
@@ -111,12 +111,10 @@ const handler = async (msg, { conn, command, sock }) => {
 │ En ese caso, simplemente ejecuta:
 │ #delbots
 │ para eliminar tu sesión y luego vuelve a conectarte usando:
-│ #serbot o para code si no quieres qr usa: #code o #sercode. 
-│ hasta que se conecte correctamente.
+│ #serbot o usa: #code o #sercode hasta que se conecte correctamente.
 │
 │ Esto ayuda a establecer una conexión *estable y funcional*.
-│
-╰────✦ *Sky Ultra Plus* ✦────╯`
+╰────✦ _Shadow Bot 2.0_ ✦────╯`
             }, { quoted: msg });
 
             await conn.sendMessage(msg.key.remoteJid, {
@@ -166,19 +164,18 @@ Usa ${global.prefix}serbot para volver a conectar.`
                 await conn.sendMessage(msg.key.remoteJid, {
                   text: `╭───〔 *⚠️ SUBBOT* 〕───╮
 │
-│⚠️ *Problema de conexión detectado:*
+│⚠️ _Problema de conexión detectado:_
 │ ${messageError}
 │ Intentando reconectar...
 │
-│ 🔄 Si seguir en problemas, En ese caso, simplemente ejecuta:
+│ 🔄 Si seguir en problemas, simplemente ejecuta:
 │ #delbots
 │ para eliminar tu sesión y luego vuelve a conectarte usando:
-│ #serbot o para code si no quieres qr usa: #code o #sercode. 
-│ hasta que se conecte correctamente.
+│ #serbot o usa: #code o #sercode hasta que se conecte correctamente.
 │
-│ Esto ayuda a establecer una conexión *estable y funcional*.
+│ Esto ayuda a establecer una conexión _estable y funcional_ .
 │
-╰────✦ *Sky Ultra Plus* ✦────╯`
+╰────✦ _Shadow Bot 2.0_ ✦────╯`
                 }, { quoted: msg });
                 break;
             }
