@@ -72,4 +72,4 @@ export async function before(m, { conn, participants, groupMetadata }) {
       fileName: `despedida.mp3`
     }, { quoted: fkontak, ephemeralExpiration: 24 * 60 * 100, disappearingMessagesInChat: 24 * 60 * 100 });
   }
-        }
+          }
