@@ -24,7 +24,7 @@ export async function before(m, { conn, participants, groupMetadata }) {
         forwardedNewsletterMessageInfo: {
           newsletterJid: "120363402846939411@newsletter",
           serverMessageId: '',
-          newsletterName: 'puro papus 👻'
+          newsletterName: 'shadow'
         },
         forwardingScore: 9999999,
         isForwarded: true,
@@ -50,7 +50,7 @@ export async function before(m, { conn, participants, groupMetadata }) {
       audio: { url: vn2 },
       contextInfo: {
         forwardedNewsletterMessageInfo: {
-          newsletterJid: "120363402846939411@newsletter",
+          newsletterJid: "120363417092486861@newsletter",
           serverMessageId: '',
           newsletterName: 'Vivos Vivientes 🌸'
         },
@@ -72,4 +72,4 @@ export async function before(m, { conn, participants, groupMetadata }) {
       fileName: `despedida.mp3`
     }, { quoted: fkontak, ephemeralExpiration: 24 * 60 * 100, disappearingMessagesInChat: 24 * 60 * 100 });
   }
-            }
+          }
