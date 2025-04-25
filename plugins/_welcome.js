@@ -1,36 +1,40 @@
-import { WAMessageStubType } from '@whiskeysockets/baileys'
-import fetch from 'node-fetch'
+importar fetch desde 'node-fetch';
 
-export async function before(m, { conn, participants, groupMetadata }) {
-  if (!m.messageStubType || !m.isGroup) return true
+exportar función asíncrona antes de (m, { conexión, participantes, grupoMetadata }) {
+  si (!m.messageStubType || !m.isGroup) devuelve verdadero;
 
-  let who = m.messageStubParameters[0]
-  let taguser = `@${who.split('@')[0]}`
-  let chat = global.db.data.chats[m.chat]
-  let defaultImage = 'https://files.catbox.moe/dgvj76.jpg';
+  sea vn = 'https://files.catbox.moe/g5h8ip.m4a';
+  sea vn2 = 'https://files.catbox.moe/q9ti4u.m4a';
+  dejar chat = global.db.data.chats[m.chat];
+  constante getMentionedJid = () => {
+    devolver m.messageStubParameters.map(param => `${param}@s.whatsapp.net`);
+  };
 
-  if (chat.welcome) {
-    let img;
-    try {
-      let pp = await conn.profilePictureUrl(who, 'image');
-      img = await (await fetch(pp)).buffer();
-    } catch {
-      img = await (await fetch(defaultImage)).buffer();
-    }
+  dejar quien = m.messageStubParameters[0] + '@s.whatsapp.net';
+  deje que el usuario = global.db.data.users[quien];
+  deje que userName = usuario ? usuario.nombre : await conn.getName(quien);
 
-  const welcomeMessage = global.db.data.chats[m.chat]?.welcomeMessage || 'Bienvenido/a :';
+  const miniatura = await (await fetch('https://files.catbox.moe/elx34q.jpg')).buffer();
+  const redes = 'https://chat.whatsapp.com/tu-grupo'; // Ajusta si quieres un enlace real
 
-    if (m.messageStubType === WAMessageStubType.GROUP_PARTICIPANT_ADD) {
-    let bienvenida = `𓆩°»｡˚ ∾･⁙･ ღ ➵ ⁘ ➵ ღ ･⁙･∾ ˚ ｡«°𓆪\n❍⌇─➭ *Wᴇʟᴄᴏᴍᴇ ᴛᴏ Gʀᴏᴜᴘ ::*\n๑ ˚ ͙۪۪̥@${m.messageStubParameters[0].split`@`[0]} 👋🏻꒱\n\n┌ *\`ɢʀᴏᴜᴘ::\`*\n  ☕ ᩙᩞ✑ ${groupMetadata.subject}\n└┬ *ɴᴇᴡ ᴍᴇᴍʙᴇʀ*\n    ︱·˚🤍 Disfruta del grupo.\n    └╾ׅ╴ׂꨪ╌╼᪶╾᪶ ۪〫┄ׅ⃯፝֟╌╼᪶֘╾᪶╌ׅꨪ╶۪╼┘\n\n> © ᴘᴏᴡᴇʀᴇᴅ ʙʏ ᴍᴏᴏɴ ғᴏʀᴄᴇ ᴛᴇᴀᴍ`
-      await conn.sendMessage(m.chat, { image: img, caption: bienvenida, mentions: [who] }, { quoted: fkontak })
-    } else if (m.messageStubType === WAMessageStubType.GROUP_PARTICIPANT_REMOVE || m.messageStubType === WAMessageStubType.GROUP_PARTICIPANT_LEAVE) {
-
-const despMessage = global.db.data.chats[m.chat]?.despMessage || '👁️👄👁️ Ya se fue otro pendejo ojalá se vaya otro pronto😂 se fue pero no lloren que seguro otro pendejo aparecerá✨';
-
-     let bye = `𓆩°»｡˚ ∾･⁙･ ღ ➵ ⁘ ➵ ღ ･⁙･∾ ˚ ｡«°𓆪\n❍⌇─➭ *Sᴇᴇ ʏᴏᴜ Lᴀᴛᴇʀ ::*\n๑ ˚ ͙۪۪̥@${m.messageStubParameters[0].split`@`[0]} pero no lloren de seguro vendra otro pendejo acubrir su lugar👁️👄👁️꒱\n\n┌ *\`ᴘᴜᴛᴀ ᴇʟɪᴍɪɴᴀᴅᴀ\`*\n└┬ *ᴇx ᴍᴇᴍʙᴇʀ*\n    ︱·˚Adiós , ya no serás el pendejo del grupo. ¡Buena suerte! 😆,.\n    └╾ׅ╴ׂꨪ╌╼᪶╾᪶ ۪〫┄ׅ⃯፝֟╌╼᪶֘╾᪶╌ׅꨪ╶۪╼┘\n\n> © ᴘᴏᴡᴇʀᴇᴅ ʙʏ ᴍᴏᴏɴ ғᴏʀᴄᴇ ᴛᴇᴀᴍ`
-      await conn.sendMessage(m.chat, { image: img, caption: bye, mentions: [who] }, { quoted: fkontak })
-    }
-  }
-
-  return true
-}
+  si (chat.bienvenida && m.messageStubType === 27) {
+    este.enviarMensaje(m.chat, {
+      audio: { url: vn },
+      Información de contexto: {
+        Información del mensaje del boletín reenviado: {
+          Boletín informativoJid: "120363402846939411@boletín informativo",
+          ID del mensaje del servidor: '',
+          newsletterNombre: 'puros panas papus 👻'
+        },
+        Puntuación de reenvío: 9999999,
+        isForwarded: verdadero,
+        mencionadoJid: obtenerMencionadoJid(),
+        Respuesta de anuncio externo: {
+          título: `✨ Bienvenido/a ${userName} ✨`,
+          body: `¡Nos alegra tenerte aquí en *${groupMetadata.subject}*!`,
+          vista previaTipo: "FOTO",
+          uña del pulgar,
+          URL de origen: redes,
+          showAdAttribution: verdadero
+        }
+      },
