@@ -1,40 +1,75 @@
-importar fetch desde 'node-fetch';
+import fetch from 'node-fetch';
 
-exportar función asíncrona antes de (m, { conexión, participantes, grupoMetadata }) {
-  si (!m.messageStubType || !m.isGroup) devuelve verdadero;
+export async function before(m, { conn, participants, groupMetadata }) {
+  if (!m.messageStubType || !m.isGroup) return true;
 
-  sea vn = 'https://files.catbox.moe/g5h8ip.m4a';
-  sea vn2 = 'https://files.catbox.moe/q9ti4u.m4a';
-  dejar chat = global.db.data.chats[m.chat];
-  constante getMentionedJid = () => {
-    devolver m.messageStubParameters.map(param => `${param}@s.whatsapp.net`);
+  let vn = 'https://files.catbox.moe/g5h8ip.m4a';
+  let vn2 = 'https://files.catbox.moe/q9ti4u.m4a';
+  let chat = global.db.data.chats[m.chat];
+  const getMentionedJid = () => {
+    return m.messageStubParameters.map(param => `${param}@s.whatsapp.net`);
   };
 
-  dejar quien = m.messageStubParameters[0] + '@s.whatsapp.net';
-  deje que el usuario = global.db.data.users[quien];
-  deje que userName = usuario ? usuario.nombre : await conn.getName(quien);
+  let who = m.messageStubParameters[0] + '@s.whatsapp.net';
+  let user = global.db.data.users[who];
+  let userName = user ? user.name : await conn.getName(who);
 
-  const miniatura = await (await fetch('https://files.catbox.moe/elx34q.jpg')).buffer();
-  const redes = 'https://chat.whatsapp.com/tu-grupo'; // Ajusta si quieres un enlace real
+  const thumbnail = await (await fetch('https://files.catbox.moe/elx34q.jpg')).buffer();
+  const redes = 'https://chat.whatsapp.com/tu-grupo'; // Ajustá si querés un link real
 
-  si (chat.bienvenida && m.messageStubType === 27) {
-    este.enviarMensaje(m.chat, {
+  if (chat.welcome && m.messageStubType === 27) {
+    this.sendMessage(m.chat, {
       audio: { url: vn },
-      Información de contexto: {
-        Información del mensaje del boletín reenviado: {
-          Boletín informativoJid: "120363402846939411@boletín informativo",
-          ID del mensaje del servidor: '',
-          newsletterNombre: 'puros panas papus 👻'
+      contextInfo: {
+        forwardedNewsletterMessageInfo: {
+          newsletterJid: "120363402846939411@newsletter",
+          serverMessageId: '',
+          newsletterName: 'puro papus 👻'
         },
-        Puntuación de reenvío: 9999999,
-        isForwarded: verdadero,
-        mencionadoJid: obtenerMencionadoJid(),
-        Respuesta de anuncio externo: {
-          título: `✨ Bienvenido/a ${userName} ✨`,
+        forwardingScore: 9999999,
+        isForwarded: true,
+        mentionedJid: getMentionedJid(),
+        externalAdReply: {
+          title: `✨ Bienvenido/a ${userName} ✨`,
           body: `¡Nos alegra tenerte aquí en *${groupMetadata.subject}*!`,
-          vista previaTipo: "FOTO",
-          uña del pulgar,
-          URL de origen: redes,
-          showAdAttribution: verdadero
+          previewType: "PHOTO",
+          thumbnail,
+          sourceUrl: redes,
+          showAdAttribution: true
         }
       },
+      seconds: '2000',
+      ptt: true,
+      mimetype: 'audio/mpeg',
+      fileName: `bienvenida.mp3`
+    }, { quoted: fkontak, ephemeralExpiration: 24 * 60 * 100, disappearingMessagesInChat: 24 * 60 * 100 });
+  }
+
+  if (chat.welcome && (m.messageStubType === 28 || m.messageStubType === 32)) {
+    this.sendMessage(m.chat, {
+      audio: { url: vn2 },
+      contextInfo: {
+        forwardedNewsletterMessageInfo: {
+          newsletterJid: "120363402846939411@newsletter",
+          serverMessageId: '',
+          newsletterName: 'Vivos Vivientes 🌸'
+        },
+        forwardingScore: 9999999,
+        isForwarded: true,
+        mentionedJid: getMentionedJid(),
+        externalAdReply: {
+          title: `❀ Adiós ${userName} ❀`,
+          body: `Esperamos verte de nuevo por *${groupMetadata.subject}*`,
+          previewType: "PHOTO",
+          thumbnail,
+          sourceUrl: redes,
+          showAdAttribution: true
+        }
+      },
+      seconds: '2000',
+      ptt: true,
+      mimetype: 'audio/mpeg',
+      fileName: `despedida.mp3`
+    }, { quoted: fkontak, ephemeralExpiration: 24 * 60 * 100, disappearingMessagesInChat: 24 * 60 * 100 });
+  }
+  }
