@@ -1,203 +1,94 @@
-const fs = require('fs');
-const path = require('path');
-const { Boom } = require('@hapi/boom');
-const pino = require('pino');
-const QRCode = require('qrcode');
 const {
-  default: makeWASocket,
   useMultiFileAuthState,
+  DisconnectReason,
   fetchLatestBaileysVersion,
+  MessageRetryMap,
   makeCacheableSignalKeyStore,
-  DisconnectReason
-} = require('@whiskeysockets/baileys');
+  jidNormalizedUser
+} = await import('@whiskeysockets/baileys');
+import moment from 'moment-timezone';
+import NodeCache from 'node-cache';
+import readline from 'readline';
+import qrcode from "qrcode";
+import crypto from 'crypto';
+import fs from "fs";
+import pino from 'pino';
+import * as ws from 'ws';
+const { CONNECTING } = ws;
+import { Boom } from '@hapi/boom';
+import { makeWASocket } from '../lib/simple.js';
 
-const handler = async (msg, { conn, command, sock }) => {
-  const usarPairingCode = ["sercode", "code"].includes(command);
-  let sentCodeMessage = false;
+if (!(global.conns instanceof Array)) global.conns = [];
 
-  function sleep(ms) {
-    return new Promise(resolve => setTimeout(resolve, ms));
-  }
+let handler = async (m, { conn: _conn, args, usedPrefix, command, isOwner }) => {
+    console.log("Comando recibido:", command);
 
-  async function serbot() {
-    try {
-      const number = msg.key?.participant || msg.key.remoteJid;
-      const sessionDir = path.join(__dirname, "../subbots");
-      const sessionPath = path.join(sessionDir, number);
-      const rid = number.split("@")[0];
+    const bot = global.db.data.settings[conn.user.jid] || {};
+    if (!bot.jadibotmd) return m.reply('⚠️ Este comando está desactivado por el creador.');
 
-      if (!fs.existsSync(sessionDir)) {
-        fs.mkdirSync(sessionDir, { recursive: true });
-      }
+    let parent = args[0] && args[0] === 'plz' ? _conn : await global.conn;
 
-      await conn.sendMessage(msg.key.remoteJid, {
-        react: { text: '⌛', key: msg.key }
-      });
+    async function serbot() {
+        try {
+            console.log("🔄 Intentando conectar subbot...");
+            let authFolderB = m.sender.split('@')[0];
+            const userFolderPath = `./ShadowJadiBot/${authFolderB}`;
 
-      const { state, saveCreds } = await useMultiFileAuthState(sessionPath);
-      const { version } = await fetchLatestBaileysVersion();
-      const logger = pino({ level: "silent" });
+            // Validar y crear carpeta de credenciales
+            if (!fs.existsSync(userFolderPath)) {
+                console.log("📁 Creando carpeta de credenciales...");
+                fs.mkdirSync(userFolderPath, { recursive: true });
+            }
 
-      const socky = makeWASocket({
-        version,
-        logger,
-        auth: {
-          creds: state.creds,
-          keys: makeCacheableSignalKeyStore(state.keys, logger)
-        },
-        printQRInTerminal: !usarPairingCode,
-        browser: ['Windows', 'Chrome']
-      });
+            if (args[0]) {
+                console.log("📜 Guardando credenciales...");
+                fs.writeFileSync(`${userFolderPath}/creds.json`, JSON.stringify(JSON.parse(Buffer.from(args[0], "base64").toString("utf-8")), null, '\t'));
+            }
 
-      let reconnectionAttempts = 0;
-      const maxReconnectionAttempts = 3;
+            const { state, saveCreds } = await useMultiFileAuthState(userFolderPath);
+            const { version } = await fetchLatestBaileysVersion();
 
-      socky.ev.on("connection.update", async ({ qr, connection, lastDisconnect }) => {
-        if (qr && !sentCodeMessage) {
-          if (usarPairingCode) {
-            const code = await socky.requestPairingCode(rid);
-            await conn.sendMessage(msg.key.remoteJid, {
-              video: { url: "https://cdn.russellxz.click/b0cbbbd3.mp4" },
-              caption: "🔐 *Código generado:*\nAbre WhatsApp > Vincular dispositivo y pega el siguiente código:",
-              gifPlayback: true
-            }, { quoted: msg });
-            await sleep(1000);
-            await conn.sendMessage(msg.key.remoteJid, {
-              text: "```" + code + "```"
-            }, { quoted: msg });
-          } else {
-            const qrImage = await QRCode.toBuffer(qr);
-            await conn.sendMessage(msg.key.remoteJid, {
-              image: qrImage,
-              caption: `📲 Escanea este código QR desde *WhatsApp > Vincular dispositivo* para conectarte como subbot.`
-            }, { quoted: msg });
-          }
-          sentCodeMessage = true;
-        }
-
-        switch (connection) {
-          case "open":
-            await conn.sendMessage(msg.key.remoteJid, {
-              text: `╭───〔 *🤖 SUBBOT CONECTADO* 〕───╮
-│
-│ ✅ *Bienvenido a Shadow Bot*
-│
-│ Ya eres parte del mejor sistema multifuncional.
-│
-│ 🛠️ Usa los siguientes comandos para comenzar:
-│
-│ ${global.prefix}help
-│ ${global.prefix}menu
-│
-│ ⚔️ Disfruta de las funciones del subbot
-│ y optimiza tus tareas.
-│
-│ ℹ️ Por defecto, el subbot está en *modo privado*,
-│ lo que significa que *solo tú puedes usarlo*.
-│
-│ Usa el comando:
-│ #menu
-│ (para ver configuraciones y cómo hacer
-│ que otras personas puedan usarlo.)
-│
-│ ➕ Los prefijos por defecto son: *. y #*
-│ Si quieres cambiarlos, usa:
-│ #setprefix
-│
-│ 🔄 Si notas que el subbot *no responde al instante*
-│ o tarda mucho *aunque esté conectado*, no te preocupes.
-│ Puede ser un fallo temporal.
-│
-│ En ese caso, simplemente ejecuta:
-│ #delbots
-│ para eliminar tu sesión y luego vuelve a conectarte usando:
-│ #serbot o usa: #code o #sercode hasta que se conecte correctamente.
-│
-│ Esto ayuda a establecer una conexión *estable y funcional*.
-╰────✦ _Shadow Bot 2.0_ ✦────╯`
-            }, { quoted: msg });
-
-            await conn.sendMessage(msg.key.remoteJid, {
-              react: { text: "🔁", key: msg.key }
-            });
-            break;
-
-          case "close": {
-            const reason = new Boom(lastDisconnect?.error)?.output.statusCode || lastDisconnect?.error?.output?.statusCode;
-            const messageError = DisconnectReason[reason] || `Código desconocido: ${reason}`;
-
-            const eliminarSesion = () => {
-              if (fs.existsSync(sessionPath)) {
-                fs.rmSync(sessionPath, { recursive: true, force: true });
-              }
+            const connectionOptions = {
+                logger: pino({ level: 'silent' }),
+                printQRInTerminal: false,
+                browser: ["Shadow Bot", "Chrome", "20.0.04"],
+                auth: {
+                    creds: state.creds,
+                    keys: makeCacheableSignalKeyStore(state.keys, pino({ level: "fatal" }).child({ level: "fatal" }))
+                },
+                version
             };
 
-            switch (reason) {
-              case 401:
-              case DisconnectReason.badSession:
-              case DisconnectReason.loggedOut:
-                await conn.sendMessage(msg.key.remoteJid, {
-                  text: `⚠️ *Sesión eliminada.*
-${messageError}
-Usa ${global.prefix}serbot para volver a conectar.`
-                }, { quoted: msg });
-                eliminarSesion();
-                break;
+            console.log("📶 Inicializando conexión...");
+            let conn = makeWASocket(connectionOptions);
 
-              case DisconnectReason.restartRequired:
-                if (reconnectionAttempts < maxReconnectionAttempts) {
-                  reconnectionAttempts++;
-                  await sleep(3000);
-                  await serbot();
-                  return;
-                }
-                await conn.sendMessage(msg.key.remoteJid, {
-                  text: `⚠️ *Reintentos de conexión fallidos.*`
-                }, { quoted: msg });
-                break;
+            if (conn.authState.creds.registered) {
+                console.log("✅ Subbot conectado exitosamente.");
+                await parent.reply(m.chat, '🌟 ¡Conexión establecida con éxito!', m);
+            } else {
+                console.log("🔑 Generando código de emparejamiento...");
+                let cleanedNumber = m.sender.split('@')[0].replace(/[^0-9]/g, '');
+                let codeBot = await conn.requestPairingCode(cleanedNumber);
+                codeBot = codeBot?.match(/.{1,4}/g)?.join("-") || codeBot;
 
-              case DisconnectReason.connectionReplaced:
-                console.log(`ℹ️ Sesión reemplazada por otra instancia.`);
-                break;
+                const videoUrl = "https://files.catbox.moe/mjpong.mp4"; // Reemplaza con tu enlace de video
+                await parent.sendMessage(m.chat, {
+                    video: { url: videoUrl },
+                    caption: `🎥 *Tutorial de conexión:*\n\n💬 Usa el código de abajo para conectarte como subbot. \n💡 ¡Recuerda que el código solo funciona en el número solicitado!`,
+                    gifPlayback: true
+                }, { quoted: m });
 
-              default:
-                await conn.sendMessage(msg.key.remoteJid, {
-                  text: `╭───〔 *⚠️ SUBBOT* 〕───╮
-│
-│⚠️ _Problema de conexión detectado:_
-│ ${messageError}
-│ Intentando reconectar...
-│
-│ 🔄 Si seguir en problemas, simplemente ejecuta:
-│ #delbots
-│ para eliminar tu sesión y luego vuelve a conectarte usando:
-│ #serbot o usa: #code o #sercode hasta que se conecte correctamente.
-│
-│ Esto ayuda a establecer una conexión _estable y funcional_ .
-│
-╰────✦ _Shadow Bot 2.0_ ✦────╯`
-                }, { quoted: msg });
-                break;
+                await parent.reply(m.chat, `📝 Tu código de conexión:\n\`\`\`${codeBot}\`\`\``, m);
             }
-            break;
-          }
+
+        } catch (error) {
+            console.error("❌ Error en serbot:", error.message);
+            await parent.reply(m.chat, `⚠️ Error inesperado: ${error.message}`, m);
         }
-      });
-
-      socky.ev.on("creds.update", saveCreds);
-
-    } catch (e) {
-      console.error("❌ Error en serbot:", e);
-      await conn.sendMessage(msg.key.remoteJid, {
-        text: `❌ *Error inesperado:* ${e.message}`
-      }, { quoted: msg });
     }
-  }
 
-  await serbot();
+    serbot();
 };
 
-handler.command = ['sercode', 'code', 'jadibot', 'serbot', 'qr'];
-handler.tags = ['owner'];
-handler.help = ['serbot', 'code'];
-module.exports = handler;
+handler.help = ['code'];
+handler.tags = ['serbot'];
