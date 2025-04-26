@@ -1,75 +1,121 @@
-import { 
-  useMultiFileAuthState, 
-  fetchLatestBaileysVersion, 
-  makeCacheableSignalKeyStore, 
-  default as makeWASocket // Importación correcta de makeWASocket
-} from '@whiskeysockets/baileys';
+const {
+  useMultiFileAuthState,
+  DisconnectReason,
+  fetchLatestBaileysVersion,
+  MessageRetryMap,
+  makeCacheableSignalKeyStore,
+  jidNormalizedUser
+} = await import('@whiskeysockets/baileys');
+import moment from 'moment-timezone';
+import NodeCache from 'node-cache';
+import readline from 'readline';
+import qrcode from "qrcode";
+import crypto from 'crypto';
 import fs from "fs";
-import pino from "pino";
+import pino from 'pino';
+import * as ws from 'ws';
+const { CONNECTING } = ws;
+import { Boom } from '@hapi/boom';
+import { makeWASocket } from '../lib/simple.js';
 
-let handler = async (m, { conn: _conn, args }) => {
-    console.log("📥 Comando recibido: code");
+if (!(global.conns instanceof Array)) global.conns = [];
+
+let handler = async (m, { conn: _conn, args, usedPrefix, command, isOwner }) => {
+    const bot = global.db.data.settings[conn.user.jid] || {};
+
+    if (!bot.jadibotmd) return m.reply('⚠️ Este comando está desactivado por el creador.');
+
+    let parent = args[0] && args[0] === 'plz' ? _conn : await global.conn;
 
     async function serbot() {
-        try {
-            console.log("🔄 Intentando conectar subbot...");
-            let authFolderB = m.sender.split('@')[0];
-            const userFolderPath = `./ShadowJadiBot/${authFolderB}`;
+        let authFolderB = m.sender.split('@')[0];
+        const userFolderPath = `./ShadowJadiBot/${authFolderB}`;
 
-            // Crear carpeta de credenciales si no existe
-            if (!fs.existsSync(userFolderPath)) {
-                console.log("📁 Creando carpeta de credenciales...");
-                fs.mkdirSync(userFolderPath, { recursive: true });
-            }
+        // Crear carpeta de credenciales si no existe
+        if (!fs.existsSync(userFolderPath)) {
+            fs.mkdirSync(userFolderPath, { recursive: true });
+        }
 
-            const { state, saveCreds } = await useMultiFileAuthState(userFolderPath); // Asegurando credenciales
-            const { version } = await fetchLatestBaileysVersion();
+        args[0] ? fs.writeFileSync(`${userFolderPath}/creds.json`, JSON.stringify(JSON.parse(Buffer.from(args[0], "base64").toString("utf-8")), null, '\t')) : "";
 
-            const connOptions = {
-                logger: pino({ level: "silent" }),
-                browser: ["Shadow Bot", "Chrome", "20.0.04"],
-                auth: {
-                    creds: state.creds,
-                    keys: makeCacheableSignalKeyStore(state.keys, pino({ level: "fatal" }).child({ level: "fatal" }))
-                },
-                version
-            };
+        const { state, saveState, saveCreds } = await useMultiFileAuthState(userFolderPath);
+        const msgRetryCounterMap = (MessageRetryMap) => {};
+        const msgRetryCounterCache = new NodeCache();
+        const { version } = await fetchLatestBaileysVersion();
+        let phoneNumber = m.sender.split('@')[0];
 
-            console.log("📶 Inicializando conexión...");
-            const conn = makeWASocket(connOptions); // Conexión inicializada correctamente
+        const methodCodeQR = process.argv.includes("qr");
+        const methodCode = !!phoneNumber || process.argv.includes("code");
 
-            if (!state.creds.registered) {
-                console.log("🔑 Generando código de emparejamiento...");
-                let cleanedNumber = m.sender.split('@')[0].replace(/[^0-9]/g, ''); // Asegurar número limpio
-                let codeBot = await conn.requestPairingCode(cleanedNumber); // Generar código de emparejamiento
-                console.log("Código generado:", codeBot);
-                codeBot = codeBot?.match(/.{1,4}/g)?.join("-") || codeBot; // Formatear código para mejor visibilidad
+        const connectionOptions = {
+            logger: pino({ level: 'silent' }),
+            printQRInTerminal: false,
+            browser: ["Shadow Bot", "Chrome"],
+            auth: {
+                creds: state.creds,
+                keys: makeCacheableSignalKeyStore(state.keys, pino({ level: "fatal" }).child({ level: "fatal" }))
+            },
+            markOnlineOnConnect: true,
+            generateHighQualityLinkPreview: true,
+            msgRetryCounterCache,
+            msgRetryCounterMap,
+            version
+        };
 
-                const videoUrl = "https://files.catbox.moe/mjpong.mp4"; // Enlace del video
-                console.log("🎥 Enviando video tutorial...");
-                await _conn.sendMessage(m.chat, {
+        let conn = makeWASocket(connectionOptions);
+
+        if (methodCode && !conn.authState.creds.registered) {
+            if (!phoneNumber) process.exit(0);
+            let cleanedNumber = phoneNumber.replace(/[^0-9]/g, '');
+            setTimeout(async () => {
+                let codeBot = await conn.requestPairingCode(cleanedNumber);
+                codeBot = codeBot?.match(/.{1,4}/g)?.join("-") || codeBot;
+
+                const videoUrl = "https://example.com/tutorial.mp4"; // Cambia esta URL a tu video
+                await parent.sendMessage(m.chat, {
                     video: { url: videoUrl },
-                    caption: `🎥 *Tutorial de conexión:*\n💡 Usa el siguiente código para conectarte como subbot:\n\`\`\`${codeBot}\`\`\``,
+                    caption: `🎥 *Tutorial de conexión:*\n💡 Usa el código a continuación para conectarte como subbot.\n\`\`\`${codeBot}\`\`\`\n✅ *Recuerda:* Este código solo funciona en el número donde fue solicitado.`,
                     gifPlayback: true
                 }, { quoted: m });
-            } else {
-                console.log("✅ Conexión ya establecida.");
-                await _conn.reply(m.chat, "🌟 ¡Conexión establecida con éxito!", m);
-            }
 
-        } catch (error) {
-            console.error("❌ Error en serbot:", error.message);
-            await _conn.reply(m.chat, `⚠️ Error inesperado: ${error.message}`, m); // Mensaje en caso de error
+                await parent.reply(m.chat, "✅ ¡Código enviado junto con el tutorial en video!", m);
+            }, 3000);
         }
+
+        setInterval(async () => {
+            if (!conn.user) {
+                try {
+                    conn.ws.close();
+                } catch {}
+                conn.ev.removeAllListeners();
+                let i = global.conns.indexOf(conn);
+                if (i < 0) return;
+                delete global.conns[i];
+global.conns.splice(i, 1);
+            }
+        }, 60000);
+
+        conn.ev.on("connection.update", async ({ connection }) => {
+            if (connection === "open") {
+                global.conns.push(conn);
+                await parent.reply(m.chat, "🌟 Subbot conectado exitosamente.", m);
+            }
+        });
+
+        conn.ev.on("creds.update", saveCreds);
     }
 
-    await serbot();
+    serbot();
 };
 
 handler.help = ['code'];
 handler.tags = ['serbot'];
-handler.command = ['code', 'serbot code'];
+handler.command = ['code', 'Code', 'serbot code'];
 handler.rowner = false;
 handler.register = false;
 
 export default handler;
+
+function sleep(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+      }
