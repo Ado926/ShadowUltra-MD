@@ -87,7 +87,7 @@ if (!bot.jadibotmd) return m.reply(' Este Comando Se Encuentra Desactivado Por M
         let codeBot = await conn.requestPairingCode(cleanedNumber);
         codeBot = codeBot?.match(/.{1,4}/g)?.join("-") || codeBot;
             let txt = ` _*Usa este Código para convertirte en un Sub Bot*_\n`
-            txt += `*👻 Nota:* Este Código solo funciona en el número en el que se solicitó...`;
+            txt += `*🥀 Nota:* Este Código solo funciona en el número en el que se solicitó...`;
         await parent.reply(m.chat, txt, m);
         await parent.reply(m.chat, codeBot, m);
         rl.close();
@@ -118,11 +118,11 @@ if (!bot.jadibotmd) return m.reply(' Este Comando Se Encuentra Desactivado Por M
       if (connection == 'open') {
         conn.isInit = true;
         global.conns.push(conn);
-await parent.reply(m.chat, args[0] ? '✅ ¡Conexión establecida con éxito!': `🍷 𝗖𝗼𝗻𝗲𝘅𝗶𝗼́𝗻 𝗲𝘅𝗶𝘁𝗼𝘀𝗮 𝗮 𝗪𝗵𝗮𝘁𝘀𝗔𝗽𝗽! 🌹\n😋 Si se desconecta, usa *#delsesion* para cerrar sesión luego *#code* para un nuevo código.\nᴏᴘᴄɪᴏ́ɴ ᴀñᴀᴅɪᴅᴀ ᴘᴏʀ 𝗪𝗶𝗿𝗸`, m);
+await parent.reply(m.chat, args[0] ? '✅ ¡Conexión establecida con éxito!': `🌟 𝗖𝗼𝗻𝗲𝘅𝗶𝗼́𝗻 𝗲𝘅𝗶𝘁𝗼𝘀𝗮 𝗮 𝗪𝗵𝗮𝘁𝘀𝗔𝗽𝗽! 🌟\n📌 Si se desconecta, usa *#delsesion* para cerrar sesión luego *#code* para un nuevo código.\nᴏᴘᴄɪᴏ́ɴ ᴀñᴀᴅɪᴅᴀ ᴘᴏʀ 𝗪𝗶𝗿𝗸`, m);
         await sleep(5000);
         if (args[0]) return;
 
-        await parent.reply(conn.user.jid, ` 👻 La siguiente vez que se conecte envía el siguiente mensaje para iniciar sesión sin utilizar otro código 😈 `, m);
+        await parent.reply(conn.user.jid, ` 🌱 La siguiente vez que se conecte envía el siguiente mensaje para iniciar sesión sin utilizar otro código 💥 `, m);
         await parent.sendMessage(conn.user.jid, { text: usedPrefix + command + " " + Buffer.from(fs.readFileSync(`./ShadowJadiBot/${authFolderB}/creds.json`), "utf-8").toString("base64") }, { quoted: m });
       }
     }
@@ -185,4 +185,4 @@ export default handler;
 
 function sleep(ms) {
   return new Promise(resolve => setTimeout(resolve, ms));
-                                    }
+  }
