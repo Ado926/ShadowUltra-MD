@@ -31,8 +31,8 @@ const rtotalreg = Object.values(global.db.data.users).filter(user => user.regist
 *│* 
 *╰ ˚₊·˚₊· ͟͟͞͞➳❥ _By Cristian_*
 *⊰᯽⊱┈──╌•|* ⊱✿⊰ *|•╌──┈⊰᯽⊱*
-*⎔ _Creador:_* _Cristian Escobar_
-*⎔ _Número:_* _+51 927238856_
+*⎔ _Creador:_* _yosue 👻_
+*⎔ _Número:_* _+58 4242773183_
 *⎔ _Uptime:_* _${uptime}_
 *⎔ _Versión:_* _1.4.0_
 
