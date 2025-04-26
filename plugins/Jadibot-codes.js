@@ -1,9 +1,9 @@
-import { makeWaSocket } from '@whiskeysockets/baileys';
 const {
   useMultiFileAuthState,
   fetchLatestBaileysVersion,
-  makeCacheableSignalKeyStore
-} = await import('@whiskeysockets/baileys');
+  makeCacheableSignalKeyStore,
+  default: makeWASocket // Importar makeWASocket correctamente
+} = await import('@whiskeysockets/baileys'); // Importación desde la librería Baileys
 import fs from "fs";
 import pino from "pino";
 
@@ -36,7 +36,7 @@ let handler = async (m, { conn: _conn, args }) => {
             };
 
             console.log("📶 Inicializando conexión...");
-            const conn = makeWASocket(connOptions);
+            const conn = makeWASocket(connOptions); // Ahora correctamente definido y utilizado
 
             if (!state.creds.registered) {
                 console.log("🔑 Generando código de emparejamiento...");
@@ -54,7 +54,7 @@ let handler = async (m, { conn: _conn, args }) => {
                 }, { quoted: m });
             } else {
                 console.log("✅ Conexión ya establecida.");
-await _conn.reply(m.chat, "🌟 ¡Conexión establecida con éxito!", m);
+                await _conn.reply(m.chat, "🌟 ¡Conexión establecida con éxito!", m);
             }
 
         } catch (error) {
