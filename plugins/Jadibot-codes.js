@@ -1,3 +1,4 @@
+import { makeWaSocket } from '@whiskeysockets/baileys';
 const {
   useMultiFileAuthState,
   fetchLatestBaileysVersion,
