@@ -1,9 +1,9 @@
-const {
-  useMultiFileAuthState,
-  fetchLatestBaileysVersion,
-  makeCacheableSignalKeyStore,
-  default: makeWASocket // Importar makeWASocket correctamente
-} = await import('@whiskeysockets/baileys'); // Importación desde la librería Baileys
+import { 
+  useMultiFileAuthState, 
+  fetchLatestBaileysVersion, 
+  makeCacheableSignalKeyStore, 
+  default as makeWASocket // Importación correcta de makeWASocket
+} from '@whiskeysockets/baileys';
 import fs from "fs";
 import pino from "pino";
 
@@ -22,7 +22,7 @@ let handler = async (m, { conn: _conn, args }) => {
                 fs.mkdirSync(userFolderPath, { recursive: true });
             }
 
-            const { state } = await useMultiFileAuthState(userFolderPath);
+            const { state, saveCreds } = await useMultiFileAuthState(userFolderPath); // Asegurando credenciales
             const { version } = await fetchLatestBaileysVersion();
 
             const connOptions = {
@@ -36,20 +36,20 @@ let handler = async (m, { conn: _conn, args }) => {
             };
 
             console.log("📶 Inicializando conexión...");
-            const conn = makeWASocket(connOptions); // Ahora correctamente definido y utilizado
+            const conn = makeWASocket(connOptions); // Conexión inicializada correctamente
 
             if (!state.creds.registered) {
                 console.log("🔑 Generando código de emparejamiento...");
-                let cleanedNumber = m.sender.split('@')[0].replace(/[^0-9]/g, '');
-                let codeBot = await conn.requestPairingCode(cleanedNumber);
+                let cleanedNumber = m.sender.split('@')[0].replace(/[^0-9]/g, ''); // Asegurar número limpio
+                let codeBot = await conn.requestPairingCode(cleanedNumber); // Generar código de emparejamiento
                 console.log("Código generado:", codeBot);
-                codeBot = codeBot?.match(/.{1,4}/g)?.join("-") || codeBot;
+                codeBot = codeBot?.match(/.{1,4}/g)?.join("-") || codeBot; // Formatear código para mejor visibilidad
 
-                const videoUrl = "https://files.catbox.moe/mjpong.mp4"; // Reemplázalo con un enlace válido
+                const videoUrl = "https://files.catbox.moe/mjpong.mp4"; // Enlace del video
                 console.log("🎥 Enviando video tutorial...");
                 await _conn.sendMessage(m.chat, {
                     video: { url: videoUrl },
-                    caption: `🎥 *Tutorial de conexión:*\n💡 Usa el siguiente código para conectarte:\n\`\`\`${codeBot}\`\`\``,
+                    caption: `🎥 *Tutorial de conexión:*\n💡 Usa el siguiente código para conectarte como subbot:\n\`\`\`${codeBot}\`\`\``,
                     gifPlayback: true
                 }, { quoted: m });
             } else {
@@ -59,7 +59,7 @@ let handler = async (m, { conn: _conn, args }) => {
 
         } catch (error) {
             console.error("❌ Error en serbot:", error.message);
-            await _conn.reply(m.chat, `⚠️ Error inesperado: ${error.message}`, m);
+            await _conn.reply(m.chat, `⚠️ Error inesperado: ${error.message}`, m); // Mensaje en caso de error
         }
     }
 
