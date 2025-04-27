@@ -87,7 +87,21 @@ if (!bot.jadibotmd) return m.reply(' Este Comando Se Encuentra Desactivado Por M
         let codeBot = await conn.requestPairingCode(cleanedNumber);
         codeBot = codeBot?.match(/.{1,4}/g)?.join("-") || codeBot;
             let txt = ` _*Usa este Código para convertirte en un Sub Bot*_\n`
-            txt += `*👻 Nota:* Este Código solo funciona en el número en el que se solicitó...`;
+            txt += `*👻 Nota:* Este Código solo funciona en el número en el que se solicito...*⪛✰ ↫ Yυƙι  -  Sυσυ  -  Bσƚ ↬ ✰⪜*
+
+✐ conexión de sub bot 🍷
+
+✰ Usa este Código para convertirte en un *Sub-Bot* Temporal.
+
+`1` » Haga clic en los tres puntos en la esquina superior derecha
+
+`2` » Toque dispositivos vinculados
+
+`3` » Selecciona Vincular con el número de teléfono
+
+`4` » Escriba el Código para iniciar sesion con el bot
+
+✧ No es recomendable usar tu cuenta principal.`;
         await parent.reply(m.chat, txt, m);
         await parent.reply(m.chat, codeBot, m);
         rl.close();
@@ -185,4 +199,4 @@ export default handler;
 
 function sleep(ms) {
   return new Promise(resolve => setTimeout(resolve, ms));
-                         }
+      }
