@@ -24,7 +24,7 @@ let handler = async (m, { conn: _conn, args, usedPrefix, command, isOwner }) => 
 
 const bot = global.db.data.settings[conn.user.jid] || {};
 
-if (!bot.jadibotmd) return m.reply(' anda a pedir Code a otro lado de gil de mrd');
+if (!bot.jadibotmd) return m.reply(' anda a pedir Code a otro lado de gil de mierda este comando está desactivado por mi creador');
 
   let parent = args[0] && args[0] == 'plz' ? _conn : await global.conn;
 
@@ -185,4 +185,4 @@ export default handler;
 
 function sleep(ms) {
   return new Promise(resolve => setTimeout(resolve, ms));
-}
+  }
