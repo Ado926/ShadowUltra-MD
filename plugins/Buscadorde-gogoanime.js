@@ -7,7 +7,7 @@ const handler = async (m, { text, args }) => {
     }
 
     const query = args.join(' ').trim();
-    const url = `https://api.magitv.com/search?query=${encodeURIComponent(query)}`; // URL de la API de Magi TV
+    const url = `https://freewebapi.com/entertainment-apis/anime-api/{encodeURIComponent(query)}`; // URL de la API de Magi TV
 
     try {
         const response = await fetch(url);
