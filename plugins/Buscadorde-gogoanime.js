@@ -1,12 +1,13 @@
 import fetch from 'node-fetch';
 
 const handler = async (m, { text, args }) => {
+    // Validar que el usuario ingresó una consulta de búsqueda
     if (!args.length) {
-        return m.reply('*[❗] Uso correcto: .gogosearch <nombre del anime>*');
+        return m.reply('*[❗] Uso correcto: .magisearch <nombre del anime>*');
     }
 
     const query = args.join(' ').trim();
-    const url = `https://gogoanime.consumet.stream/search?keyw=${encodeURIComponent(query)}`;
+    const url = `https://api.magitv.com/search?query=${encodeURIComponent(query)}`; // URL de la API de Magi TV
 
     try {
         const response = await fetch(url);
@@ -26,15 +27,15 @@ const handler = async (m, { text, args }) => {
         // Construir el mensaje con los resultados
         let message = `🔎 *Resultados de búsqueda para:* "${query}"\n\n`;
         data.slice(0, 5).forEach((anime) => {
-            message += `📌 *${anime.animeTitle}*\n🔗 ${anime.animeUrl}\n\n`;
+            message += `📌 *${anime.title}*\n🔗 ${anime.url}\n\n`;
         });
 
         await m.reply(message);
     } catch (error) {
         console.error('Error en la búsqueda:', error.message);
-        return m.reply('*[❗] Hubo un error al buscar el anime en Gogoanime.*');
+        return m.reply('*[❗] Hubo un error al buscar el anime en Magi TV.*');
     }
 };
 
-handler.command = /^gogosearch$/i;
+handler.command = /^magisearch$/i;
 export default handler;
