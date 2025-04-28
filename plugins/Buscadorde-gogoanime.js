@@ -1,13 +1,12 @@
 import fetch from 'node-fetch';
 
 const handler = async (m, { text, args }) => {
-    // Validar que el usuario ingresó una consulta de búsqueda
     if (!args.length) {
-        return m.reply('*[❗] Uso correcto: .magisearch <nombre del anime>*');
+        return m.reply('*[❗] Uso correcto: .animeplus <nombre del anime>*');
     }
 
     const query = args.join(' ').trim();
-    const url = `https://freewebapi.com/entertainment-apis/anime-api/{encodeURIComponent(query)}`; // URL de la API de Magi TV
+    const url = `https://freewebapi.com/api/anime/search?query=${encodeURIComponent(query)}`; // URL de la API de FreeWebApi Anime
 
     try {
         const response = await fetch(url);
@@ -27,15 +26,15 @@ const handler = async (m, { text, args }) => {
         // Construir el mensaje con los resultados
         let message = `🔎 *Resultados de búsqueda para:* "${query}"\n\n`;
         data.slice(0, 5).forEach((anime) => {
-            message += `📌 *${anime.title}*\n🔗 ${anime.url}\n\n`;
+            message += `📌 *${anime.title}*\n🎥 *Video:* ${anime.videoUrl || 'No disponible'}\n🔗 ${anime.url}\n\n`;
         });
 
         await m.reply(message);
     } catch (error) {
         console.error('Error en la búsqueda:', error.message);
-        return m.reply('*[❗] Hubo un error al buscar el anime en Magi TV.*');
+        return m.reply('*[❗] Hubo un error al buscar el anime en FreeWebApi.*');
     }
 };
 
-handler.command = /^magisearch$/i;
+handler.command = /^animeplus$/i;
 export default handler;
