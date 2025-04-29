@@ -4,26 +4,24 @@ let handler = async (m, { conn, args }) => {
     // Base de datos de personajes directamente en el código
     const characters = [
         {
-            name: "aika sano", // Convertido a minúsculas
+            name: "aika sano",
             gender: "Mujer",
             value: "2000",
             source: "Ane wa Yanmama Junyuu-chuu",
             img: [
                 "https://files.catbox.moe/4ea1lz.jpg",
-                "https://files.catbox.moe/4g2twd.jpg",
                 "https://files.catbox.moe/4g2twd.jpg"
             ],
             vid: [
                 "https://files.catbox.moe/vsm42i.mp4",
-                "https://files.catbox.moe/gqb6pn.mp4",
-                "https://files.catbox.moe/a0ay0u.mp4" // URL adicional
+                "https://files.catbox.moe/gqb6pn.mp4"
             ],
             user: null,
             status: "Libre",
             votes: 0
         },
         {
-            name: "mariya mikhailovna kujou", // Convertido a minúsculas
+            name: "mariya mikhailovna kujou",
             gender: "Mujer",
             value: "1700",
             source: "Roshidere",
@@ -32,15 +30,14 @@ let handler = async (m, { conn, args }) => {
                 "https://qu.ax/r2dJc.jpg"
             ],
             vid: [
-                "https://files.catbox.moe/rj2tqv.mp4",
-                "https://files.catbox.moe/extraMariya.mp4" // URL adicional
+                "https://files.catbox.moe/rj2tqv.mp4"
             ],
             user: null,
             status: "Libre",
             votes: 0
         },
         {
-            name: "rem", // Personaje añadido
+            name: "rem",
             gender: "Mujer",
             value: "2500",
             source: "Re:Zero",
@@ -50,40 +47,48 @@ let handler = async (m, { conn, args }) => {
             ],
             vid: [
                 "https://files.catbox.moe/8t3fsz.mp4",
-
-"https://files.catbox.moe/nsp6d2.mp4",
-                "https://files.catbox.moe/wuchhp.mp4" // URL adicional
+                "https://files.catbox.moe/nsp6d2.mp4"
             ],
-            name: "secret", // Convertido a minúsculas
-            gender: "hombre",
+            user: null,
+            status: "Libre",
+            votes: 0
+        },
+        {
+            name: "secret",
+            gender: "Hombre",
             value: "2000",
-            source: "shadowl",
+            source: "Shadowl",
             img: [
                 "https://files.catbox.moe/08fo9q.jpg",
-                "https://files.catbox.moe/qex4y1.jpg",
-                "https://files.catbox.moe/t397rs.jpg"
+                "https://files.catbox.moe/qex4y1.jpg"
             ],
             vid: [
                 "https://files.catbox.moe/p4ciwk.mp4",
-                "https://files.catbox.moe/60k1ro.mp4",
-                "https://files.catbox.moe/sh1mlv.mp4" // URL adicional
+                "https://files.catbox.moe/60k1ro.mp4"
             ],
+            user: null,
+            status: "Libre",
+            votes: 0
         },
-         {
-            name: "velmil", // Convertido a minúsculas
+        {
+            name: "velmil",
             gender: "Mujer",
             value: "2000",
-            source: "velmeil",
+            source: "Velmeil",
             img: [
                 "https://files.catbox.moe/4ea1lz.jpg",
-                "https://files.catbox.moe/4g2twd.jpg",
                 "https://files.catbox.moe/4g2twd.jpg"
             ],
             vid: [
                 "https://files.catbox.moe/7yzlyh.mp4",
-                "https://files.catbox.moe/jk0mtm.mp4",
-                "https://files.catbox.moe/ii9t9w.mp4" // URL adicional
+                "https://files.catbox.moe/jk0mtm.mp4"
             ],
+            user: null,
+            status: "Libre",
+            votes: 0
+        }
+    ]; // Aquí cerramos correctamente el array de personajes
+
     // Buscar el personaje en la base de datos
     const character = characters.find(c => c.name === characterName);
 
@@ -104,8 +109,7 @@ let handler = async (m, { conn, args }) => {
     for (const img of character.img) {
         await conn.sendFile(m.chat, img, 'image.jpg', respuesta, m);
     }
-
-    // Enviar videos del personaje
+// Enviar videos del personaje
     for (const vid of character.vid) {
         await conn.sendFile(m.chat, vid, 'video.mp4', '', m);
     }
