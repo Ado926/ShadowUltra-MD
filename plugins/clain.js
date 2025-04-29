@@ -1,26 +1,30 @@
-import { promises as fs } from 'fs';
-
-const charactersFilePath = './src/database/characters.json';
-const haremFilePath = './src/database/harem.json';
+const characters = [
+    {
+       recompensa:"shadow bot 👻",
+        id: "1",
+        name: "shadow",
+        gender: "hombre",
+        value: 1900,
+        img: ["https://files.catbox.moe/k94woq.jpg", "https://files.catbox.moe/gd3lvm.mp4"],
+        source: "Date a Live",
+        user: null,
+        status: "Libre"
+    },
+    {
+        recompensa:"shadow bot👻",
+        id: "2",
+        name: "shadow",
+        gender: "hombre",
+        value: 3000,
+        img: ["https://example.com/kurumi1.jpg", "https://example.com/kurumi2.jpg"],
+        source: "Date a Live",
+        user: null,
+        status: "Libre"
+    },
+    // Agrega más personajes aquí...
+];
 
 const cooldowns = {};
-
-async function loadCharacters() {
-    try {
-        const data = await fs.readFile(charactersFilePath, 'utf-8');
-        return JSON.parse(data);
-    } catch (error) {
-        throw new Error('❀ No se pudo cargar el archivo characters.json.');
-    }
-}
-
-async function saveCharacters(characters) {
-    try {
-        await fs.writeFile(charactersFilePath, JSON.stringify(characters, null, 2), 'utf-8');
-    } catch (error) {
-        throw new Error('❀ No se pudo guardar el archivo characters.json.');
-    }
-}
 
 let handler = async (m, { conn }) => {
     const userId = m.sender;
@@ -35,7 +39,6 @@ let handler = async (m, { conn }) => {
 
     if (m.quoted && m.quoted.sender === conn.user.jid) {
         try {
-            const characters = await loadCharacters();
             const characterIdMatch = m.quoted.text.match(/ID: \*(.+?)\*/);
 
             if (!characterIdMatch) {
@@ -51,7 +54,7 @@ let handler = async (m, { conn }) => {
                 return;
             }
 
-            if (character.user && character.user !== userId) {
+            if (character.user) {
                 await conn.reply(m.chat, `《✧》El personaje ya ha sido reclamado por @${character.user.split('@')[0]}, inténtalo a la próxima :v.`, m, { mentions: [character.user] });
                 return;
             }
@@ -60,9 +63,9 @@ let handler = async (m, { conn }) => {
             character.user = userId;
             character.status = "Reclamado";
 
-            await saveCharacters(characters);
+            await conn.reply(m.chat, `《✧》Has reclamado a *${character.name}* con éxito.`, m);
 
-            await conn.reply(m.chat, `✦ Has reclamado a *${character.name}* con éxito.`, m);
+            // Registrar cooldown para el usuario
             cooldowns[userId] = now + 30 * 60 * 1000;
 
         } catch (error) {
@@ -76,7 +79,7 @@ let handler = async (m, { conn }) => {
 
 handler.help = ['claim'];
 handler.tags = ['gacha'];
-handler.command = ['c', 'claim', 'c'];
+handler.command = ['c', 'claim'];
 handler.group = true;
 handler.register = true;
 
