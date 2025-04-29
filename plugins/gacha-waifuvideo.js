@@ -71,17 +71,21 @@ let handler = async (m, { conn, args }) => {
             votes: 0
         },
         {
-            name: "velmil",
+            name: "velmeil",
             gender: "Mujer",
             value: "2000",
             source: "Velmeil",
             img: [
                 "https://files.catbox.moe/id1byh.jpg",
-"https://files.catbox.moe/08fo9q.jpg" "https://files.catbox.moe/h7xby4.jpg"
+
+"https://files.catbox.moe/08fo9q.jpg"
+ "https://files.catbox.moe/h7xby4.jpg"
             ],
             vid: [
                 "https://files.catbox.moe/xt4ejs.mp4",
-"https://files.catbox.moe/60k1ro.mp4"     "https://files.catbox.moe/sh1mlv.mp4"
+
+"https://files.catbox.moe/60k1ro.mp4"    
+ "https://files.catbox.moe/sh1mlv.mp4"
             ],
             user: null,
             status: "Libre",
