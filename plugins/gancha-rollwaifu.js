@@ -1,13 +1,10 @@
-const cooldowns = {}
-
-// Base de datos de personajes directamente en el código
 const characters = [
     {
         id: "1",
         name: "Reine Murasame",
         gender: "Mujer",
         value: 1900,
-        img: ["https://files.catbox.moe/jhhy39.jpeg", "https://files.catbox.moe/cwzr7t.jpg"],
+        img: ["https://example.com/reine1.jpg", "https://example.com/reine2.jpg"],
         source: "Date a Live",
         user: null
     },
@@ -16,73 +13,51 @@ const characters = [
         name: "Kurumi Tokisaki",
         gender: "Mujer",
         value: 3000,
-        img: ["https://files.catbox.moe/yro161.jpg", "https://files.catbox.moe/mkh4bt.jpg"],
+        img: ["https://example.com/kurumi1.jpg", "https://example.com/kurumi2.jpg"],
         source: "Date a Live",
         user: null
     },
     // Agrega más personajes aquí...
-]
+];
  {
         id: "1",
-        name: " velmiel",
+        name: "velmiel",
         gender: "Mujer",
-        value: 19000,
+        value: 1900,
         img: ["https://files.catbox.moe/id1byh.jpg", "https://files.catbox.moe/h7xby4.jpg"],
         source: "Date a Live",
         user: null
     },
-// Harem simulado, almacenado internamente en el código
-let harem = []
-
-let handler = async (m, { conn }) => {
-    const userId = m.sender
-    const now = Date.now()
-
-    if (cooldowns[userId] && now < cooldowns[userId]) {
-        const remainingTime = Math.ceil((cooldowns[userId] - now) / 1000)
-        const minutes = Math.floor(remainingTime / 60)
-        const seconds = remainingTime % 60
-        return await conn.reply(m.chat, `《✧》Debes esperar *${minutes} minutos y ${seconds} segundos* para usar *#rw* de nuevo.`, m)
+const handler = async (m, { text, args, conn }) => {
+    if (!args.length) {
+        return await conn.reply(m.chat, '《✧》Debes citar un personaje válido para reclamar.', m);
     }
 
-    try {
-        // Seleccionar un personaje aleatorio
-        const randomCharacter = characters[Math.floor(Math.random() * characters.length)]
-        const randomImage = randomCharacter.img[Math.floor(Math.random() * randomCharacter.img.length)]
+    const characterName = args.join(' ').trim();
+    const character = characters.find(c => c.name.toLowerCase() === characterName.toLowerCase());
 
-        // Verificar si el personaje está en el harem
-        const userEntry = harem.find(entry => entry.characterId === randomCharacter.id)
-        const statusMessage = randomCharacter.user 
-            ? `Reclamado por @${randomCharacter.user.split('@')[0]}` 
-            : 'Libre'
-
-        const message = `❀ Nombre » *${randomCharacter.name}*
-⚥ Género » *${randomCharacter.gender}*
-✰ Valor » *${randomCharacter.value}*
-♡ Estado » ${statusMessage}
-❖ Fuente » *${randomCharacter.source}*
-✦ ID: *${randomCharacter.id}*`
-
-        const mentions = userEntry ? [userEntry.userId] : []
-        await conn.sendFile(m.chat, randomImage, `${randomCharacter.name}.jpg`, message, m, { mentions })
-
-        // Actualizar el estado si el personaje está libre
-        if (!randomCharacter.user) {
-            randomCharacter.user = userId
-            harem.push({ userId, characterId: randomCharacter.id })
-        }
-
-        // Actualizar el cooldown para el usuario
-        cooldowns[userId] = now + 15 * 60 * 1000
-
-    } catch (error) {
-        await conn.reply(m.chat, `✘ Error al cargar el personaje: ${error.message}`, m)
+    if (!character) {
+        return await conn.reply(m.chat, '《✧》Debes citar un personaje válido para reclamar.', m);
     }
-}
 
-handler.help = ['ver', 'rw', 'rollwaifu']
-handler.tags = ['gacha']
-handler.command = ['ver', 'rw', 'rollwaifu']
-handler.group = true
+    if (character.user) {
+        return await conn.reply(m.chat, `✦ El personaje ya ha sido reclamado por @${character.user.split('@')[0]}.`, m, {
+            mentions: [character.user]
+        });
+    }
 
-export default handler
+    // Reclamar el personaje
+    const userId = m.sender;
+    character.user = userId;
+
+    const randomImage = character.img[Math.floor(Math.random() * character.img.length)];
+    const message = `✦ Has reclamado a *${character.name}* con éxito.`;
+
+    await conn.sendFile(m.chat, randomImage, `${character.name}.jpg`, message, m);
+
+    // Confirmar actualización
+    console.log(`El personaje "${character.name}" ha sido reclamado por ${userId}.`);
+};
+
+handler.command = ['c','rw']
+export default handler;
