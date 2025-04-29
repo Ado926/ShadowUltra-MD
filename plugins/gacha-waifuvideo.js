@@ -76,12 +76,12 @@ let handler = async (m, { conn, args }) => {
             value: "2000",
             source: "Velmeil",
             img: [
-                "https://files.catbox.moe/4ea1lz.jpg",
-                "https://files.catbox.moe/4g2twd.jpg"
+                "https://files.catbox.moe/id1byh.jpg",
+"https://files.catbox.moe/08fo9q.jpg" "https://files.catbox.moe/h7xby4.jpg"
             ],
             vid: [
-                "https://files.catbox.moe/7yzlyh.mp4",
-                "https://files.catbox.moe/jk0mtm.mp4"
+                "https://files.catbox.moe/gd3lvm.mp4",
+"https://files.catbox.moe/60k1ro.mp4"     "https://files.catbox.moe/sh1mlv.mp4"
             ],
             user: null,
             status: "Libre",
