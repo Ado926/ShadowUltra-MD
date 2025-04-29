@@ -2,7 +2,7 @@ const characters = [
     {
        recompensa:"shadow bot 👻",
         id: "1",
-        name: "shadow",
+        name: "este maravilloso personaje",
         gender: "hombre",
         value: 1900,
         img: ["https://files.catbox.moe/k94woq.jpg", "https://files.catbox.moe/gd3lvm.mp4"],
@@ -13,7 +13,7 @@ const characters = [
     {
         recompensa:"shadow bot👻",
         id: "2",
-        name: "shadow",
+        name: "este maravilloso personaje",
         gender: "hombre",
         value: 3000,
         img: ["https://example.com/kurumi1.jpg", "https://example.com/kurumi2.jpg"],
