@@ -22,7 +22,15 @@ const characters = [
     },
     // Agrega más personajes aquí...
 ]
-
+ {
+        id: "1",
+        name: " velmiel",
+        gender: "Mujer",
+        value: 19000,
+        img: ["https://files.catbox.moe/id1byh.jpg", "https://files.catbox.moe/h7xby4.jpg"],
+        source: "Date a Live",
+        user: null
+    },
 // Harem simulado, almacenado internamente en el código
 let harem = []
 
