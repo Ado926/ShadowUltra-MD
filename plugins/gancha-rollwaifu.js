@@ -27,7 +27,7 @@ const characters = [
         name: " velmiel",
         gender: "Mujer",
         value: 19000,
-        img: ["https://files.catbox.moe/id1byh.jpg", "https://files.catbox.moe/h7xby4.jpg"],
+        img: ["https://files.catbox.moe/jhhy39.jpeg", "https://files.catbox.moe/cwzr7t.jpg"],
         source: "Date a Live",
         user: null
     },
