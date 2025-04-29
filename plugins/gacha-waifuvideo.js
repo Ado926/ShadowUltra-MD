@@ -54,12 +54,37 @@ let handler = async (m, { conn, args }) => {
 "https://files.catbox.moe/nsp6d2.mp4",
                 "https://files.catbox.moe/wuchhp.mp4" // URL adicional
             ],
-            user: null,
-            status: "Libre",
-            votes: 0
+            name: "secret", // Convertido a minúsculas
+            gender: "hombre",
+            value: "2000",
+            source: "shadowl",
+            img: [
+                "https://files.catbox.moe/08fo9q.jpg",
+                "https://files.catbox.moe/qex4y1.jpg",
+                "https://files.catbox.moe/t397rs.jpg"
+            ],
+            vid: [
+                "https://files.catbox.moe/p4ciwk.mp4",
+                "https://files.catbox.moe/60k1ro.mp4",
+                "https://files.catbox.moe/sh1mlv.mp4" // URL adicional
+            ],
         }
     ];
-
+{
+            name: "velmil", // Convertido a minúsculas
+            gender: "Mujer",
+            value: "2000",
+            source: "velmeil",
+            img: [
+                "https://files.catbox.moe/4ea1lz.jpg",
+                "https://files.catbox.moe/4g2twd.jpg",
+                "https://files.catbox.moe/4g2twd.jpg"
+            ],
+            vid: [
+                "https://files.catbox.moe/7yzlyh.mp4",
+                "https://files.catbox.moe/jk0mtm.mp4",
+                "https://files.catbox.moe/ii9t9w.mp4" // URL adicional
+            ],
     // Buscar el personaje en la base de datos
     const character = characters.find(c => c.name === characterName);
 
