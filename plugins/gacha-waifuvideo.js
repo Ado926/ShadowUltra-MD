@@ -54,44 +54,43 @@ let handler = async (m, { conn, args }) => {
             votes: 0
         },
         {
-            name: "secret",
-            gender: "Hombre",
+            name: "velmiel",
+            gender: "mujer",
             value: "2000",
-            source: "Shadowl",
+            source: "velmiel",
             img: [
-                "https://files.catbox.moe/08fo9q.jpg",
-                "https://files.catbox.moe/qex4y1.jpg"
+        "https://files.catbox.moe/id1byh.jpg",
+                "https://files.catbox.moe/h7xby4.jpg"
             ],
             vid: [
                 "https://files.catbox.moe/p4ciwk.mp4",
-                "https://files.catbox.moe/60k1ro.mp4"
+                "https://files.catbox.moe/ii9t9w.mp4",
+                "https://files.catbox.moe/7yzlyh.mp4"
             ],
             user: null,
             status: "Libre",
             votes: 0
         },
         {
-            name: "velmeil",
-            gender: "Mujer",
+            name: "secret",
+            gender: "hombre",
             value: "2000",
-            source: "Velmeil",
+            source: "secret",
             img: [
-                "https://files.catbox.moe/id1byh.jpg",
-
-"https://files.catbox.moe/08fo9q.jpg"
- "https://files.catbox.moe/h7xby4.jpg"
+                "https://files.catbox.moe/08fo9q.jpg",
+                "https://files.catbox.moe/qex4y1.jpg",
+                "https://files.catbox.moe/t397rs.jpg"
             ],
             vid: [
-                "https://files.catbox.moe/xt4ejs.mp4",
-
-"https://files.catbox.moe/60k1ro.mp4"    
- "https://files.catbox.moe/sh1mlv.mp4"
+                "https://files.catbox.moe/gd3lvm.mp4",
+                "https://files.catbox.moe/60k1ro.mp4",
+                "https://files.catbox.moe/sh1mlv.mp4"
             ],
             user: null,
             status: "Libre",
             votes: 0
         }
-    ]; // Aquí cerramos correctamente el array de personajes
+    ]; // Base de datos correctamente estructurada
 
     // Buscar el personaje en la base de datos
     const character = characters.find(c => c.name === characterName);
@@ -113,12 +112,12 @@ let handler = async (m, { conn, args }) => {
     for (const img of character.img) {
         await conn.sendFile(m.chat, img, 'image.jpg', respuesta, m);
     }
-// Enviar videos del personaje
+
+    // Enviar videos del personaje
     for (const vid of character.vid) {
         await conn.sendFile(m.chat, vid, 'video.mp4', '', m);
     }
 };
-
 handler.help = ['character <nombre>'];
 handler.tags = ['fun', 'anime'];
 handler.command = ['waifuvideo', 'waifu']; // Comandos disponibles
