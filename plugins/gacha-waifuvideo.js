@@ -68,9 +68,8 @@ let handler = async (m, { conn, args }) => {
                 "https://files.catbox.moe/60k1ro.mp4",
                 "https://files.catbox.moe/sh1mlv.mp4" // URL adicional
             ],
-        }
-    ];
-{
+        },
+         {
             name: "velmil", // Convertido a minúsculas
             gender: "Mujer",
             value: "2000",
