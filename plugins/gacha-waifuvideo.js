@@ -59,13 +59,13 @@ let handler = async (m, { conn, args }) => {
             value: "2000",
             source: "velmiel",
             img: [
-                "https://files.catbox.moe/08fo9q.jpg",
-                "https://files.catbox.moe/qex4y1.jpg"
+        "https://files.catbox.moe/id1byh.jpg",
+                "https://files.catbox.moe/h7xby4.jpg"
             ],
             vid: [
                 "https://files.catbox.moe/p4ciwk.mp4",
-                "https://files.catbox.moe/60k1ro.mp4",
-                "https://files.catbox.moe/sh1mlv.mp4"
+                "https://files.catbox.moe/ii9t9w.mp4",
+                "https://files.catbox.moe/7yzlyh.mp4"
             ],
             user: null,
             status: "Libre",
@@ -77,9 +77,9 @@ let handler = async (m, { conn, args }) => {
             value: "2000",
             source: "secret",
             img: [
-                "https://files.catbox.moe/id1byh.jpg",
                 "https://files.catbox.moe/08fo9q.jpg",
-                "https://files.catbox.moe/h7xby4.jpg"
+                "https://files.catbox.moe/qex4y1.jpg",
+                "https://files.catbox.moe/t397rs.jpg"
             ],
             vid: [
                 "https://files.catbox.moe/gd3lvm.mp4",
