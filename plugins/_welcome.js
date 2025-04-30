@@ -66,10 +66,10 @@ export async function before(m, { conn, participants, groupMetadata }) {
           showAdAttribution: true
         }
       },
-      seconds: '2000',
+      seconds: '158:56:54',
       ptt: true,
       mimetype: 'audio/mpeg',
       fileName: `despedida.mp3`
     }, { quoted: fkontak, ephemeralExpiration: 24 * 60 * 100, disappearingMessagesInChat: 24 * 60 * 100 });
   }
-}
+  }
