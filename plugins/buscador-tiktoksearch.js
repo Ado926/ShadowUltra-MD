@@ -9,8 +9,13 @@ const {
 
 let handler = async (message, { conn, text, usedPrefix, command }) => {
   if (!text) {
-    return conn.reply(message.chat, "❕️ *¿QUÉ BÚSQUEDA DESEA REALIZAR EN TIKTOK?*", message, rcanal);
+    return conn.reply(message.chat, "❕️ *¿QUÉ BÚSQUEDA DESEA REALIZAR EN TIKTOK?*", message);
   }
+
+  // Definir las variables faltantes
+  const logo = 'https://files.catbox.moe/logo.png'; // URL del logo
+  const redes = 'https://www.example.com'; // URL de redes o página relevante
+  const titulowm = 'SHADOW BOT'; // Título del watermark (puedes personalizarlo)
 
   async function createVideoMessage(url) {
     const { videoMessage } = await generateWAMessageContent({
@@ -38,8 +43,8 @@ let handler = async (message, { conn, text, usedPrefix, command }) => {
           title: '♡  ͜ ۬︵࣪᷼⏜݊᷼𝘿𝙚𝙨𝙘𝙖𝙧𝙜𝙖𝙨⏜࣪᷼︵۬ ͜ ',
           body: '<(✿◠‿◠)> SHADOW🔥',
           previewType: 0, 
-          thumbnail: logo,
-          sourceUrl: redes 
+          thumbnail: logo, // La variable logo ahora está definida
+          sourceUrl: redes // URL de las redes
         }
       }
     });
@@ -101,7 +106,7 @@ let handler = async (message, { conn, text, usedPrefix, command }) => {
 
 handler.help = ["tiktoksearch <txt>"];
 handler.chocolates = 1;
-handler.register = true
+handler.register = true;
 handler.tags = ["buscador"];
 handler.command = ["tiktoksearch", "tts", "tiktoks"];
 
