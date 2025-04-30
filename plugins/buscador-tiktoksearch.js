@@ -1,3 +1,4 @@
+
 import axios from 'axios';
 const {
   proto,
@@ -7,16 +8,14 @@ const {
   getDevice
 } = (await import("@whiskeysockets/baileys")).default;
 
+// Definición del manejador
 let handler = async (message, { conn, text, usedPrefix, command }) => {
+  // Verifica si se proporcionó texto para la búsqueda
   if (!text) {
-    return conn.reply(message.chat, "❕️ *¿QUÉ BÚSQUEDA DESEA REALIZAR EN TIKTOK?*", message);
+    return conn.reply(message.chat, "❕️ *¿QUÉ BÚSQUEDA DESEA REALIZAR EN TIKTOK?*", message, rcanal);
   }
 
-  // Definir las variables faltantes
-  const logo = 'https://files.catbox.moe/logo.png'; // URL del logo
-  const redes = 'https://www.example.com'; // URL de redes o página relevante
-  const titulowm = 'SHADOW BOT'; // Título del watermark (puedes personalizarlo)
-
+  // Función para crear un mensaje de video
   async function createVideoMessage(url) {
     const { videoMessage } = await generateWAMessageContent({
       video: { url }
@@ -26,6 +25,7 @@ let handler = async (message, { conn, text, usedPrefix, command }) => {
     return videoMessage;
   }
 
+  // Función para mezclar un array
   function shuffleArray(array) {
     for (let i = array.length - 1; i > 0; i--) {
       const j = Math.floor(Math.random() * (i + 1));
@@ -34,6 +34,7 @@ let handler = async (message, { conn, text, usedPrefix, command }) => {
   }
 
   try {
+    // Responde al usuario que se están enviando resultados
     conn.reply(message.chat, '✨️ *ENVIANDO SUS RESULTADOS..*', message, {
       contextInfo: { 
         externalAdReply: { 
@@ -43,18 +44,20 @@ let handler = async (message, { conn, text, usedPrefix, command }) => {
           title: '♡  ͜ ۬︵࣪᷼⏜݊᷼𝘿𝙚𝙨𝙘𝙖𝙧𝙜𝙖𝙨⏜࣪᷼︵۬ ͜ ',
           body: '<(✿◠‿◠)> SHADOW🔥',
           previewType: 0, 
-          thumbnail: logo, // La variable logo ahora está definida
-          sourceUrl: redes // URL de las redes
+          thumbnail: logo,
+          sourceUrl: redes 
         }
       }
     });
 
+    // Realiza la búsqueda en TikTok
     let results = [];
     let { data } = await axios.get("https://apis-starlights-team.koyeb.app/starlight/tiktoksearch?text=" + text);
     let searchResults = data.data;
     shuffleArray(searchResults);
-    let topResults = searchResults.splice(0, 7);
+    let topResults = searchResults.splice(0, 7); // Toma los primeros 7 resultados
 
+    // Prepara los resultados para enviar
     for (let result of topResults) {
       results.push({
         body: proto.Message.InteractiveMessage.Body.fromObject({ text: null }),
@@ -68,6 +71,7 @@ let handler = async (message, { conn, text, usedPrefix, command }) => {
       });
     }
 
+    // Genera el mensaje que se enviará
     const messageContent = generateWAMessageFromContent(message.chat, {
       viewOnceMessage: {
         message: {
@@ -95,6 +99,7 @@ let handler = async (message, { conn, text, usedPrefix, command }) => {
       quoted: message
     });
 
+    // Envía el mensaje generado
     await conn.relayMessage(message.chat, messageContent.message, {
       messageId: messageContent.key.id
     });
@@ -104,6 +109,7 @@ let handler = async (message, { conn, text, usedPrefix, command }) => {
   }
 };
 
+// Configuración del manejador
 handler.help = ["tiktoksearch <txt>"];
 handler.chocolates = 1;
 handler.register = true;
@@ -111,3 +117,4 @@ handler.tags = ["buscador"];
 handler.command = ["tiktoksearch", "tts", "tiktoks"];
 
 export default handler;
+          
