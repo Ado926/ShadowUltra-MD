@@ -1,11 +1,14 @@
 import fetch from 'node-fetch';
 
+const YOUTUBE_API_KEY = 'AIzaSyDxSl-YLDFDHDmLzaFWEVrYAzn7EihCYJA'; // Clave API de YouTube
+
 const handler = async (m, { conn, text }) => {
     if (!text) {
         return conn.reply(m.chat, "❕️ *¿QUÉ CANCIÓN O VIDEO QUIERES BUSCAR?*", m);
     }
 
-    const searchUrl = `https://yt-api-fetch.vercel.app/search?q=${encodeURIComponent(text)}`;
+    // URL de búsqueda en YouTube utilizando la API oficial
+    const searchUrl = `https://www.googleapis.com/youtube/v3/search?part=snippet&type=video&q=${encodeURIComponent(text)}&maxResults=1&key=${YOUTUBE_API_KEY}`;
 
     try {
         const response = await fetch(searchUrl);
@@ -18,31 +21,34 @@ const handler = async (m, { conn, text }) => {
         const data = await response.json();
         console.log("Respuesta de la API:", data); // Log para depuración
 
-        if (!data || !data.results || data.results.length === 0) {
+        if (!data.items || data.items.length === 0) {
             return conn.reply(m.chat, "❌ No se encontraron resultados para tu búsqueda.", m);
         }
 
-        const video = data.results[0];
-        const videoUrl = `https://www.youtube.com/watch?v=${video.videoId}`;
-        const thumbnail = video.thumbnail;
+        const video = data.items[0];
+        const videoId = video.id.videoId;
+        const videoUrl = `https://www.youtube.com/watch?v=${videoId}`;
+        const thumbnail = video.snippet.thumbnails.high.url;
+        const title = video.snippet.title;
+        const channel = video.snippet.channelTitle;
 
         const responseMessage = `
 🎶 Tú .play2 ${text}
 🌸 *FELÍZ A TU LADO*
-🎤 ${video.title}
-📌 Duración: ${video.duration}
-📺 Canal: ${video.channelTitle}
+🎤 ${title}
+📺 Canal: ${channel}
 🔗 [Ver en YouTube](${videoUrl})
 `;
 
+        // Enviar mensaje con imagen
         await conn.sendMessage(m.chat, {
             image: { url: thumbnail },
             caption: responseMessage
         });
 
+        // Enviar el enlace del video en vez de descargarlo
         await conn.sendMessage(m.chat, {
-            video: { url: videoUrl },
-            caption: `Aquí tienes el video de *${video.title}* 🎶`
+            text: `Aquí tienes el video de *${title}* 🎶\n🔗 ${videoUrl}`
         });
 
     } catch (error) {
