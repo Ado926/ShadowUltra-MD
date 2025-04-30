@@ -1,30 +1,43 @@
+import { promises as fs } from 'fs'
+
+const charactersFilePath = './src/database/characters.json'
+const haremFilePath = './src/database/harem.json'
+
 const cooldowns = {}
 
-// Base de datos de personajes directamente en el código
-const characters = [
-    {
-        id: "1",
-        name: "Reine Murasame",
-        gender: "Mujer",
-        value: 1900,
-        img: ["https://files.catbox.moe/jhhy39.jpeg", "https://files.catbox.moe/cwzr7t.jpg"],
-        source: "Date a Live",
-        user: null
-    },
-    {
-        id: "2",
-        name: "Kurumi Tokisaki",
-        gender: "Mujer",
-        value: 3000,
-        img: ["https://files.catbox.moe/yro161.jpg", "https://files.catbox.moe/mkh4bt.jpg"],
-        source: "Date a Live",
-        user: null
-    },
-    // Agrega más personajes aquí...
-]
+async function loadCharacters() {
+    try {
+        const data = await fs.readFile(charactersFilePath, 'utf-8')
+        return JSON.parse(data)
+    } catch (error) {
+        throw new Error('❀ No se pudo cargar el archivo characters.json.')
+    }
+}
 
-// Harem simulado, almacenado internamente en el código
-let harem = []
+async function saveCharacters(characters) {
+    try {
+        await fs.writeFile(charactersFilePath, JSON.stringify(characters, null, 2), 'utf-8')
+    } catch (error) {
+        throw new Error('❀ No se pudo guardar el archivo characters.json.')
+    }
+}
+
+async function loadHarem() {
+    try {
+        const data = await fs.readFile(haremFilePath, 'utf-8')
+        return JSON.parse(data)
+    } catch (error) {
+        return []
+    }
+}
+
+async function saveHarem(harem) {
+    try {
+        await fs.writeFile(haremFilePath, JSON.stringify(harem, null, 2), 'utf-8')
+    } catch (error) {
+        throw new Error('❀ No se pudo guardar el archivo harem.json.')
+    }
+}
 
 let handler = async (m, { conn }) => {
     const userId = m.sender
@@ -38,11 +51,11 @@ let handler = async (m, { conn }) => {
     }
 
     try {
-        // Seleccionar un personaje aleatorio
+        const characters = await loadCharacters()
         const randomCharacter = characters[Math.floor(Math.random() * characters.length)]
         const randomImage = randomCharacter.img[Math.floor(Math.random() * randomCharacter.img.length)]
 
-        // Verificar si el personaje está en el harem
+        const harem = await loadHarem()
         const userEntry = harem.find(entry => entry.characterId === randomCharacter.id)
         const statusMessage = randomCharacter.user 
             ? `Reclamado por @${randomCharacter.user.split('@')[0]}` 
@@ -58,13 +71,10 @@ let handler = async (m, { conn }) => {
         const mentions = userEntry ? [userEntry.userId] : []
         await conn.sendFile(m.chat, randomImage, `${randomCharacter.name}.jpg`, message, m, { mentions })
 
-        // Actualizar el estado si el personaje está libre
         if (!randomCharacter.user) {
-            randomCharacter.user = userId
-            harem.push({ userId, characterId: randomCharacter.id })
+            await saveCharacters(characters)
         }
 
-        // Actualizar el cooldown para el usuario
         cooldowns[userId] = now + 15 * 60 * 1000
 
     } catch (error) {
