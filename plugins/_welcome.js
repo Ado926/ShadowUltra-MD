@@ -38,7 +38,7 @@ export async function before(m, { conn, participants, groupMetadata }) {
           showAdAttribution: true
         }
       },
-      seconds: '2000',
+      seconds: '5278263792',
       ptt: true,
       mimetype: 'audio/mpeg',
       fileName: `bienvenida.mp3`
