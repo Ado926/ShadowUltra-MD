@@ -1,242 +1,653 @@
 [
-  {
-    "question": "¿Quién fue el primer emperador romano?",
-    "options": ["Augusto", "César", "Nerón"],
-    "answer": "Augusto"
-  },
-  {
-    "question": "¿Cuál es el nombre completo de la teoría de la relatividad de Einstein?",
-    "options": ["Teoría de la relatividad especial", "Teoría de la relatividad general", "Teoría unificada de campos"],
-    "answer": "Teoría de la relatividad general"
-  },
-  {
-    "question": "¿Quién pintó el techo de la Capilla Sixtina?",
-    "options": ["Leonardo da Vinci", "Raphael", "Miguel Ángel"],
-    "answer": "Miguel Ángel"
-  },
-  {
-    "question": "¿En qué año se firmó la Declaración de Independencia de los Estados Unidos?",
-    "options": ["1776", "1789", "1800"],
-    "answer": "1776"
-  },
-  {
-    "question": "¿Cómo se llama la capa más externa de la Tierra?",
-    "options": ["Corteza", "Manto", "Núcleo"],
-    "answer": "Corteza"
-  },
-  {
-    "question": "¿Qué país fue el primero en lanzar un satélite artificial al espacio?",
-    "options": ["Estados Unidos", "Unión Soviética", "China"],
-    "answer": "Unión Soviética"
-  },
-  {
-    "question": "¿Cuál es el órgano más grande del cuerpo humano?",
-    "options": ["El corazón", "La piel", "El hígado"],
-    "answer": "La piel"
-  },
-  {
-    "question": "¿Qué filósofo griego fue maestro de Alejandro Magno?",
-    "options": ["Platón", "Aristóteles", "Sócrates"],
-    "answer": "Aristóteles"
-  },
-  {
-    "question": "¿Qué es el bosón de Higgs?",
-    "options": ["Una partícula subatómica", "Una teoría matemática", "Un tipo de energía"],
-    "answer": "Una partícula subatómica"
-  },
-  {
-    "question": "¿Cuál es el país más grande del mundo por superficie?",
-    "options": ["Canadá", "Rusia", "China"],
-    "answer": "Rusia"
-  },
-  {
-    "question": "¿En qué ciudad se encuentra la famosa Torre Inclinada?",
-    "options": ["Roma", "Florencia", "Pisa"],
-    "answer": "Pisa"
-  },
-  {
-    "question": "¿Qué autor escribió la obra 'Don Quijote de la Mancha'?",
-    "options": ["Miguel de Cervantes", "Fernando de Rojas", "Luis de Góngora"],
-    "answer": "Miguel de Cervantes"
-  },
-  {
-    "question": "¿Cuál es la capital de Mongolia?",
-    "options": ["Ulan Bator", "Astana", "Pyongyang"],
-    "answer": "Ulan Bator"
-  },
-  {
-    "question": "¿Cuántos elementos químicos hay en la tabla periódica?",
-    "options": ["118", "120", "112"],
-    "answer": "118"
-  },
-  {
-    "question": "¿Qué físico es conocido por sus contribuciones a la teoría cuántica y la relatividad?",
-    "options": ["Max Planck", "Albert Einstein", "Niels Bohr"],
-    "answer": "Albert Einstein"
-  },
-  {
-    "question": "¿Qué instrumento musical tiene 88 teclas?",
-    "options": ["Piano", "Órgano", "Arpa"],
-    "answer": "Piano"
-  },
-  {
-    "question": "¿Cuál es el río más largo del mundo?",
-    "options": ["Río Amazonas", "Río Nilo", "Río Yangtsé"],
-    "answer": "Río Amazonas"
-  },
-  {
-    "question": "¿Cuál fue la primera civilización que inventó la escritura?",
-    "options": ["Egipcios", "Sumerios", "Chinos"],
-    "answer": "Sumerios"
-  },
-  {
-    "question": "¿En qué país nació el matemático y filósofo René Descartes?",
-    "options": ["Francia", "Alemania", "Países Bajos"],
-    "answer": "Francia"
-  },
-  {
-    "question": "¿Cuál es el nombre de la teoría que propone que los continentes eran una vez un solo supercontinente?",
-    "options": ["Deriva continental", "Teoría de cuerdas", "Teoría del Big Bang"],
-    "answer": "Deriva continental"
-  },
-  {
-    "question": "¿Qué pintor es conocido por su obra 'La noche estrellada'?",
-    "options": ["Claude Monet", "Vincent van Gogh", "Pablo Picasso"],
-    "answer": "Vincent van Gogh"
-  },
-  {
-    "question": "¿En qué continente se encuentra el desierto de Atacama?",
-    "options": ["Asia", "América del Sur", "África"],
-    "answer": "América del Sur"
-  },
-  {
-    "question": "¿Cuál es el único mamífero capaz de volar?",
-    "options": ["Murciélago", "Albatros", "Murciégalo"],
-    "answer": "Murciélago"
-  },
-  {
-    "question": "¿Qué país ganó la Copa del Mundo de Fútbol de 1970?",
-    "options": ["Brasil", "Argentina", "Alemania"],
-    "answer": "Brasil"
-  },
-  {
-    "question": "¿Qué escritor estadounidense es conocido por su obra 'Matar a un ruiseñor'?",
-    "options": ["Ernest Hemingway", "Mark Twain", "Harper Lee"],
-    "answer": "Harper Lee"
-  },
-  {
-    "question": "¿Cuál es el nombre de la galaxia en la que vivimos?",
-    "options": ["Vía Láctea", "Andrómeda", "Sagitario A"],
-    "answer": "Vía Láctea"
-  },
-  {
-    "question": "¿Quién fue el último emperador de China?",
-    "options": ["Pu Yi", "Qianlong", "Yongzheng"],
-    "answer": "Pu Yi"
-  },
-  {
-    "question": "¿Qué científico descubrió la penicilina?",
-    "options": ["Marie Curie", "Alexander Fleming", "Louis Pasteur"],
-    "answer": "Alexander Fleming"
-  },
-  {
-    "question": "¿Cuál es el número atómico del oxígeno?",
-    "options": ["8", "16", "6"],
-    "answer": "8"
-  },
-  {
-    "question": "¿En qué país se originó el ajedrez?",
-    "options": ["China", "India", "Persia"],
-    "answer": "India"
-  },
-  {
-    "question": "¿Quién fue el primer ser humano en viajar al espacio?",
-    "options": ["Neil Armstrong", "Yuri Gagarin", "Buzz Aldrin"],
-    "answer": "Yuri Gagarin"
-  },
-  {
-    "question": "¿Cuál es el elemento más abundante en la corteza terrestre?",
-    "options": ["Oxígeno", "Silicio", "Aluminio"],
-    "answer": "Oxígeno"
-  },
-  {
-    "question": "¿En qué año se hundió el Titanic?",
-    "options": ["1912", "1905", "1898"],
-    "answer": "1912"
-  },
-  {
-    "question": "¿Qué continente tiene más países?",
-    "options": ["África", "Asia", "Europa"],
-    "answer": "África"
-  },
-  {
-    "question": "¿En qué país se encuentra la ciudad de Petra, famosa por su arquitectura excavada en roca?",
-    "options": ["Jordania", "Israel", "Egipto"],
-    "answer": "Jordania"
-  },
-  {
-    "question": "¿Quién escribió la novela '1984'?",
-    "options": ["Aldous Huxley", "George Orwell", "Ray Bradbury"],
-    "answer": "George Orwell"
-  },
-  {
-    "question": "¿Qué filósofo griego escribió 'La República'?",
-    "options": ["Platón", "Aristóteles", "Sócrates"],
-    "answer": "Platón"
-  },
-  {
-    "question": "¿Cuál es el símbolo químico del oro?",
-    "options": ["Au", "Ag", "Pb"],
-    "answer": "Au"
-  },
-  {
-    "question": "¿Qué famoso físico teórico propuso la ecuación E = mc^2?",
-    "options": ["Isaac Newton", "Albert Einstein", "Niels Bohr"],
-    "answer": "Albert Einstein"
-  },
-  {
-    "question": "¿Cuál es la montaña más alta del mundo?",
-    "options": ["K2", "Everest", "Makalu"],
-    "answer": "Everest"
-  },
-  {
-    "question": "¿Quién fue el primer presidente de los Estados Unidos?",
-    "options": ["Abraham Lincoln", "Thomas Jefferson", "George Washington"],
-    "answer": "George Washington"
-  },
-  {
-    "question": "¿Qué metal es líquido a temperatura ambiente?",
-    "options": ["Mercurio", "Plomo", "Cobre"],
-    "answer": "Mercurio"
-  },
-  {
-    "question": "¿Qué escritor inglés es conocido por su obra 'Hamlet'?",
-    "options": ["Charles Dickens", "William Shakespeare", "John Milton"],
-    "answer": "William Shakespeare"
-  },
-  {
-    "question": "¿Cuál es el planeta más cercano al Sol?",
-    "options": ["Venus", "Mercurio", "Marte"],
-    "answer": "Mercurio"
-  },
-  {
-    "question": "¿Qué país inventó el papel?",
-    "options": ["Egipto", "China", "Grecia"],
-    "answer": "China"
-  },
-  {
-    "question": "¿Qué océano es el más grande?",
-    "options": ["Atlántico", "Índico", "Pacífico"],
-    "answer": "Pacífico"
-  },
-  {
-    "question": "¿Quién descubrió la gravedad?",
-    "options": ["Galileo Galilei", "Isaac Newton", "Albert Einstein"],
-    "answer": "Isaac Newton"
-  },
-  {
-    "question": "¿Cuál es la ciudad más poblada del mundo?",
-    "options": ["Tokio", "Nueva York", "Seúl"],
-    "answer": "Tokio"
-  }
-]
+   {
+      "id": "1",
+      "name": "Aika Sano",
+      "gender": "Mujer",
+      "value": "2200",
+      "source": "Ane wa Yanmama Junyuu-chuu",
+      "img": [
+         "https://raw.githubusercontent.com/The-King-Destroy/Adiciones/main/Contenido/1742690379398.jpeg",
+         "https://raw.githubusercontent.com/The-King-Destroy/Adiciones/main/Contenido/1742690401622.jpeg",
+         "https://raw.githubusercontent.com/The-King-Destroy/Adiciones/main/Contenido/1742690416897.jpeg"
+      ],
+      "vid": [
+         "https://files.catbox.moe/fyd68k.mp4",
+         "https://files.catbox.moe/l2txfh.mp4"
+      ],
+      "user": null,
+      "status": "Libre",
+      "votes": 0
+   },
+   {
+      "id": "2",
+      "name": "Mariya Mikhailovna Kujou",
+      "gender": "Mujer",
+      "value": "2060",
+      "source": "Tokidoki Bosotto Russia-go de Dereru Tonari no Alya-san",
+      "img": [
+         "https://raw.githubusercontent.com/The-King-Destroy/Adiciones/main/Contenido/1742699105347.jpeg",
+         "https://raw.githubusercontent.com/The-King-Destroy/Adiciones/main/Contenido/1742698851202.jpeg",
+         "https://raw.githubusercontent.com/The-King-Destroy/Adiciones/main/Contenido/1742699105347.jpeg"
+      ],
+      "vid": [
+         "https://raw.githubusercontent.com/The-King-Destroy/Adiciones/main/Contenido/1742704584808.mp4",
+         "https://raw.githubusercontent.com/The-King-Destroy/Adiciones/main/Contenido/1742704604513.mp4"
+      ],
+      "user": null,
+      "status": "Libre",
+      "votes": 0
+   },
+   {
+      "id": "3",
+      "name": "Mikasa Ackerman",
+      "gender": "Mujer",
+      "value": "1870",
+      "source": "Attack on Titan (Shingeki no Kyojin)",
+      "img": [
+         "https://raw.githubusercontent.com/The-King-Destroy/Adiciones/main/Contenido/1742704905218.jpeg",
+         "https://raw.githubusercontent.com/The-King-Destroy/Adiciones/main/Contenido/1742704915798.jpeg",
+         "https://raw.githubusercontent.com/The-King-Destroy/Adiciones/main/Contenido/1742704921942.jpeg"
+      ],
+      "vid": [
+         "https://raw.githubusercontent.com/The-King-Destroy/Adiciones/main/Contenido/1742704947621.mp4",
+         "https://raw.githubusercontent.com/The-King-Destroy/Adiciones/main/Contenido/1742704940238.mp4"
+      ],
+      "user": null,
+      "status": "Libre",
+      "votes": 0
+   },
+   {
+      "id": "4",
+      "name": "Izuku Midoriya",
+      "gender": "Hombre",
+      "value": "1700",
+      "source": "My Hero Academia",
+      "img": [
+         "https://raw.githubusercontent.com/The-King-Destroy/Adiciones/main/Contenido/1742704995584.jpeg",
+         "https://raw.githubusercontent.com/The-King-Destroy/Adiciones/main/Contenido/1742705001309.jpeg",
+         "https://raw.githubusercontent.com/The-King-Destroy/Adiciones/main/Contenido/1742705005753.jpeg"
+      ],
+      "vid": [
+         "https://raw.githubusercontent.com/The-King-Destroy/Adiciones/main/Contenido/1742705018012.mp4",
+         "https://raw.githubusercontent.com/The-King-Destroy/Adiciones/main/Contenido/1742705012304.mp4"
+      ],
+      "user": null,
+      "status": "Libre",
+      "votes": 0
+   },
+   {
+      "id": "5",
+      "name": "Misa Amane",
+      "gender": "Mujer",
+      "value": "1900",
+      "source": "Death Note",
+      "img": [
+         "https://raw.githubusercontent.com/The-King-Destroy/Adiciones/main/Contenido/1742705040586.jpeg",
+         "https://raw.githubusercontent.com/The-King-Destroy/Adiciones/main/Contenido/1742705047683.jpeg",
+         "https://raw.githubusercontent.com/The-King-Destroy/Adiciones/main/Contenido/1742705058827.jpeg"
+      ],
+      "vid": [
+         "https://raw.githubusercontent.com/The-King-Destroy/Adiciones/main/Contenido/1742705330136.mp4",
+         "https://raw.githubusercontent.com/The-King-Destroy/Adiciones/main/Contenido/1742705334100.mp4"
+      ],
+      "user": null,
+      "status": "Libre",
+      "votes": 0
+   },
+   {
+      "id": "6",
+      "name": "Asuna Yuuki",
+      "gender": "Mujer",
+      "value": "1960",
+      "source": "Sword Art Online",
+      "img": [
+         "https://raw.githubusercontent.com/The-King-Destroy/Adiciones/main/Contenido/1742704670236.jpeg",
+         "https://raw.githubusercontent.com/The-King-Destroy/Adiciones/main/Contenido/1742704661356.jpeg",
+         "https://raw.githubusercontent.com/The-King-Destroy/Adiciones/main/Contenido/1742704654811.jpeg"
+      ],
+      "vid": [
+         "https://raw.githubusercontent.com/The-King-Destroy/Adiciones/main/Contenido/1742705250183.mp4",
+         "https://raw.githubusercontent.com/The-King-Destroy/Adiciones/main/Contenido/1742705278781.mp4"
+      ],
+      "user": null,
+      "status": "Libre",
+      "votes": 0
+   },
+   {
+      "id": "7",
+      "name": "Erza Scarlet",
+      "gender": "Mujer",
+      "value": "1890",
+      "source": "Fairy Tail",
+      "img": [
+         "https://raw.githubusercontent.com/The-King-Destroy/Adiciones/main/Contenido/1742705567193.jpeg",
+         "https://raw.githubusercontent.com/The-King-Destroy/Adiciones/main/Contenido/1742705584165.jpeg",
+         "https://raw.githubusercontent.com/The-King-Destroy/Adiciones/main/Contenido/1742705597070.jpeg"
+      ],
+      "vid": [
+         "https://raw.githubusercontent.com/The-King-Destroy/Adiciones/main/Contenido/1742705629597.mp4",
+         "https://raw.githubusercontent.com/The-King-Destroy/Adiciones/main/Contenido/1742705638604.mp4"
+      ],
+      "user": null,
+      "status": "Libre",
+      "votes": 0
+   },
+   {
+      "id": "8",
+      "name": "Kurumi Tokisaki",
+      "gender": "Mujer",
+      "value": "2090",
+      "source": "Date A live",
+      "img": [
+         "https://raw.githubusercontent.com/The-King-Destroy/Adiciones/main/Contenido/1742703264755.jpeg",
+         "https://raw.githubusercontent.com/The-King-Destroy/Adiciones/main/Contenido/1742703280299.jpeg",
+         "https://raw.githubusercontent.com/The-King-Destroy/Adiciones/main/Contenido/1742703286891.jpeg"
+      ],
+      "vid": [
+         "https://files.catbox.moe/hylgd2.mp4",
+         "https://files.catbox.moe/516xac.mp4"
+      ],
+      "user": null,
+      "status": "Libre",
+      "votes": 0
+   },
+   {
+      "id": "9",
+      "name": "Momo Deviluke",
+      "gender": "Mujer",
+      "value": "1000",
+      "source": "To Love Ru",
+      "img": [
+         "https://files.catbox.moe/hnrpb4.jpg",
+         "https://files.catbox.moe/gufek6.jpg",
+         "https://files.catbox.moe/3p7fwt.jpg"
+      ],
+      "vid": [],
+      "user": null,
+      "status": "Libre",
+      "votes": 0
+   },
+   {
+      "id": "10",
+      "name": "Nino Nakano",
+      "gender": "Mujer",
+      "value": "2100",
+      "source": "Gotoubun no Hanayome",
+      "img": [
+         "https://raw.githubusercontent.com/The-King-Destroy/Adiciones/main/Contenido/1742703603140.jpeg",
+         "https://raw.githubusercontent.com/The-King-Destroy/Adiciones/main/Contenido/1742703599114.jpeg",
+         "https://raw.githubusercontent.com/The-King-Destroy/Adiciones/main/Contenido/1742703603140.jpeg"
+      ],
+      "vid": [
+         "https://raw.githubusercontent.com/The-King-Destroy/Adiciones/main/Contenido/1742703675449.mp4",
+         "https://raw.githubusercontent.com/The-King-Destroy/Adiciones/main/Contenido/1742703667641.mp4"
+      ],
+      "user": null,
+      "status": "Libre",
+      "votes": 0
+   },
+   {
+      "id": "11",
+      "name": "Ryo Yamada",
+      "gender": "Mujer",
+      "value": "1920",
+      "source": "Bocchi the Rock",
+      "img": [
+         "https://files.catbox.moe/rb8jh8.jpg",
+         "https://files.catbox.moe/ykw4gj.jpg",
+         "https://files.catbox.moe/1icdxd.jpg"
+      ],
+      "vid": [
+         "https://files.catbox.moe/9rwy3g.mp4",
+         "https://files.catbox.moe/enavfp.mp4"
+      ],
+      "user": null,
+      "status": "Libre",
+      "votes": 0
+   },
+   {
+      "id": "12",
+      "name": "Sumi Sakurasawa",
+      "gender": "Mujer",
+      "value": "1900",
+      "source": "Rent a Girlfriend",
+      "img": [
+         "https://files.catbox.moe/b94meg.jpg",
+         "https://files.catbox.moe/u4f5xl.jpg",
+         "https://files.catbox.moe/qmjabr.jpg"
+      ],
+      "vid": [
+         "https://files.catbox.moe/life34.mp4",
+         "https://files.catbox.moe/ds7mta.mp4"
+      ],
+      "user": null,
+      "status": "Libre",
+      "votes": 0
+   },
+   {
+      "id": "13",
+      "name": "Umaru Doma",
+      "gender": "Mujer",
+      "value": "1900",
+      "source": "Himouto! Umaru-chan",
+      "img": [
+         "https://files.catbox.moe/8e24l4.jpg",
+         "https://files.catbox.moe/8dnp1r.jpg",
+         "https://files.catbox.moe/bhvatf.jpg"
+      ],
+      "vid": [
+         "https://files.catbox.moe/ob5hwu.mp4",
+         "https://files.catbox.moe/mce2ug.mp4"
+      ],
+      "user": null,
+      "status": "Libre",
+      "votes": 0
+   },
+   {
+      "id": "14",
+      "name": "Chizuru Mizuhara",
+      "gender": "Mujer",
+      "value": "1940",
+      "source": "Rent a Girlfriend",
+      "img": [
+         "https://files.catbox.moe/2i4fhq.jpg",
+         "https://files.catbox.moe/jvo5sw.jpg",
+         "https://files.catbox.moe/el9gci.jpg"
+      ],
+      "vid": [
+         "https://files.catbox.moe/p7putk.mp4",
+         "https://files.catbox.moe/dkt3t4.mp4"
+      ],
+      "user": null,
+      "status": "Libre",
+      "votes": 0
+   },
+   {
+      "id": "15",
+      "name": "Makima",
+      "gender": "Mujer",
+      "value": "1950",
+      "source": "Chainsaw Man",
+      "img": [
+         "https://files.catbox.moe/uphhjx.jpg",
+         "https://files.catbox.moe/vs9k7k.jpg",
+         "https://files.catbox.moe/hqrurr.jpg"
+      ],
+      "vid": [
+         "https://files.catbox.moe/lmz562.mp4",
+         "https://files.catbox.moe/0g6dab.mp4"
+      ],
+      "user": null,
+      "status": "Libre",
+      "votes": 0
+   },
+   {
+      "id": "16",
+      "name": "Power",
+      "gender": "Mujer",
+      "value": "1850",
+      "source": "Chainsaw Man",
+      "img": [
+         "https://files.catbox.moe/uwc0qu.jpg",
+         "https://files.catbox.moe/vtpfja.jpg",
+         "https://files.catbox.moe/phvp4x.jpg"
+      ],
+      "vid": [
+         "https://files.catbox.moe/tlrm2h.mp4",
+         "https://files.catbox.moe/gnm3i6.mp4"
+      ],
+      "user": null,
+      "status": "Libre",
+      "votes": 0
+   },
+   {
+      "id": "17",
+      "name": "Yuliet Persia",
+      "gender": "Mujer",
+      "value": "1900",
+      "source": "Kishuku Gakkou no Juliet",
+      "img": [
+         "https://files.catbox.moe/0lvcm5.jpg",
+         "https://files.catbox.moe/m3j9jx.jpg",
+         "https://raw.githubusercontent.com/The-King-Destroy/Adiciones/main/Contenido/1742703178806.jpeg"
+      ],
+      "vid": [
+         "https://files.catbox.moe/xmil5a.mp4",
+         "https://raw.githubusercontent.com/The-King-Destroy/Adiciones/main/Contenido/1742703182248.mp4"
+      ],
+      "user": null,
+      "status": "Libre",
+      "votes": 0
+   },
+   {
+      "id": "18",
+      "name": "Kisara",
+      "gender": "Mujer",
+      "value": "1940",
+      "source": "Engage Kiss",
+      "img": [
+         "https://files.catbox.moe/yb9cd1.jpg",
+         "https://files.catbox.moe/r8cdr9.jpg",
+         "https://files.catbox.moe/2nwdjr.jpg"
+      ],
+      "vid": [
+         "https://files.catbox.moe/zv4t2r.mp4",
+         "https://files.catbox.moe/c7pmwj.mp4"
+      ],
+      "user": null,
+      "status": "Libre",
+      "votes": 0
+   },
+   {
+      "id": "19",
+      "name": "Raphtalia",
+      "gender": "Mujer",
+      "value": "1945",
+      "source": "Tate no Yuusha no Nariagari",
+      "img": [
+         "https://files.catbox.moe/dieynb.jpg",
+         "https://files.catbox.moe/7phn5e.jpg",
+         "https://files.catbox.moe/tkquyv.jpg"
+      ],
+      "vid": [
+         "https://files.catbox.moe/ddrzjt.mp4",
+         "https://files.catbox.moe/6z2yci.mp4"
+      ],
+      "user": null,
+      "status": "Libre",
+      "votes": 0
+   },
+   {
+      "id": "20",
+      "name": "Ai Hoshino",
+      "gender": "Mujer",
+      "value": "1950",
+      "source": "Oshi no Ko",
+      "img": [
+         "https://files.catbox.moe/w680ix.jpg",
+         "https://files.catbox.moe/x0tbit.jpg",
+         "https://files.catbox.moe/5uaa4m.jpg"
+      ],
+      "vid": [
+         "https://files.catbox.moe/7orx6o.mp4",
+         "https://files.catbox.moe/o7tsc7.mp4"
+      ],
+      "user": null,
+      "status": "Libre",
+      "votes": 0
+   },
+   {
+      "id": "21",
+      "name": "Alisa Mikhailovna Kujou",
+      "gender": "Mujer",
+      "value": "2100",
+      "source": "Tokidoki Bosotto Russia-go de Dereru Tonari no Alya-san",
+      "img": [
+         "https://raw.githubusercontent.com/The-King-Destroy/Adiciones/main/Contenido/1743039981280.jpeg",
+         "https://raw.githubusercontent.com/The-King-Destroy/Adiciones/main/Contenido/1743039970478.jpeg",
+         "https://raw.githubusercontent.com/The-King-Destroy/Adiciones/main/Contenido/1743039960772.jpeg"
+      ],
+      "vid": [
+         "https://files.catbox.moe/e5neow.mp4",
+         "https://files.catbox.moe/yw5fb3.mp4"
+      ],
+      "user": null,
+      "status": "Libre",
+      "votes": 0
+   },
+   {
+      "id": "22",
+      "name": "Mukuro Hoshimiya",
+      "gender": "Mujer",
+      "value": "1960",
+      "source": "Date A Live",
+      "img": [
+         "https://files.catbox.moe/r8wufk.jpg",
+         "https://files.catbox.moe/a8eq0s.jpg",
+         "https://files.catbox.moe/212kcc.jpg"
+      ],
+      "vid": [
+         "https://files.catbox.moe/6c79ie.mp4",
+         "https://files.catbox.moe/4fstm1.mp4"
+      ],
+      "user": null,
+      "status": "Libre",
+      "votes": 0
+   },
+   {
+      "id": "23",
+      "name": "Pikachu",
+      "gender": "desconocido",
+      "value": "1800",
+      "source": "Pokemon",
+      "img": [
+         "https://files.catbox.moe/19v1oz.jpg",
+         "https://raw.githubusercontent.com/The-King-Destroy/Adiciones/main/Contenido/1742703372200.jpeg",
+         "https://raw.githubusercontent.com/The-King-Destroy/Adiciones/main/Contenido/1742703365355.jpeg"
+      ],
+      "vid": [],
+      "user": null,
+      "status": "Libre",
+      "votes": 0
+   },
+   {
+      "id": "24",
+      "name": "Fenrrys",
+      "gender": "Mujer",
+      "value": "1900",
+      "source": "Lv2 kara Cheat datta Motoy Uusha Kouho no Mattari Isekai Life",
+      "img": [
+         "https://files.catbox.moe/sev5eq.jpg",
+         "https://files.catbox.moe/8zam00.jpg",
+         "https://files.catbox.moe/cy428r.jpg"
+      ],
+      "vid": [
+         "https://files.catbox.moe/7ee3x5.mp4",
+         "https://files.catbox.moe/cm96rp.mp4"
+      ],
+      "user": null,
+      "status": "Libre",
+      "votes": 0
+   },
+   {
+      "id": "25",
+      "name": "Fern",
+      "gender": "Mujer",
+      "value": "1930",
+      "source": "Sousou no Frieren",
+      "img": [
+         "https://files.catbox.moe/1itvxu.jpg",
+         "https://files.catbox.moe/fm3ndt.jpg",
+         "https://files.catbox.moe/2q124i.jpg"
+      ],
+      "vid": [
+         "https://files.catbox.moe/fhhcgx.mp4",
+         "https://files.catbox.moe/5j1k8a.mp4"
+      ],
+      "user": null,
+      "status": "Libre",
+      "votes": 0
+   },
+   {
+      "id": "26",
+      "name": "Yelan",
+      "gender": "Mujer",
+      "value": "1920",
+      "source": "Geshin Impact",
+      "img": [
+         "https://files.catbox.moe/m6rw1x.jpg",
+         "https://files.catbox.moe/ljfa6q.jpg",
+         "https://files.catbox.moe/sxz9kc.jpg"
+      ],
+      "vid": [
+         "https://files.catbox.moe/pf52y9.mp4",
+         "https://files.catbox.moe/417iee.mp4"
+      ],
+      "user": null,
+      "status": "Libre",
+      "votes": 0
+   },
+   {
+      "id": "27",
+      "name": "Lloyd Frontera",
+      "gender": "Hombre",
+      "value": "1900",
+      "source": "The Greatest Estate Developer",
+      "img": [
+         "https://raw.githubusercontent.com/The-King-Destroy/Adiciones/main/Contenido/1742705446073.jpeg",
+         "https://raw.githubusercontent.com/The-King-Destroy/Adiciones/main/Contenido/1742705441166.jpeg",
+         "https://raw.githubusercontent.com/The-King-Destroy/Adiciones/main/Contenido/1742705436419.jpeg"
+      ],
+      "vid": [],
+      "user": null,
+      "status": "Libre",
+      "votes": 0
+   },
+   {
+      "id": "28",
+      "name": "Gotou Hitori",
+      "gender": "Mujer",
+      "value": "1995",
+      "source": "Bocchi the Rock!",
+      "img": [
+         "https://files.catbox.moe/krpuox.jpg",
+         "https://files.catbox.moe/iihqvh.jpg",
+         "https://files.catbox.moe/x5ph70.jpg"
+      ],
+      "vid": [],
+      "user": null,
+      "status": "Libre",
+      "votes": 0
+   },
+   {
+      "id": "29",
+      "name": "Hu Tao",
+      "gender": "Mujer",
+      "value": "1992",
+      "source": "Genshin Impact",
+      "img": [
+         "https://files.catbox.moe/sepzxn.jpg",
+         "https://files.catbox.moe/gjryw1.jpg",
+         "https://files.catbox.moe/qo8okk.jpg"
+      ],
+      "vid": [
+         "https://files.catbox.moe/u2cz65.mp4",
+         "https://files.catbox.moe/iaswzn.mp4"
+      ],
+      "user": null,
+      "status": "Libre",
+      "votes": 0
+   },
+   {
+      "id": "30",
+      "name": "Ayane Shirakawa",
+      "gender": "Mujer",
+      "value": "1997",
+      "source": "Overflow",
+      "img": [
+         "https://files.catbox.moe/06c7d5.jpg",
+         "https://files.catbox.moe/h82szt.jpg",
+         "https://files.catbox.moe/qubleg.jpg"
+      ],
+      "vid": [
+         "https://files.catbox.moe/gs8i2d.mp4",
+         "https://files.catbox.moe/52l5p9.mp4"
+      ],
+      "user": null,
+      "status": "Libre",
+      "votes": 0
+   },
+   {
+      "id": "31",
+      "name": "Kotone Shirakawa",
+      "gender": "Mujer",
+      "value": "1998",
+      "source": "Overflow",
+      "img": [
+         "https://files.catbox.moe/j609gs.jpg",
+         "https://files.catbox.moe/8xnp43.jpg",
+         "https://files.catbox.moe/84emtj.jpg"
+      ],
+      "vid": [
+         "https://files.catbox.moe/vmqvdf.mp4",
+         "https://files.catbox.moe/r2grl7.mp4"
+      ],
+      "user": null,
+      "status": "Libre",
+      "votes": 0
+   },
+   {
+      "id": "32",
+      "name": "Yuki Suou",
+      "gender": "Mujer",
+      "value": "2500",
+      "source": "Tokidoki Bosotto Russia-go de Dereru Tonari no Alya-san",
+      "img": [
+         "https://files.catbox.moe/4oj8si.jpg",
+         "https://files.catbox.moe/mwr4vz.jpg",
+         "https://raw.githubusercontent.com/The-King-Destroy/Adiciones/main/Contenido/1742705626076.jpeg"
+      ],
+      "vid": [
+         "https://files.catbox.moe/0q8ei9.mp4",
+         "https://files.catbox.moe/2v8xk7.mp4"
+      ],
+      "user": null,
+      "status": "Libre",
+      "votes": 0
+   },
+   {
+      "id": "33",
+      "name": "Akaza Akari",
+      "gender": "Mujer",
+      "value": "1890",
+      "source": "Yuru Yuri",
+      "img": [
+         "https://files.catbox.moe/vw57ak.jpg",
+         "https://files.catbox.moe/ndr01w.png",
+         "https://files.catbox.moe/23kt0v.jpg"
+      ],
+      "vid": [
+         "https://files.catbox.moe/4pfv49.mp4",
+         "https://files.catbox.moe/q9fj6w.mp4"
+      ],
+      "user": null,
+      "status": "Libre",
+      "votes": 0
+   },
+   {
+      "id": "34",
+      "name": "Bulma",
+      "gender": "Mujer",
+      "value": "1890",
+      "source": "Dragon ball",
+      "img": [
+         "https://files.catbox.moe/5lctcx.jpg",
+         "https://files.catbox.moe/19jneh.jpg",
+         "https://files.catbox.moe/47f51d.jpg"
+      ],
+      "vid": [
+         "https://files.catbox.moe/5zc2bm.mp4",
+         "https://raw.githubusercontent.com/The-King-Destroy/Adiciones/main/Contenido/1742705954195.mp4"
+      ],
+      "user": null,
+      "status": "Libre",
+      "votes": 0
+   },
+   {
+      "id": "35",
+      "name": "Ruby Hoshino",
+      "gender": "Mujer",
+      "value": "1920",
+      "source": "Oshi no Ko",
+      "img": [
+         "https://files.catbox.moe/fwqv8b.jpg",
+         "https://files.catbox.moe/dblfhj.jpg",
+         "https://files.catbox.moe/dvivmf.jpg"
+      ],
+      "vid": [
+         "https://files.catbox.moe/j85zzj.mp4",
+         "https://files.catbox.moe/pwol0x.mp4"
+      ],
+      "user": null,
+      "status": "Libre",
+      "votes": 0
