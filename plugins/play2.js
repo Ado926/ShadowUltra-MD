@@ -22,40 +22,19 @@ const handler = async (m, { conn, text }) => {
         console.log("Respuesta de la API:", data); // Log para depuración
 
         if (!data.items || data.items.length === 0) {
-            return conn.reply(m.chat, "❌ No se encontraron resultados para tu búsqueda.", m);
+            return conn.reply(m.chat, "❌ No se encontraron resultados.", m);
         }
 
         const video = data.items[0];
-        const videoId = video.id.videoId;
-        const videoUrl = `https://www.youtube.com/watch?v=${videoId}`;
-        const thumbnail = video.snippet.thumbnails.high.url;
-        const title = video.snippet.title;
-        const channel = video.snippet.channelTitle;
+        const videoUrl = `https://www.youtube.com/watch?v=${video.id.videoId}`;
+        const videoTitle = video.snippet.title;
 
-        const responseMessage = `
-🎶 Tú .play2 ${text}
-🌸 *FELÍZ A TU LADO*
-🎤 ${title}
-📺 Canal: ${channel}
-🔗 [Ver en YouTube](${videoUrl})
-`;
-
-        // Enviar mensaje con imagen
-        await conn.sendMessage(m.chat, {
-            image: { url: thumbnail },
-            caption: responseMessage
-        });
-
-        // Enviar el enlace del video en vez de descargarlo
-        await conn.sendMessage(m.chat, {
-            text: `Aquí tienes el video de *${title}* 🎶\n🔗 ${videoUrl}`
-        });
-
+        // Enviar el enlace del video y el título
+        return conn.reply(m.chat, `📹 Aquí está tu video\n🔥 Título: ${videoTitle}\n🔗 ${videoUrl}`, m);
     } catch (error) {
-        console.error("Error en la búsqueda:", error.message);
-        conn.reply(m.chat, `❌ Error al buscar el video: ${error.message}`, m);
+        console.error("Error al buscar el video:", error);
+        return conn.reply(m.chat, "❌ Ocurrió un error al buscar el video.", m);
     }
 };
 
-handler.command = ["play2"];
 export default handler;
