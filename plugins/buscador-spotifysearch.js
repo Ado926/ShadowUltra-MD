@@ -4,7 +4,7 @@ import qs from 'qs';
 
 let handler = async (m, { conn, text, usedPrefix, command }) => {
   if (!text) {
-    return m.reply(`°Ejemplo *${usedPrefix + command} Mi Niña Ozuna*`);
+    return m.reply(`°Ejemplo *${usedPrefix + command} enamorado Féliz a tu lado*`);
   }
 
   const appleMusic = {
@@ -147,7 +147,7 @@ let handler = async (m, { conn, text, usedPrefix, command }) => {
       `💎 *Nombre:* ${name}\n` +
       `🗣️ *Artista:* ${artist}\n` +
       `⏱️ *Duración:* ${duration}\n\n` +
-      `> Mai Bot`,
+      `> shadow`,
     contextInfo: {
       externalAdReply: {
         title: name,
