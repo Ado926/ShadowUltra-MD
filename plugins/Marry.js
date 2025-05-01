@@ -7,6 +7,11 @@ const handler = async (m, { conn, args }) => {
 
     let partner = args[0].replace('@', '') + '@s.whatsapp.net';
     let user = m.sender;
-    
-    // Si ya están casados
+
+    // Verificar si el usuario está intentando casarse consigo mismo
+    if (partner === user) {
+        return conn.reply(m.chat, "💔 *No puedes casarte contigo mismo!*", m);
+    }
+
+    // Verificar si ya están casados
     if (marriages
