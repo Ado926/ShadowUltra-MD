@@ -14,18 +14,18 @@ const handler = async (m, { conn, text }) => {
         }
 
         const data = await response.json();
+        const movies = data.data; // Aquí está la lista real
 
-        // Ajuste aquí: validación de `data.data`
-        if (!data || !data.data || data.data.length === 0) {
+        if (!movies || movies.length === 0) {
             return conn.reply(m.chat, "❌ No se encontraron resultados para tu búsqueda.", m);
         }
 
-        const movie = data.data[0];
-        const title = movie.title || "Sin título";
-        const year = movie.release_date?.split("-")[0] || "Año desconocido";
-        const rating = movie.vote_average ?? "N/A";
-        const poster = movie.image || "https://via.placeholder.com/300x450?text=Sin+imagen";
-        const description = movie.overview || "Descripción no disponible.";
+        const movie = movies[0];
+        const title = movie.title || "Título desconocido";
+        const year = movie.release_date ? movie.release_date.split('-')[0] : "Año desconocido";
+        const rating = movie.vote_average || "N/A";
+        const poster = movie.image || movie.poster_path || null;
+        const description = movie.overview || "Sin descripción.";
 
         const responseMessage = `
 🎬 *Película encontrada:*
@@ -35,10 +35,14 @@ const handler = async (m, { conn, text }) => {
 📄 *Descripción:* ${description}
 `;
 
-        await conn.sendMessage(m.chat, {
-            image: { url: poster },
-            caption: responseMessage.trim()
-        });
+        if (poster) {
+            await conn.sendMessage(m.chat, {
+                image: { url: poster },
+                caption: responseMessage
+            });
+        } else {
+            conn.reply(m.chat, responseMessage, m);
+        }
 
     } catch (error) {
         console.error("Error en la búsqueda:", error.message);
