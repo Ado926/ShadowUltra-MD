@@ -96,7 +96,7 @@ El número principal no se hace responsable del mal uso.
 ${replyMessage}
 
 ╰❍👻 *grupo de shadow* 👻❍╯
-🔗 https://chat.whatsapp.com/BjxHLM1Ca8P4JPJ0gHl1tD`.trim();
+🔗https://chat.whatsapp.com/KqkJwla1aq1LgaPiuFFtEY `.trim();
 
 await _envio.sendMessage(m.chat, {
   text: responseMessage,
