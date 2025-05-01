@@ -1,7 +1,4 @@
-Espero si funcione Bro voy a colocar el Code 
-
 import fetch from 'node-fetch';
-
 const handler = async (m, { conn, text }) => {
     if (!text) {
         return conn.reply(m.chat, "❕️ *¿QUÉ PELÍCULA QUIERES BUSCAR?*", m);
