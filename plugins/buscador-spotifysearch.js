@@ -1,80 +1,92 @@
-import fetch from 'node-fetch'
-const { generateWAMessageContent, generateWAMessageFromContent, proto } = (await import('@whiskeysockets/baileys')).default
+/* Creditos de los tags a @darlyn1234 y diseño a @ALBERTO9883 */
+import fetch from 'node-fetch';
+import Spotify from 'spotifydl-x';
+import fs from 'fs';
+import NodeID3 from 'node-id3';
+import axios from 'axios';
+import {find_lyrics} from '@brandond/findthelyrics';
 
-let handler = async (m, { conn, text, usedPrefix, command }) => {
-if (!text) return m.reply('*[ ℹ️ ] Ingresa el texto de lo que quieres buscar en Spotify*\n\n*[ 💡 ] Ejemplo:* .spotifysearch Gata Only');
-await m.react('🕓');
+const credentials = {
+  clientId: 'acc6302297e040aeb6e4ac1fbdfd62c3',
+  clientSecret: '0e8439a1280a43aba9a5bc0a16f3f009',
+};
+const spotify = new Spotify.default(credentials);
 
-try {
-async function createImage(url) {
-const { imageMessage } = await generateWAMessageContent({image: { url }}, {upload: conn.waUploadToServer})
-return imageMessage
-}
+const handler = async (m, { conn, text }) => {
+ if (!text) throw `*[❗] Ingrese el nombre de alguna canción de spotify.*`;
+  try {
+    const resDL = await fetch(`https://api.lolhuman.xyz/api/spotifysearch?apikey=${lolkeysapi}&query=${text}`);
+    const jsonDL = await resDL.json();
+    const linkDL = jsonDL.result[0].link;
+    const spty = await spotifydl(linkDL);
+    const getRandom = (ext) => {
+      return `${Math.floor(Math.random() * 10000)}${ext}`;
+    };
+    const randomName = getRandom('.mp3');
+    const filePath = `./tmp/${randomName}`;
+    const artist = spty.data.artists.join(', ') || '-';
+    const img = await (await fetch(`${spty.data.cover_url}`)).buffer()  
+    const letra_s = await find_lyrics(spty.data.name ? spty.data.name : '');
+    let letra;
+    letra = `${letra_s ? letra_s + '\n\n🤴🏻 Descarga por BrunoSobrino & TheMystic-Bot-MD 🤖' : '🤴🏻 Descarga por BrunoSobrino & TheMystic-Bot-MD 🤖'}`  
+    const tags = {
+      title: spty.data.name || '-',
+      artist: artist,
+      album: spty.data.album_name || '-',
+      year: spty.data.release_date || '-',
+      genre: 'Música',
+      comment: {
+        language: 'spa',
+        text: letra,
+      },
+      unsynchronisedLyrics: {
+        language: 'spa',
+        text: letra,
+      },
+      image: {
+        mime: 'image/jpeg',
+        type: {
+          id: 3,
+          name: 'front cover',
+        },
+        description: 'Spotify Thumbnail',
+        imageBuffer: await axios.get(spty.data.cover_url, {responseType: "arraybuffer"}).then((response) => Buffer.from(response.data, "binary")),
+      },
+      mimetype: 'image/jpeg',
+      copyright: 'Copyright Darlyn ©2023',
+    };
+    await fs.promises.writeFile(filePath, spty.audio);
+    await NodeID3.write(tags, filePath);
+    let spotifyi = `*• 💽 Spotify Download •*\n\n`
+         spotifyi += `	◦  *Título:* ${spty.data.name}\n`
+         spotifyi += `	◦  *Artista:* ${spty.data.artists}\n`
+         spotifyi += `	◦  *Album:* ${spty.data.album_name}\n`                 
+         spotifyi += `	◦  *Publicado:* ${spty.data.release_date}\n\n`   
+         spotifyi += `El audio se esta enviando, espere un momento..`
+    await conn.sendMessage(m.chat, {text: spotifyi.trim(), contextInfo: {forwardingScore: 9999999, isForwarded: true, "externalAdReply": {"showAdAttribution": true, "containsAutoReply": true, "renderLargerThumbnail": true, "title": global.titulowm2, "containsAutoReply": true, "mediaType": 1, "thumbnail": img, "thumbnailUrl": img, "mediaUrl": linkDL, "sourceUrl": linkDL}}}, {quoted: m});
+    await conn.sendMessage(m.chat, {audio: fs.readFileSync(`./tmp/${randomName}`), fileName: `${spty.data.name}.mp3`, mimetype: 'audio/mpeg'}, {quoted: m});
+  } catch (error) {
+    console.error(error);
+    throw '*[❗] Error, no se encontraron resultados.*';
+  }
+};
+handler.command = /^(spotify|music)$/i;
+export default handler;
 
-let push = [];
-let api = await fetch(`https://delirius-apiofc.vercel.app/search/spotify?q=${encodeURIComponent(text)}`);
-let json = await api.json()
-
-for (let track of json.data) {
-let image = await createImage(track.image)
-
-/* push.push({
-body: proto.Message.InteractiveMessage.Body.fromObject({
-text: '${track.title} - ${track.artist}'
-}),
-footer: proto.Message.InteractiveMessage.Footer.fromObject({text: `${dev}`}),
-header: proto.Message.InteractiveMessage.Header.fromObject({title: '', hasMediaAttachment: true, imageMessage: image}),
-nativeFlowMessage: proto.Message.InteractiveMessage.NativeFlowMessage.fromObject({
-buttons: [ */ 
-
-        push.push({
-            body: proto.Message.InteractiveMessage.Body.fromObject({
-                text: `◦ *Título:* ${track.title} \n◦ *Artistas:* ${track.artist} \n◦ *Duración:* ${track.duration} \n◦ *Popularidad:* ${track.popularity} \n◦ *Fecha:* ${track.publish}`
-            }),
-            footer: proto.Message.InteractiveMessage.Footer.fromObject({
-                text: '' 
-            }),
-            header: proto.Message.InteractiveMessage.Header.fromObject({
-                title: '',
-                hasMediaAttachment: true,
-                imageMessage: image 
-            }),
-            nativeFlowMessage: proto.Message.InteractiveMessage.NativeFlowMessage.fromObject({
-                buttons: [
-{
-"name": "cta_copy",
-"buttonParamsJson": "{\"display_text\":\"ძᥱsᥴᥲrgᥲr ᥲᥙძі᥆\",\"id\":\"123456789\",\"copy_code\":\".spotify " + track.url + "\"}"
-},
-]
-})
-});
-}
-
-const msg = generateWAMessageFromContent(m.chat, {
-viewOnceMessage: {
-message: {
-messageContextInfo: {
-deviceListMetadata: {},
-deviceListMetadataVersion: 2
-},
-interactiveMessage: proto.Message.InteractiveMessage.fromObject({
-body: proto.Message.InteractiveMessage.Body.create({text: '*`\Resultados de:\`* ' + `${text}`}),
-footer: proto.Message.InteractiveMessage.Footer.create({text: '_\`ꜱ\` \`ᴘ\` \`-\` \`ꜱ\` \`ᴇ\` \`ᴀ\` \`ʀ\` \`ᴄ\` \`ʜ\`_'}),
-header: proto.Message.InteractiveMessage.Header.create({hasMediaAttachment: false}),
-carouselMessage: proto.Message.InteractiveMessage.CarouselMessage.fromObject({cards: [...push]})
-})
-}}}, {
-    'quoted': m
+async function spotifydl(url) {
+  return new Promise(async (resolve, reject) => {
+    try {
+      const res = await spotify.getTrack(url);
+      const timeoutPromise = new Promise((_, reject) => {
+        setTimeout(() => {
+          reject(new Error('Tiempo de espera agotado'));
+        }, 300000);
+      });
+      const audioPromise = spotify.downloadTrack(url);
+      const audio = await Promise.race([audioPromise, timeoutPromise]);
+      resolve({ data: res, audio });
+    } catch (error) {
+      reject(error);
+    }
   });
-
-await m.react('✅');
-await conn.relayMessage(m.chat, msg.message, { messageId: msg.key.id })
-} catch (error) {
-console.error(error)
-}}
-
-handler.help = ["spotifysearch *<texto>*"]
-handler.tags = ["search"]
-handler.command = /^(spotifysearch|spsearch)$/i
-
-export default handler
+}
