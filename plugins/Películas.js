@@ -1,35 +1,32 @@
 import fetch from 'node-fetch';
+
 const handler = async (m, { conn, text }) => {
     if (!text) {
         return conn.reply(m.chat, "❕️ *¿QUÉ PELÍCULA QUIERES BUSCAR?*", m);
     }
 
-    // URL de búsqueda en la API de películas
     const searchUrl = `https://nightapioficial.onrender.com/api/movies/search?query=${encodeURIComponent(text)}`;
 
     try {
         const response = await fetch(searchUrl);
-
-        // Verificar si la respuesta es exitosa
         if (!response.ok) {
             throw new Error(`Error en la API: ${response.status} ${response.statusText}`);
         }
 
         const data = await response.json();
 
-        if (!data || !data.movies || data.movies.length === 0) {
+        // Ajuste aquí: validación de `data.data`
+        if (!data || !data.data || data.data.length === 0) {
             return conn.reply(m.chat, "❌ No se encontraron resultados para tu búsqueda.", m);
         }
 
-        // Seleccionar la primera película encontrada
-        const movie = data.movies[0];
-        const title = movie.title;
-        const year = movie.year;
-        const rating = movie.rating || "N/A";
-        const poster = movie.poster;
-        const description = movie.description || "No disponible.";
+        const movie = data.data[0];
+        const title = movie.title || "Sin título";
+        const year = movie.release_date?.split("-")[0] || "Año desconocido";
+        const rating = movie.vote_average ?? "N/A";
+        const poster = movie.image || "https://via.placeholder.com/300x450?text=Sin+imagen";
+        const description = movie.overview || "Descripción no disponible.";
 
-        // Formatear el mensaje de respuesta
         const responseMessage = `
 🎬 *Película encontrada:*
 🎥 *Título:* ${title}
@@ -38,10 +35,9 @@ const handler = async (m, { conn, text }) => {
 📄 *Descripción:* ${description}
 `;
 
-        // Enviar mensaje con imagen
         await conn.sendMessage(m.chat, {
             image: { url: poster },
-            caption: responseMessage
+            caption: responseMessage.trim()
         });
 
     } catch (error) {
