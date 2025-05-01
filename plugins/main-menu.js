@@ -18,7 +18,7 @@ let handler = async (m, { conn, usedPrefix, usedPrefix: _p, __dirname, text, com
     let totalreg = Object.keys(global.db.data.users).length
     let rtotalreg = Object.values(global.db.data.users).filter(user => user.registered == true).length
 
-        await m.react('🍪')
+        await m.react('💥,👻')
         let who = m.mentionedJid && m.mentionedJid[0] ? m.mentionedJid[0] : m.fromMe ? conn.user.jid : m.sender
         let perfil = await conn.profilePictureUrl(who, 'image').catch(_ => 'https://files.catbox.moe/pk3xxk.jpg')
 
@@ -47,7 +47,7 @@ ${readMore}
 ര ׄ 🍃˚ ${usedPrefix}menuff
 ര ׄ 🍃˚ ${usedPrefix}menuowner
 ര ׄ 🍃˚ ${usedPrefix}menulogos
-
+ര ׄ 🍃˚ ${usedPrefix}menuanimes
 𓂂𓏸  𐅹੭੭   *\`іᥒ𝖿᥆\`*   🫖ᩚ꤬ᰨᰍ
 ര ׄ 🫖˚ ${usedPrefix}totalf
 ര ׄ 🫖˚ ${usedPrefix}grupos
@@ -67,9 +67,9 @@ ${readMore}
 ര ׄ 🌿˚ ${usedPrefix}manual
 
 𓂂𓏸  𐅹੭੭   *\`ძᥱsᥴᥲrgᥲs\`*   📥ᩚ꤬ᰨᰍ
-ര ׄ 📥˚ ${usedPrefix}play *texto*
+ര ׄ 📥˚ ${usedPrefix} playaudio *texto*
 ര ׄ 📥˚ ${usedPrefix}aplay *texto*
-ര ׄ 📥˚ ${usedPrefix}aplay2 *texto*
+ര ׄ 📥˚ ${usedPrefix}aplayvideo *texto*
 ര ׄ 📥˚ ${usedPrefix}splay *texto*
 ര ׄ 📥˚ ${usedPrefix}ytmp4doc *texto*
 ര ׄ 📥˚ ${usedPrefix}ytmp3doc *texto*
@@ -106,7 +106,7 @@ ${readMore}
 ര ׄ 🔎˚ ${usedPrefix}gnula *texto*
 ര ׄ 🔎˚ ${usedPrefix}mercadolibre *texto*
 ര ׄ 🔎˚ ${usedPrefix}ffstalk *id*
-
+ര ׄ 🔎˚ ${usedPrefix}animeplus *nombre del anim*
 𓂂𓏸  𐅹੭੭   *\`іᥒ𝗍ᥱᥣіgᥱᥒᥴіᥲs\`*   ☕ᩚ꤬ᰨᰍ
 ര ׄ ☕˚ ${usedPrefix}ia *texto*
 ര ׄ ☕˚ ${usedPrefix}shadow *texto*
@@ -114,7 +114,7 @@ ${readMore}
 ര ׄ ☕˚ ${usedPrefix}chatgpt *texto*
 ര ׄ ☕˚ ${usedPrefix}imgg *texto*
 ര ׄ ☕˚ ${usedPrefix}imgg2 *texto*
-
+ര ׄ ☕˚ ${usedPrefix}simi *texto*
 𓂂𓏸  𐅹੭੭   *\`ᥣіs𝗍ᥲs\`*   📑ᩚ꤬ᰨᰍ
 ര ׄ 📑˚ ${usedPrefix}infem4 *hr + p*
 ര ׄ 📑˚ ${usedPrefix}inmasc4 *hr + p*
@@ -166,7 +166,7 @@ ${readMore}
 ര ׄ ⚒️˚ ${usedPrefix}reaccioneschannel
 ര ׄ ⚒️˚ ${usedPrefix}nuevonombrecanal
 ര ׄ ⚒️˚ ${usedPrefix}nuevadescchannel
-
+ര ׄ ⚒️˚ ${usedPrefix}clima
 𓂂𓏸  𐅹੭੭   *\`grᥙ⍴᥆s\`*   🌵ᩚ꤬ᰨᰍ
 ര ׄ 🌵˚ ${usedPrefix}add *número*
 ര ׄ 🌵˚ ${usedPrefix}grupo *abrir / cerrar*
@@ -209,7 +209,7 @@ ${readMore}
 ര ׄ 🪻˚ ${usedPrefix}highpass *vid*
 ര ׄ 🪻˚ ${usedPrefix}lowpass *vid*
 ര ׄ 🪻˚ ${usedPrefix}underwater *vid*
-
+ര ׄ 🪻˚ ${usedPrefix} iamatomic *vid*
 𓂂𓏸  𐅹੭੭   *\`ძі᥎ᥱrsі᥆ᥒ\`*   🥯ᩚ꤬ᰨᰍ
 ര ׄ 🥯˚ ${usedPrefix}gay *@tag*
 ര ׄ 🥯˚ ${usedPrefix}lesbiana *@tag*
@@ -237,7 +237,7 @@ ${readMore}
 ര ׄ 🥯˚ ${usedPrefix}parejas
 ര ׄ 🥯˚ ${usedPrefix}love
 ര ׄ 🥯˚ ${usedPrefix}personalidad
-
+ര ׄ 🥯˚ ${usedPrefix}miq (URL mp4,jpeg,jpg,png,gif)|(descripción de lo que quieras no importa que coloques XD) |true|bella
 𓂂𓏸  𐅹੭੭   *\`ȷᥙᥱg᥆s\`*   🐚ᩚ꤬ᰨᰍ
 ര ׄ 🐚˚ ${usedPrefix}pregunta *texto*
 ര ׄ 🐚˚ ${usedPrefix}ttt *texto*
@@ -248,7 +248,45 @@ ${readMore}
 
 𓂂𓏸  𐅹੭੭   *\`ᥲᥒіmᥱ\`*   🐚ᩚ꤬ᰨᰍ
 ര ׄ 🏕️˚ ${usedPrefix}messi
-
+ര ׄ 🏕️˚ ${usedPrefix}saludo
+ര ׄ 🏕️˚ ${usedPrefix}buenasnoches
+ര ׄ 🏕️˚ ${usedPrefix}bath
+ര ׄ 🏕️˚ ${usedPrefix}bite
+ര ׄ 🏕️˚ ${usedPrefix}bleh
+ര ׄ 🏕️˚ ${usedPrefix}café
+ര ׄ 🏕️˚ ${usedPrefix}blush
+ര ׄ 🏕️˚ ${usedPrefix}bored
+ര ׄ 🏕️˚ ${usedPrefix}cry
+ര ׄ 🏕️˚ ${usedPrefix}cuddle
+ര ׄ 🏕️˚ ${usedPrefix}dance
+ര ׄ 🏕️˚ ${usedPrefix}drunk
+ര ׄ 🏕️˚ ${usedPrefix}eat
+ര ׄ 🏕️˚ ${usedPrefix}facepalm
+ര ׄ 🏕️˚ ${usedPrefix}Happy
+ര ׄ 🏕️˚ ${usedPrefix}Hello
+ര ׄ 🏕️˚ ${usedPrefix}hug
+ര ׄ 🏕️˚ ${usedPrefix}kill
+ര ׄ 🏕️˚ ${usedPrefix}kiss
+ര ׄ 🏕️˚ ${usedPrefix}kiss2
+ര ׄ 🏕️˚ ${usedPrefix}laugh
+ര ׄ 🏕️˚ ${usedPrefix}leve
+ര ׄ 🏕️˚ ${usedPrefix}pat
+ര ׄ 🏕️˚ ${usedPrefix}poke
+ര ׄ 🏕️˚ ${usedPrefix}pout
+ര ׄ 🏕️˚ ${usedPrefix}ppcp
+ര ׄ 🏕️˚ ${usedPrefix}preg
+ര ׄ 🏕️˚ ${usedPrefix}punch
+ര ׄ 🏕️˚ ${usedPrefix}run
+ര ׄ 🏕️˚ ${usedPrefix}sad
+ര ׄ 🏕️˚ ${usedPrefix}scared
+ര ׄ 🏕️˚ ${usedPrefix}seduce
+ര ׄ 🏕️˚ ${usedPrefix}shy
+ര ׄ 🏕️˚ ${usedPrefix}slap
+ര ׄ 🏕️˚ ${usedPrefix}sleep
+ര ׄ 🏕️˚ ${usedPrefix}smoke
+ര ׄ 🏕️˚ ${usedPrefix}think
+ര ׄ 🏕️˚ ${usedPrefix}rw
+ര ׄ 🏕️˚ ${usedPrefix}c
 𓂂𓏸  𐅹੭੭   *\`gі𝖿s ᥒs𝖿ա\`*   🔥ᩚ꤬ᰨᰍ
 ര ׄ 🔥˚ ${usedPrefix}violar *@tag*
 ര ׄ 🔥˚ ${usedPrefix}follar *@tag*
@@ -268,7 +306,7 @@ ${readMore}
 ര ׄ 🔥˚ ${usedPrefix}fap *@tag*
 ര ׄ 🔥˚ ${usedPrefix}manosear *@tag*
 ര ׄ 🔥˚ ${usedPrefix}lesbianas *@tag*
-
+ര ׄ 🔥˚ ${usedPrefix}undress *@tag*
 𓂂𓏸  𐅹੭੭   *\`s𝗍іᥴkᥱrs\`*   🍦ᩚ꤬ᰨᰍ
 ര ׄ 🍦˚ ${usedPrefix}sticker *img*
 ര ׄ 🍦˚ ${usedPrefix}sticker *vid*
@@ -335,4 +373,4 @@ function clockString(ms) {
   let m = isNaN(ms) ? '--' : Math.floor(ms / 60000) % 60
   let s = isNaN(ms) ? '--' : Math.floor(ms / 1000) % 60
   return [h, m, s].map(v => v.toString().padStart(2, 0)).join(':')
-}
+    }
