@@ -84,18 +84,18 @@ const replyMessage = message.length === 0
 const totalUsers = users.length;
 
 const responseMessage = `
-╭─❍༻🌹 *SUB-BOTS ACTIVOS* 🍷༺❍─╮
+╭❍👻 *SUBS ACTIVOS* 😈❍╮
 
 ${emoji2} \`\`\`
 Cada Sub-Bot utiliza sus funciones de manera independiente.
 El número principal no se hace responsable del mal uso.
 \`\`\`
 
-👻 *Total de Sub-Bots Conectados:* ${totalUsers || '0'}
+😈 *Total de Sub-Bots Conectados:* ${totalUsers || '0'}
 
 ${replyMessage}
 
-╰─❍༻👻 *grupo oficial de shadow* 😈༺❍─╯
+╰❍👻 *grupo de shadow* 👻❍╯
 🔗 https://chat.whatsapp.com/BjxHLM1Ca8P4JPJ0gHl1tD`.trim();
 
 await _envio.sendMessage(m.chat, {
