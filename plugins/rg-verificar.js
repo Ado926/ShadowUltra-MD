@@ -93,12 +93,12 @@ Utiliza *${usedPrefix}unreg* para romper el sello actual.`)
 │ ♱ *Sello Único:* ${sn}
 │    
 ├─ ✧ 𝑩𝒆𝒏𝒅𝒊𝒄𝒊𝒐𝒏𝒆𝒔 𝑶𝒕𝒐𝒓𝒈𝒂𝒅𝒂𝒔:
-│ ✦ *MayCoins:* +46
+│ ✦ *shadowCoins:* +46
 │ ☽ *Energía Espiritual:* +310
 │ ❀ *Sellos de Invocación:* +25
 │    
 ├─ "Recuerda visitar el baño del 3er piso..."
-│ https://whatsapp.com/channel/0029VayXJte65yD6LQGiRB0R
+│ https://whatsapp.com/channel/0029VbAXuUtB4hdYWC6m2R1h
 │    
 ╰─「 ⋆｡˚☽˚｡⋆ ✧ ⋆｡˚☽˚｡⋆ 」─╯
 `.trim()
@@ -131,13 +131,13 @@ Utiliza *${usedPrefix}unreg* para romper el sello actual.`)
 │ ♱ *Sello:* ${sn}
 │
 ├─ ✧ 𝑩𝒆𝒏𝒅𝒊𝒄𝒊𝒐𝒏𝒆𝒔:
-│ ✦ MayCoins: +46
+│ ✦ shadowCoins: +46
 │ ☽ Energía Espiritual: +310
 │ ❀ Sellos de Invocación: +25
 │
 │ 📜 *Fecha del Pacto:* ${moment().format('YYYY-MM-DD HH:mm:ss')}
 ╰─「 𝑷𝒐𝒓 𝒍𝒐𝒔 𝑺𝒊𝒆𝒕𝒆 𝑴𝒊𝒔𝒕𝒆𝒓𝒊𝒐𝒔 」─╯
-> Hanako-kun & MaycolAIUltraMD`
+> SHADOW`
 
   // ✧ Intento de comunicación con el Reino Espiritual
   try {
