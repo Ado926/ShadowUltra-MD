@@ -40,7 +40,7 @@ let handler = async (m, { conn, args, usedPrefix, command }) => {
     } finally {
         if (stiker) {
             // Obtener imagen del grupo
-            let groupPicture = await conn.profilePictureUrl(m.chat, 'image').catch(() => 'https://files.catbox.moe/08fo9q.jpg');
+            let groupPicture = await conn.profilePictureUrl(m.chat, 'image').catch(() => '');
 
             await conn.sendMessage(m.chat, {
                 image: { url: groupPicture }, // Imagen arriba
