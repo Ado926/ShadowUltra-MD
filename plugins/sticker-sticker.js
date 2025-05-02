@@ -9,7 +9,7 @@ let handler = async (m, { conn, args, usedPrefix, command }) => {
     if (/webp|image|video/g.test(mime)) {
       if (/video/g.test(mime) && (q.msg || q).seconds > 10) return m.reply(`[ ⚠️ ] El video no puede durar más de 10 segundos`);
 
-      let img = await q.download?.();
+      let img?.();
       if (!img) return conn.reply(m.chat, `*[ ℹ️ ] Responde al video o imagen con el comando*`, m);
 
       let out;
@@ -35,7 +35,14 @@ let handler = async (m, { conn, args, usedPrefix, command }) => {
     if (!stiker) stiker = e;
   } finally {
     if (stiker) {
-      conn.sendFile(m.chat, stiker, 'sticker.webp', '', m, true, { 
+      // Enviar la imagen antes del sticker con el mensaje correcto
+      await conn.sendMessage(m.chat, { 
+        image: { url: 'https://files.catbox.moe/08fo9q.jpg' }, 
+        caption: 'Aquí está tu imagen junto al mensaje!' 
+      });
+
+      // Enviar el sticker
+      await conn.sendFile(m.chat, stiker, 'sticker.webp', '', m, true, { 
         contextInfo: { 
           'forwardingScore': 200, 
           'isForwarded': false, 
@@ -49,9 +56,6 @@ let handler = async (m, { conn, args, usedPrefix, command }) => {
           }
         } 
       }, { quoted: m });
-
-      // Aquí enviamos la imagen adicional antes del mensaje
-      conn.sendMessage(m.chat, { image: { url: 'https://files.catbox.moe/08fo9q.jpg' }, caption: 'Aquí está tu imagen junto al mensaje!' });
     } else {
       return conn.reply(m.chat, `*[ ℹ️ ] La conversión ha fallado, responde a un vídeo, imagen o GIF para convertirlo en sticker.*`, m, rcanal);
     }
