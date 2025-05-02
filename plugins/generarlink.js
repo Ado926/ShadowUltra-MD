@@ -1,56 +1,25 @@
-case 'gerarlink':
-  try {
-    const axios = require('axios');
-    const FormData = require('form-data');
-    let form = new FormData();
+const axios = require('axios');
+const FormData = require('form-data');
 
-    if (((!isMedia && !info.message.videoMessage) || isQuotedImage) && q.length <= 1) {
-      await reagir(from, "📤");
-      const mediaObject = isQuotedImage
-        ? JSON.parse(JSON.stringify(info).replace('quotedM', 'm')).message.extendedTextMessage.contextInfo.message.imageMessage
-        : info.message.imageMessage;
+async function gerarLink(m, conn) {
+    try {
+        const mediaObject = m.message.imageMessage || m.message.videoMessage;
+        if (!mediaObject) return conn.reply(m.chat, "❌ No se encontró ningún archivo adjunto.", m);
 
-      const buffer = await getFileBuffer(mediaObject, 'image');
+        const buffer = await getFileBuffer(mediaObject, mediaObject.mimetype.includes("video") ? "video" : "image");
+        let form = new FormData();
+        form.append("reqtype", "fileupload");
+        form.append("fileToUpload", buffer, { filename: mediaObject.mimetype.includes("video") ? "video.mp4" : "upload.jpg" });
 
-      form = new FormData();
-      form.append('reqtype', 'fileupload');
-      form.append('fileToUpload', buffer, { filename: 'upload.jpg' });
+        const res = await axios.post("https://catbox.moe/user/api.php", form, { headers: form.getHeaders() });
 
-      const res = await axios.post('https://catbox.moe/user/api.php', form, {
-        headers: form.getHeaders()
-      });
+        await conn.sendMessage(m.chat, { text: `✅ Enlace generado:\n🔗 ${res.data}` }, { quoted: m });
 
-      await socket.sendMessage(from, { text: res.data }, { quoted: selo });
-      await reagir(from, "✅️");
-
-    } else if (((isMedia && info.message.videoMessage.seconds < 30) ||
-                (isQuotedVideo && info.message.extendedTextMessage?.contextInfo?.quotedMessage?.videoMessage?.seconds < 30)) && q.length <= 1) {
-      
-      await reagir(from, "📤");
-      const mediaObject = isQuotedVideo
-        ? JSON.parse(JSON.stringify(info).replace('quotedM', 'm')).message.extendedTextMessage.contextInfo.message.videoMessage
-        : info.message.videoMessage;
-
-      const buffer = await getFileBuffer(mediaObject, 'video');
-
-      form = new FormData();
-      form.append('reqtype', 'fileupload');
-      form.append('fileToUpload', buffer, { filename: 'video.mp4' });
-
-      const res = await axios.post('https://catbox.moe/user/api.php', form, {
-        headers: form.getHeaders()
-      });
-
-      await socket.sendMessage(from, { text: res.data }, { quoted: selo });
-      await reagir(from, "✅️");
-
-    } else {
-      await reagir(from, "😿");
-      reply("Você deve marcar uma imagem ou um vídeo de até 30 segundos.");
+    } catch (error) {
+        console.error("Error:", error);
+        await conn.reply(m.chat, "❌ Error al generar el enlace.", m);
     }
-  } catch (e) {
-    console.log(e);
-    await reagir(from, "❌️");
-    reply("Erro ao tentar gerar o link do arquivo.");
-  }
-  break;
+}
+
+handler.command = ["gerarlink"];
+export default handler;
