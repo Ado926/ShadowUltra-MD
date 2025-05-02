@@ -1,99 +1,171 @@
-import axios from 'axios'
-import { createHash } from 'crypto'
+/**
+ * ⋆｡˚ ☁︎｡⋆｡ ˚☽˚｡⋆ ✦ ⋆｡˚☁︎｡⋆｡ ˚☽˚｡⋆ ✦
+ * 
+ * 𝐓𝐨𝐢𝐥𝐞𝐭-𝐁𝐨𝐮𝐧𝐝 𝐇𝐚𝐧𝐚𝐤𝐨-𝐤𝐮𝐧 𝐑𝐞𝐠𝐢𝐬𝐭𝐫𝐨 𝐝𝐞 𝐒𝐞𝐫𝐞𝐬 𝐄𝐬𝐩𝐢𝐫𝐢𝐭𝐮𝐚𝐥𝐞𝐬
+ * 
+ * "Los rumores dicen que si escribes tu nombre en el Libro de los Siete Misterios,
+ * Hanako-kun te concederá un deseo a cambio de convertirte en su asistente..."
+ * 
+ * ┏━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+ * ┃        七不思議        ┃
+ * ┃   Los Siete Misterios   ┃
+ * ┗━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+ * 
+ * ⋆｡˚ ☁︎｡⋆｡ ˚☽˚｡⋆ ✦ ⋆｡˚☁︎｡⋆｡ ˚☽˚｡⋆ ✦
+ */
+
+import db from '../lib/database.js'
+import fs from 'fs'
 import PhoneNumber from 'awesome-phonenumber'
+import { createHash } from 'crypto'
+import fetch from 'node-fetch'
 import moment from 'moment-timezone'
 
-let Reg = /\|?(.*)([.|] *?)([0-9]*)$/i
-let handler = async function (m, { conn, text, args, usedPrefix, command }) {
-    let user = global.db.data.users[m.sender]
-    let name2 = conn.getName(m.sender)
-    let whe = m.mentionedJid[0] ? m.mentionedJid[0] : m.quoted ? m.quoted.sender : m.sender
+// ✿ Sello mágico para validar el pacto con Hanako-kun ✿
+const SelloMistico = /\|?(.*)([.|] *?)([0-9]*)$/i
 
-    let perfil = await conn.profilePictureUrl(whe, 'image').catch(_ => 'https://files.catbox.moe/xr2m6u.jpg')
+/**
+ * ⋆｡°✩ Ritual de Invocación ✩°｡⋆
+ * Hanako-san, Hanako-san... ¿Estás ahí?
+ */
+let handler = async function (m, { conn, text, usedPrefix, command }) {
+  // ✧ Identificar al invocador espiritual
+  const who = m.mentionedJid?.[0] || (m.fromMe ? conn.user.jid : m.sender)
+  const mentionedJid = [who]
 
-    if (user.registered === true) {
-        return m.reply(`*[ ℹ️ ] Ya te encuentras registrado.*\n\n*¿Quieres volver a registrarte?*\n\n*Use este comando para eliminar su registro*\n*\`${usedPrefix}unreg\`*`)
+  // ✧ Obtener la imagen del espejo del invocador
+  const pp = await conn.profilePictureUrl(who, 'image').catch(() => 'https://files.catbox.moe/xr2m6u.jpg')
+  const user = global.db.data.users[m.sender]
+  const name2 = conn.getName(m.sender)
+
+  // ✧ Verificar si ya existe un pacto con Hanako-kun
+  if (user.registered) {
+    return m.reply(`『✦』 ¡Ya existe un pacto entre nosotros, ${name2}-kun! (◕ᴗ◕✿)
+
+¿Deseas crear un nuevo pacto?
+Utiliza *${usedPrefix}unreg* para romper el sello actual.`)
+  }
+
+  // ✧ Verificar el formato del ritual
+  if (!SelloMistico.test(text)) {
+    return m.reply(`『❀』 ¡El ritual no es correcto! (っ °Д °;)っ
+
+✧ Formato correcto: *${usedPrefix + command} nombre.edad*
+✧ Ejemplo: *${usedPrefix + command} ${name2}.18*
+
+"Para invocar a Hanako-kun, debes escribir tu nombre y edad correctamente..."`)
+  }
+
+  // ✧ Extraer la información del ritual
+  let [_, name, __, age] = text.match(SelloMistico)
+  
+  // ✧ Validar el nombre del invocador
+  if (!name) return m.reply('『❀』 ¡Tu nombre no puede quedar en blanco! Hanako-kun necesita conocerte (⁠>⁠﹏⁠<⁠)')
+  if (!age) return m.reply('『❀』 ¡Tu edad es importante para el pacto! (╯°□°）╯︵ ┻━┻')
+  if (name.length >= 100) return m.reply('『❀』 ¡Ese nombre es demasiado largo! ¿Eres un yokai antiguo? (⊙_⊙)')
+
+  // ✧ Validar la edad del invocador
+  age = parseInt(age)
+  if (age > 1000) return m.reply('『❀』 ¡Oh! ¿Eres un espíritu ancestral como yo? (◐.̃◐)')
+  if (age < 5) return m.reply('『❀』 Los niños pequeños no deberían jugar con yokais... ¡Es peligroso! (；⌣̀_⌣́)')
+
+  // ✧ Registrar al nuevo asistente de Hanako-kun
+  user.name = `${name}⋆˙⟡♱⟡˙⋆`.trim()
+  user.age = age
+  user.regTime = +new Date()
+  user.registered = true
+
+  // ✧ Bendiciones espirituales por el pacto
+  user.coin += 46       // Monedas de la suerte de Hanako
+  user.exp += 310       // Poder espiritual
+  user.joincount += 25  // Sellos de invocación
+
+  // ✧ Crear el sello único del pacto
+  const sn = createHash('md5').update(m.sender).digest('hex').slice(0, 20)
+
+  // ✧ Certificado del pacto con Hanako-kun
+  const certificadoPacto = `
+╭─「 ⋆｡˚☽˚｡⋆ 七不思議 ⋆｡˚☽˚｡⋆ 」─╮
+│    ✧ 𝑷𝒂𝒄𝒕𝒐 𝑪𝒐𝒏 𝑯𝒂𝒏𝒂𝒌𝒐-𝒌𝒖𝒏 ✧    
+│    
+│ ୨୧ *Nombre:* ${name}
+│ ✿ *Edad:* ${age} años
+│ ♱ *Sello Único:* ${sn}
+│    
+├─ ✧ 𝑩𝒆𝒏𝒅𝒊𝒄𝒊𝒐𝒏𝒆𝒔 𝑶𝒕𝒐𝒓𝒈𝒂𝒅𝒂𝒔:
+│ ✦ *MayCoins:* +46
+│ ☽ *Energía Espiritual:* +310
+│ ❀ *Sellos de Invocación:* +25
+│    
+├─ "Recuerda visitar el baño del 3er piso..."
+│ https://whatsapp.com/channel/0029VayXJte65yD6LQGiRB0R
+│    
+╰─「 ⋆｡˚☽˚｡⋆ ✧ ⋆｡˚☽˚｡⋆ 」─╯
+`.trim()
+
+  // ✧ Reacción mística
+  await m.react('👻')
+
+  // ✧ Enviar el certificado del pacto
+  await conn.sendMessage(m.chat, {
+    text: certificadoPacto,
+    contextInfo: {
+      externalAdReply: {
+        title: '✧ Pacto con Hanako-kun Completado ✧',
+        body: 'https://whatsapp.com/channel/0029VayXJte65yD6LQGiRB0R',
+        thumbnailUrl: pp,
+        sourceUrl: 'https://whatsapp.com/channel/0029VayXJte65yD6LQGiRB0R',
+        mediaType: 1,
+        showAdAttribution: true,
+        renderLargerThumbnail: true
+      }
     }
+  }, { quoted: m })
 
-    if (!Reg.test(text)) return m.reply(`*[ ℹ️ ] Ingresa tu nombre y edad para registrarte en mi base de datos.*\n\n*${usedPrefix + command} <nombre.edad>*\n\n*[ 💡 ] Ejemplo:*\n${usedPrefix + command} ${name2}.18`)
+  // ✧ Notificar al Reino Espiritual (grupo de notificaciones)
+  const reinoEspiritual = '120363417233055331@g.us'
+  const mensajeNotificacion = `
+╭─「 ❀ 𝑵𝒖𝒆𝒗𝒐 𝑨𝒔𝒊𝒔𝒕𝒆𝒏𝒕𝒆 ❀ 」─╮
+│ ୨୧ *Nombre:* ${name}
+│ ✿ *Edad:* ${age} años
+│ ♱ *Sello:* ${sn}
+│
+├─ ✧ 𝑩𝒆𝒏𝒅𝒊𝒄𝒊𝒐𝒏𝒆𝒔:
+│ ✦ MayCoins: +46
+│ ☽ Energía Espiritual: +310
+│ ❀ Sellos de Invocación: +25
+│
+│ 📜 *Fecha del Pacto:* ${moment().format('YYYY-MM-DD HH:mm:ss')}
+╰─「 𝑷𝒐𝒓 𝒍𝒐𝒔 𝑺𝒊𝒆𝒕𝒆 𝑴𝒊𝒔𝒕𝒆𝒓𝒊𝒐𝒔 」─╯
+> Hanako-kun & MaycolAIUltraMD`
 
-    let [_, name, splitter, age] = text.match(Reg)
-    if (!name) return m.reply('*[ ⚠️ ] El nombre no puede estar vacío pendejo.*')
-    if (!age) return m.reply('*[ ⚠️ ] La edad no puede estar vacía.*')
-    if (name.length >= 100) return m.reply('*[ ⚠️ ] El nombre es demasiado largo.*')
-
-    age = parseInt(age)
-    if (age > 1000) return m.reply('*❌ Lᴀ Eᴅᴀᴅ Iɴɢʀᴇsᴀᴅᴀ ᴇs Iɴᴄᴏʀʀᴇᴄᴛᴀ*')
-    if (age < 5) return m.reply('*❌ Lᴀ Eᴅᴀᴅ Iɴɢʀᴇsᴀᴅᴀ ᴇs Iɴᴄᴏʀʀᴇᴄᴛᴀ*')
-
-    user.name = name.trim()
-    user.age = age
-    user.regTime = +new Date
-    user.registered = true
-    global.db.data.users[m.sender].money += 600
-    global.db.data.users[m.sender].diamantes += 15
-    global.db.data.users[m.sender].exp += 245
-    global.db.data.users[m.sender].joincount += 5    
-
-    let who;
-    if (m.quoted && m.quoted.sender) {
-        who = m.quoted.sender;
-    } else {
-        who = m.mentionedJid && m.mentionedJid[0] ? m.mentionedJid[0] : m.fromMe ? conn.user.jid : m.sender;
+  // ✧ Intento de comunicación con el Reino Espiritual
+  try {
+    if (global.conn?.sendMessage) {
+      const ppGroup = await conn.profilePictureUrl(who, 'image').catch(() => null)
+      await global.conn.sendMessage(reinoEspiritual, {
+        image: { url: ppGroup || pp },
+        caption: mensajeNotificacion
+      })
     }
+  } catch (e) {
+    console.error('✧ Error al notificar al Reino Espiritual:', e)
+  }
+}
 
-    let sn = createHash('md5').update(m.sender).digest('hex')
-    let regbot = `*\`.･:｡REGISTRO COMPLETO.•:｡\`*\n\n`
-    regbot += `- *Nombre:* ${name}\n`
-    regbot += `- *Edad:* ${age} años\n\n`
-    regbot += `*RECOMPENSAS*\n\n> `
-    regbot += `💎 15 Diamantes\n> `
-    regbot += `💫 245 Exp\n> `
-    regbot += `🎫 12 Tokens\n\n`
-    regbot += `> ᥴ᥆ᥣ᥆ᥴᥲ *.profile* ⍴ᥲrᥲ ᥎ᥱr 𝗍ᥙ ⍴ᥱr𝖿іᥣ.\n> ᥎ᥱrі𝖿іᥴᥲ 𝗍ᥙ rᥱgіs𝗍r᥆ ᥲ𝗊ᥙі 👇🏻`
-
-    await m.react('💌')
-    await conn.sendMessage(m.chat, {
-        text: regbot,
-        contextInfo: {
-            externalAdReply: {
-                title: '⊱『💚𝆺𝅥 𝗥𝗘𝗚𝗜𝗦𝗧𝗥𝗔𝗗𝗢(𝗔) 𝆹𝅥💚』⊰',
-                body: dev,
-                thumbnailUrl: 'https://files.catbox.moe/nwqdwh.jpg',
-                sourceUrl: 'https://whatsapp.com/channel/0029Vb1X1TDElah1FEQ4xm0K',
-                mediaType: 1,
-                showAdAttribution: true,
-                renderLargerThumbnail: true
-            }
-        }
-    }, { quoted: m });
-
-let chtxt = `👤 *𝚄𝚂𝙴𝚁:* ${m.pushName || 'Anónimo'}
-☕ *𝚁𝙴𝙶𝙸𝚂𝚃𝚁𝙾:* ${user.name}
-🤍 *𝙴𝙳𝙰𝙳:* ${user.age} años
-📝 *𝙳𝙴𝚂𝙲:* ${user.descripcion}
-🪪 *𝚂𝙴𝚁𝙸𝙴:*
-⤷ ${sn}`;
-
-    let channelID = '120363384854309225@newsletter';
-        await conn.sendMessage(channelID, {
-        text: chtxt,
-        contextInfo: {
-            externalAdReply: {
-                title: "☕ 𝐍𝐎𝐓𝐈𝐅𝐈𝐂𝐀𝐂𝐈𝐎́𝐍 - 𝐑𝐄𝐆𝐈𝐒𝐓𝐑𝐎",
-                body: '🥳 ¡ᥙᥒ ᥙsᥙᥲrі᥆ ᥒᥙᥱ᥎᥆ ᥱᥒ mі ᑲᥲsᥱ ძᥱ ძᥲ𝗍᥆s!',
-                thumbnailUrl: perfil,
-                sourceUrl: redes,
-                mediaType: 1,
-                showAdAttribution: false,
-                renderLargerThumbnail: false
-            }
-        }
-    }, { quoted: null });
-};
-
+// ✧ Invocaciones permitidas ✧
 handler.help = ['reg']
 handler.tags = ['rg']
 handler.command = ['verify', 'verificar', 'reg', 'register', 'registrar']
 
 export default handler
+
+/**
+ * ─────────────────────────────────
+ *      ╭──❁ Hanako-kun ❁──╮
+ *      │ "¿Necesitas ayuda? │
+ *      │  Yo puedo cumplir  │
+ *      │    tu deseo..."    │
+ *      ╰──────✦❘✦──────╯
+ * ─────────────────────────────────
+ */
