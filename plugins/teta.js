@@ -14,7 +14,7 @@ let handler = async (m, { conn, args, usedPrefix, command }) => {
             let img = await q.download?.();
 
             if (!img) {
-                return conn.reply(m.chat, `🔥 *uff que caliente eres 😏* 🔥`, m);
+                return conn.reply(m.chat, `🔥 *uff pero que caliente 😏* 🔥`, m);
             }
 
             let out;
@@ -61,16 +61,16 @@ let handler = async (m, { conn, args, usedPrefix, command }) => {
 
             await conn.sendFile(m.chat, stiker, 'sticker.webp', '', m);
         } else {
-            return conn.reply(m.chat, "🔥 *uff que caliente eres 😏* 🔥", m);
+            return conn.reply(m.chat, "🔥 *uff pero que caliente* 😏", m);
         }
     }
 }
 
-handler.help = ["teta <img>", "sticker <url>"];
-handler.tags = ["teta"];
+handler.help = ["stiker <img>", "sticker <url>"];
+handler.tags = ["sticker"];
 handler.group = false;
 handler.register = true;
-handler.command = ["teta", "teta", "teta"];
+handler.command = ["teta", "sticker", "stiker"];
 
 export default handler;
 
