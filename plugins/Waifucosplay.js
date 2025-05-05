@@ -1,11 +1,11 @@
-import axios from 'axios';
+import axios from "axios";
 
 const handler = async (m, { conn }) => {
     try {
         await m.react("✨");
 
-        // Obtener una imagen aleatoria de waifus cosplay desde Waifu Pics
-        const response = await axios.get("https://api.waifu.pics/sfw/cosplay");
+        // Obtener una imagen aleatoria de waifus cosplay desde Animu API
+        const response = await axios.get("https://animu.moe/api/v1/cosplay");
 
         // Verificar que la API respondió correctamente
         if (!response.data || !response.data.url) {
@@ -25,16 +25,19 @@ const handler = async (m, { conn }) => {
                     body: "Imágenes de chicas en cosplay de anime",
                     mediaType: 1,
                     sourceUrl: imageUrl,
-                    thumbnail: imageUrl
-                }
-            }
+                    thumbnail: imageUrl,
+                },
+            },
         });
-
     } catch (error) {
         console.error("Error al obtener imágenes:", error);
-        await conn.reply(m.chat, "❌ No se pudo obtener una imagen en este momento. Intenta de nuevo más tarde.", m);
+        await conn.reply(
+            m.chat,
+            "❌ No se pudo obtener una imagen en este momento. Intenta de nuevo más tarde.",
+            m
+        );
     }
-}
+};
 
 handler.help = ["waifucosplay"];
 handler.tags = ["anime"];
