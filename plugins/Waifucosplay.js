@@ -4,11 +4,11 @@ const handler = async (m, { conn }) => {
     try {
         await m.react("✨");
 
-        // Obtener una imagen aleatoria de waifus cosplay
-        const { data } = await axios.get("https://api.waifu.im/sfw/cosplay");
-        const imageUrl = data.images[0].url;
+        // Obtener una imagen aleatoria de waifus cosplay desde Waifu Pics
+        const { data } = await axios.get("https://api.waifu.pics/sfw/cosplay");
+        const imageUrl = data.url;
 
-        // Mensaje con la imagen
+        // Enviar la imagen con mensaje
         await conn.sendMessage(m.chat, {
             image: { url: imageUrl },
             caption: "🌸 *Aquí tienes una waifu en cosplay* 🌸\n🔹 ¿Te gusta este personaje? 😍",
