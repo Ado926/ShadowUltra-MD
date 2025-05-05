@@ -1,12 +1,18 @@
-import axios from 'axios'
+import axios from 'axios';
 
 const handler = async (m, { conn }) => {
     try {
         await m.react("✨");
 
         // Obtener una imagen aleatoria de waifus cosplay desde Waifu Pics
-        const { data } = await axios.get("https://api.waifu.pics/sfw/cosplay");
-        const imageUrl = data.url;
+        const response = await axios.get("https://api.waifu.pics/sfw/cosplay");
+
+        // Verificar que la API respondió correctamente
+        if (!response.data || !response.data.url) {
+            throw new Error("❌ No se pudo obtener una imagen de la API.");
+        }
+
+        const imageUrl = response.data.url;
 
         // Enviar la imagen con mensaje
         await conn.sendMessage(m.chat, {
@@ -26,7 +32,7 @@ const handler = async (m, { conn }) => {
 
     } catch (error) {
         console.error("Error al obtener imágenes:", error);
-        await conn.reply(m.chat, "❌ No se pudo obtener una imagen en este momento.", m);
+        await conn.reply(m.chat, "❌ No se pudo obtener una imagen en este momento. Intenta de nuevo más tarde.", m);
     }
 }
 
