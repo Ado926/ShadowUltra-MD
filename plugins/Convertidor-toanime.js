@@ -1,48 +1,30 @@
 import uploadImage from '../lib/uploadImage.js';
-
-const handler = async (m, { conn, text, args, usedPrefix, command }) => {
+const handler = async (m, {conn, text, args, usedPrefix, command}) => {
+  const q = m.quoted ? m.quoted : m;
+  const mime = (q.msg || q).mimetype || q.mediaType || '';
+  if (!/image/g.test(mime)) throw '🛑 *Responda a una imagen*';
+  m.reply('☄️ *Conviertiendo la imagen en anime, espere un momento...*');
+  const data = await q.download?.();
+  const image = await uploadImage(data);
+  try {
+    const anime = `https://api.lolhuman.xyz/api/imagetoanime?apikey=${lolkeysapi}&img=${image}`;
+    await conn.sendFile(m.chat, anime, 'error.jpg', null, m);
+  } catch (i) {
     try {
-        const q = m.quoted ? m.quoted : m;
-        const mime = (q.msg || q).mimetype || q.mediaType || '';
-
-        if (!/image/g.test(mime)) throw '*[❗] RESPONDA O ETIQUETE A UNA IMAGEN*';
-        m.reply('*[❗] CONVIRTIENDO IMAGEN A DISEÑO ANIME...*');
-
-        const data = await q.download?.();
-        if (!data) throw '*[❗] ERROR AL DESCARGAR LA IMAGEN*';
-
-        const image = await uploadImage(data);
-        console.log("URL de la imagen subida:", image);
-
-        if (!image) throw '*[❗] ERROR AL SUBIR LA IMAGEN*';
-
-        try {
-            const anime = `https://api.lolhuman.xyz/api/imagetoanime?apikey=${lolkeysapi}&img=${image}`;
-            console.log("Intentando con LolHuman API:", anime);
-            await conn.sendFile(m.chat, anime, 'resultado.jpg', '*Imagen convertida a anime*', m);
-        } catch (i) {
-            console.error("Error con LolHuman API:", i.message);
-            try {
-                const anime2 = `https://api.zahwazein.xyz/photoeditor/jadianime?url=${image}&apikey=${keysxxx}`;
-                console.log("Intentando con Zahwazein API:", anime2);
-                await conn.sendFile(m.chat, anime2, 'resultado.jpg', '*Imagen convertida a anime*', m);
-            } catch (a) {
-                console.error("Error con Zahwazein API:", a.message);
-                try {
-const anime3 = `https://api.caliph.biz.id/api/animeai?img=${image}&apikey=caliphkey`;
-                    console.log("Intentando con Caliph API:", anime3);
-                    await conn.sendFile(m.chat, anime3, 'resultado.jpg', ' _Imagen convertida a anime_ ', m);
-                } catch (errorFinal) {
-                    console.error("Error en todas las API:", errorFinal.message);
-                    conn.reply(m.chat, ' _[❗] ERROR AL PROCESAR LA IMAGEN EN LAS APIS_ ', m);
-                }
-            }
-        }
-    } catch (error) {
-        console.error("Error general:", error.message);
-        conn.reply(m.chat, `*[❗] ERROR GENERAL: ${error.message}*`, m);
+      const anime2 = `https://api.zahwazein.xyz/photoeditor/jadianime?url=${image}&apikey=${keysxxx}`;
+      await conn.sendFile(m.chat, anime2, 'error.jpg', null, m);
+    } catch (a) {
+      try {
+        const anime3 = `https://api.caliph.biz.id/api/animeai?img=${image}&apikey=caliphkey`;
+        await conn.sendFile(m.chat, anime3, 'error.jpg', null, m);
+      } catch (e) {
+        throw '🛑 *Ocurrió un error*';
+      }
     }
+  }
 };
-
-handler.command = /^animeconvert$/i;
+handler.help = ['toanime'];
+handler.tags = ['tools'];
+handler.register = true
+handler.command = ['jadianime','toanime'];
 export default handler;
