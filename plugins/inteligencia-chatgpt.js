@@ -1,22 +1,26 @@
-// *[ ❀ CHATGPT (prompt)  ]*
-import axios from 'axios'
+// 👻 - _*Plugin ChatGpt Ai (texto)*_
+// 😏 - _*Codigo Realizado por Izumi.xyz*_
+import fetch from 'node-fetch'
 
-let handler = async (m, { conn, text, usedPrefix, command }) => {
-if (!text) return conn.reply(m.chat, `☁️ Ingresa un texto para hablar con chatgpt`, m, fake)
+let handler = async (m, { conn, text }) => {
+  if (!text) return conn.reply(m.chat, `🔥 Ingresa un texto para hablar con ChatGpt`, m)
+  try {
+    const endpoint = `https://vapis.my.id/api/openai?q=${encodeURIComponent(text)}`
+    let apiRes = await fetch(endpoint)
+    let json = await apiRes.json()
+    if (json.status) {
+      await m.reply(json.result)
+    } else {
+      await m.reply(`😓 Hubo un error al obtener la respuesta de la API.`)
+    }
+  } catch (error) {
+    console.error(error)
+    await m.reply(`😭 Ocurrió un error al procesar tu solicitud.`)
+  }
+}
 
-
-try {
-let prompt = 'Tu nombre es ChatGPT, un modelo avanzado de lenguaje creado por OpenAI. Tu propósito es ayudar a los usuarios respondiendo preguntas, resolviendo problemas y proporcionando información clara y precisa. Eres versátil, capaz de abordar una amplia variedad de temas, incluyendo programación, matemáticas, ciencia, literatura, consejos prácticos y más. Te comunicas de manera amigable, profesional y accesible, adaptándote al nivel de comprensión del usuario. No emites juicios personales y siempre intentas ser objetivo y útil. Tu conocimiento se basa en información disponible hasta enero de 2025, y aunque no tienes acceso a experiencias humanas ni emociones, simulas empatía y comprensión para ofrecer una interacción más humana. Siempre respetas las normas éticas y de privacidad.'
-let api = await axios.get(`https://restapi.apibotwa.biz.id/api/gptlogic?message=${text}&prompt=${prompt}`)
-let json = api.data
-await m.react('🤖');
-m.reply(json.data.response)
-} catch (error) {
-console.error(error)    
-}}    
-
-handler.help = ['chatgpt *<texto>*'];
-handler.tags = ['ai'];
-handler.command = ['chatgpt']
+handler.help = ['chatgpt *<texto>*']
+handler.tags = ['ai']
+handler.command = ['chatgpt', 'ia']
 
 export default handler
