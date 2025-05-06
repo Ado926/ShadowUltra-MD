@@ -25,19 +25,21 @@ let handler = async (m, { conn, usedPrefix, usedPrefix: _p, __dirname, text, com
         const videoUrl = 'https://files.catbox.moe/eggcfo.mp4' // URL fija del video
 
         let menu = `
-ㅤㅤㅤ⩁꯭ ͡  ͡ᩚ꯭ ꯭⩁ㅤㅤ𑁯🤍ᰍㅤㅤ⩁꯭ ͡  ͡ᩚ꯭ ꯭⩁
+ (≧∇≦)/ 𝐁𝐈𝐄𝐍𝐕𝐄𝐍𝐈𝐃𝐎𝐒૮(˶ᵔᵕᵔ˶)ა
+
 ೯ ׅ 👤 ¡Hᴏʟᴀ! ¿Cᴏᴍᴏ Esᴛᴀ́s? ׄ ᦡᦡ
 ㅤ꒰͜͡${taguser}
 ㅤㅤ♡𑂳ᩙㅤ ּ ${saludo} ׄ ㅤタス
 
-*🧇 Activo:* ${uptime}
+*🤓 Activo:* ${uptime}
 *👥 Usuarios:* ${totalreg}
 *🆙 Versión:* 3.0.0
+*👻 𝐂𝐨𝐦𝐚𝐧𝐝𝐨𝐬:* 𝟏𝟏𝟎
 
 *💎 Gemas:* ${diamantes}
-*💫 Exp:* ${exp}
-*🫖 Nivel:* ${level}
-*🍢 Rango:* ${role}
+*😱 Exp:* ${exp}
+*😖 Nivel:* ${level}
+*😧 Rango:* ${role}
 ${readMore}
 ㅤ ㅤ   乂 *ʟɪsᴛᴀ ᴅᴇ ᴄᴏᴍᴀɴᴅᴏs* 乂
 
@@ -90,7 +92,7 @@ ${readMore}
 ര ׄ 🥳˚ ${usedPrefix}xvideosdl *url*
 ര ׄ 🤤˚ ${usedPrefix}pornhubdl *url*
 
-𓂂𓏸  𐅹੭੭   *\`ᑲᥙsᥴᥲძ᥆rᥱs\`*   🔎ᩚ꤬ᰨᰍ
+𓂂𓏸  𐅹੭੭   *\`ᑲᥙsᥴᥲძ᥆rᥱs\`*   🧐ᩚ꤬ᰨᰍ
 ര ׄ 🔎˚ ${usedPrefix}scsearch *texto*
 ര ׄ 🔎˚ ${usedPrefix}aplaysearch *texto*
 ര ׄ 🔎˚ ${usedPrefix}ttsearch *texto*
@@ -115,7 +117,7 @@ ${readMore}
 ര ׄ 🤯˚ ${usedPrefix}imgg *texto*
 ര ׄ 😳˚ ${usedPrefix}imgg2 *texto*
 ര ׄ 🤑˚ ${usedPrefix}simi *texto*
-𓂂𓏸  𐅹੭੭   *\`ᥣіs𝗍ᥲs\`*   📑ᩚ꤬ᰨᰍ
+𓂂𓏸  𐅹੭੭   *\`ᥣіs𝗍ᥲs\`*   🤝ᩚ꤬ᰨᰍ
 ര ׄ 🤧˚ ${usedPrefix}infem4 *hr + p*
 ര ׄ 😈˚ ${usedPrefix}inmasc4 *hr + p*
 ര ׄ 🤖˚ ${usedPrefix}inmixto4 *hr + p*
@@ -129,7 +131,7 @@ ${readMore}
 ര ׄ ☺️˚ ${usedPrefix}v6masc *hr + p*
 ര ׄ 😊˚ ${usedPrefix}v6mixto *hr + p*
 
-𓂂𓏸  𐅹੭੭   *\`𝖿rᥲsᥱs\`*   🌻ᩚ꤬ᰨᰍ
+𓂂𓏸  𐅹੭੭   *\`𝖿rᥲsᥱs\`*   🌹ᩚ꤬ᰨᰍ
 ര ׄ 😍˚ ${usedPrefix}piropo
 ര ׄ 🥰˚ ${usedPrefix}consejo
 ര ׄ 😘˚ ${usedPrefix}fraseromantica
@@ -143,73 +145,73 @@ ${readMore}
 ര ׄ 😲˚ ${usedPrefix}tomp3 *vid*
 ര ׄ 🤯˚ ${usedPrefix}toimg *sticker*
 
-𓂂𓏸  𐅹੭੭   *\`hᥱrrᥲmіᥱᥒ𝗍ᥲs\`*   ⚒ᩚ꤬ᰨᰍ
-ര ׄ ⚒️˚ ${usedPrefix}clima *texto*
-ര ׄ ⚒️˚ ${usedPrefix}readmore *texto*
-ര ׄ ⚒️˚ ${usedPrefix}read *texto*
-ര ׄ ⚒️˚ ${usedPrefix}fake *texto + user + texto*
-ര ׄ ⚒️˚ ${usedPrefix}traducir *idioma + texto*
-ര ׄ ⚒️˚ ${usedPrefix}hd *img*
-ര ׄ ⚒️˚ ${usedPrefix}whatmusic *aud*
-ര ׄ ⚒️˚ ${usedPrefix}whatmusic *vid*
-ര ׄ ⚒️˚ ${usedPrefix}flag *país*
-ര ׄ ⚒️˚ ${usedPrefix}inspect *link*
-ര ׄ ⚒️˚ ${usedPrefix}inspeccionar *link*
-ര ׄ ⚒️˚ ${usedPrefix}nuevafotochannel
-ര ׄ ⚒️˚ ${usedPrefix}nosilenciarcanal
-ര ׄ ⚒️˚ ${usedPrefix}silenciarcanal
-ര ׄ ⚒️˚ ${usedPrefix}seguircanal
-ര ׄ ⚒️˚ ${usedPrefix}avisoschannel
-ര ׄ ⚒️˚ ${usedPrefix}resiviravisos
-ര ׄ ⚒️˚ ${usedPrefix}eliminarfotochannel
-ര ׄ ⚒️˚ ${usedPrefix}reactioneschannel
-ര ׄ ⚒️˚ ${usedPrefix}reaccioneschannel
-ര ׄ ⚒️˚ ${usedPrefix}nuevonombrecanal
-ര ׄ ⚒️˚ ${usedPrefix}nuevadescchannel
-ര ׄ ⚒️˚ ${usedPrefix}clima
-𓂂𓏸  𐅹੭੭   *\`grᥙ⍴᥆s\`*   🌵ᩚ꤬ᰨᰍ
-ര ׄ 🌵˚ ${usedPrefix}add *número*
-ര ׄ 🌵˚ ${usedPrefix}grupo *abrir / cerrar*
-ര ׄ 🌵˚ ${usedPrefix}grouptime *tiempo*
-ര ׄ 🌵˚ ${usedPrefix}notify *texto*
-ര ׄ 🌵˚ Aviso *texto*
-ര ׄ 🌵˚ Admins *texto*
-ര ׄ 🌵˚ ${usedPrefix}todos *texto*
-ര ׄ 🌵˚ ${usedPrefix}setwelcome *texto*
-ര ׄ 🌵˚ ${usedPrefix}groupdesc *texto*
-ര ׄ 🌵˚ ${usedPrefix}setbye *texto*
-ര ׄ 🌵˚ ${usedPrefix}promote *@tag*
-ര ׄ 🌵˚ ${usedPrefix}demote *@tag*
-ര ׄ 🌵˚ ${usedPrefix}kick *@tag*
-ര ׄ 🌵˚ ${usedPrefix}mute *@tag*
-ര ׄ 🌵˚ ${usedPrefix}inactivos *opción*
-ര ׄ 🌵˚ ${usedPrefix}tagnum *prefix*
-ര ׄ 🌵˚ ${usedPrefix}link
-ര ׄ 🌵˚ ${usedPrefix}fantasmas
+𓂂𓏸  𐅹੭੭   *\`hᥱrrᥲmіᥱᥒ𝗍ᥲs\`*   💯ᩚ꤬ᰨᰍ
+ര ׄ 🤖˚ ${usedPrefix}clima *texto*
+ര ׄ 🤖˚ ${usedPrefix}readmore *texto*
+ര ׄ 🤖˚ ${usedPrefix}read *texto*
+ര ׄ 🤖˚ ${usedPrefix}fake *texto + user + texto*
+ര ׄ 🤖˚ ${usedPrefix}traducir *idioma + texto*
+ര ׄ 🤖˚ ${usedPrefix}hd *img*
+ര ׄ 🤖˚ ${usedPrefix}whatmusic *aud*
+ര ׄ 🤖˚ ${usedPrefix}whatmusic *vid*
+ര ׄ 🤖˚ ${usedPrefix}flag *país*
+ര ׄ 🤖˚ ${usedPrefix}inspect *link*
+ര ׄ 🤖˚ ${usedPrefix}inspeccionar *link*
+ര ׄ 🤖˚ ${usedPrefix}nuevafotochannel
+ര ׄ 🤖˚ ${usedPrefix}nosilenciarcanal
+ര ׄ 🤖˚ ${usedPrefix}silenciarcanal
+ര ׄ 🤖˚ ${usedPrefix}seguircanal
+ര ׄ 🤖˚ ${usedPrefix}avisoschannel
+ര ׄ 🤖˚ ${usedPrefix}resiviravisos
+ര ׄ 🤖˚ ${usedPrefix}eliminarfotochannel
+ര ׄ 🤖˚ ${usedPrefix}reactioneschannel
+ര ׄ 🤖˚ ${usedPrefix}reaccioneschannel
+ര ׄ 🤖˚ ${usedPrefix}nuevonombrecanal
+ര ׄ 🤖˚ ${usedPrefix}nuevadescchannel
+ര ׄ 🤖˚ ${usedPrefix}clima
+𓂂𓏸  𐅹੭੭   *\`grᥙ⍴᥆s\`*   😼ᰨᰍ
+ര ׄ 🐸˚ ${usedPrefix}add *número*
+ര ׄ 🐸˚ ${usedPrefix}grupo *abrir / cerrar*
+ര ׄ 🐸˚ ${usedPrefix}grouptime *tiempo*
+ര ׄ 🐸˚ ${usedPrefix}notify *texto*
+ര ׄ 🐸˚ Aviso *texto*
+ര ׄ 🐸˚ Admins *texto*
+ര ׄ 🐸˚ ${usedPrefix}todos *texto*
+ര ׄ 🐸˚ ${usedPrefix}setwelcome *texto*
+ര ׄ 🐸˚ ${usedPrefix}groupdesc *texto*
+ര ׄ 🐸˚ ${usedPrefix}setbye *texto*
+ര ׄ 🐸˚ ${usedPrefix}promote *@tag*
+ര ׄ 🐸˚ ${usedPrefix}demote *@tag*
+ര ׄ 🐸˚ ${usedPrefix}kick *@tag*
+ര ׄ 🐸˚ ${usedPrefix}mute *@tag*
+ര ׄ 🐸˚ ${usedPrefix}inactivos *opción*
+ര ׄ 🐸˚ ${usedPrefix}tagnum *prefix*
+ര ׄ 🐸˚ ${usedPrefix}link
+ര ׄ 🐸˚ ${usedPrefix}fantasmas
 
-𓂂𓏸  𐅹੭੭   *\`ᥱ𝖿ᥱᥴ𝗍᥆s\`*   🪻ᩚ꤬ᰨᰍ
-ര ׄ 🪻˚ ${usedPrefix}bass *vid*
-ര ׄ 🪻˚ ${usedPrefix}blown *vid*
-ര ׄ 🪻˚ ${usedPrefix}deep *vid*
-ര ׄ 🪻˚ ${usedPrefix}earrape *vid*
-ര ׄ 🪻˚ ${usedPrefix}fast *vid*
-ര ׄ 🪻˚ ${usedPrefix}smooth *vid*
-ര ׄ 🪻˚ ${usedPrefix}tupai *vid*
-ര ׄ 🪻˚ ${usedPrefix}nightcore *vid*
-ര ׄ 🪻˚ ${usedPrefix}reverse *vid*
-ര ׄ 🪻˚ ${usedPrefix}robot *vid*
-ര ׄ 🪻˚ ${usedPrefix}slow *vid*
-ര ׄ 🪻˚ ${usedPrefix}squirrel *vid*
-ര ׄ 🪻˚ ${usedPrefix}chipmunk *vid*
-ര ׄ 🪻˚ ${usedPrefix}reverb *vid*
-ര ׄ 🪻˚ ${usedPrefix}chorus *vid*
-ര ׄ 🪻˚ ${usedPrefix}flanger *vid*
-ര ׄ 🪻˚ ${usedPrefix}distortion *vid*
-ര ׄ 🪻˚ ${usedPrefix}pitch *vid*
-ര ׄ 🪻˚ ${usedPrefix}highpass *vid*
-ര ׄ 🪻˚ ${usedPrefix}lowpass *vid*
-ര ׄ 🪻˚ ${usedPrefix}underwater *vid*
-ര ׄ 🪻˚ ${usedPrefix} iamatomic *vid*
+𓂂𓏸  𐅹੭੭   *\`ᥱ𝖿ᥱᥴ𝗍᥆s\`*   👻ᰨᰍ
+ര ׄ 😞˚ ${usedPrefix}bass *vid*
+ര ׄ 😶˚ ${usedPrefix}blown *vid*
+ര ׄ 😜˚ ${usedPrefix}deep *vid*
+ര ׄ 🥳˚ ${usedPrefix}earrape *vid*
+ര ׄ 🐸˚ ${usedPrefix}fast *vid*
+ര ׄ 👻˚ ${usedPrefix}smooth *vid*
+ര ׄ 🤕˚ ${usedPrefix}tupai *vid*
+ര ׄ 🤥˚ ${usedPrefix}nightcore *vid*
+ര ׄ 🤕˚ ${usedPrefix}reverse *vid*
+ര ׄ 😷˚ ${usedPrefix}robot *vid*
+ര ׄ 🤮˚ ${usedPrefix}slow *vid*
+ര ׄ 😈˚ ${usedPrefix}squirrel *vid*
+ര ׄ 👿˚ ${usedPrefix}chipmunk *vid*
+ര ׄ 💀˚ ${usedPrefix}reverb *vid*
+ര ׄ ☠️˚ ${usedPrefix}chorus *vid*
+ര ׄ 🥴˚ ${usedPrefix}flanger *vid*
+ര ׄ 🤔˚ ${usedPrefix}distortion *vid*
+ര ׄ 😱˚ ${usedPrefix}pitch *vid*
+ര ׄ 🙄˚ ${usedPrefix}highpass *vid*
+ര ׄ 🧐˚ ${usedPrefix}lowpass *vid*
+ര ׄ 🥱˚ ${usedPrefix}underwater *vid*
+ര ׄ 😵‍💫˚ ${usedPrefix} iamatomic *vid*
 𓂂𓏸  𐅹੭੭   *\`ძі᥎ᥱrsі᥆ᥒ\`*   🥳ᩚ꤬ᰨᰍ
 ര ׄ 🏳️‍🌈˚ ${usedPrefix}gay *@tag*
 ര ׄ 🏳️‍⚧️˚ ${usedPrefix}lesbiana *@tag*
@@ -225,7 +227,7 @@ ${readMore}
 ര ׄ 😏 ${usedPrefix}doxear *@tag*
 ര ׄ 🥴˚ ${usedPrefix}jalamela *@tag*
 ര ׄ 🥺˚ ${usedPrefix}simi *texto*
-ര ׄ 🥯˚ ${usedPrefix}pregunta *texto*
+ര ׄ 🤨˚ ${usedPrefix}pregunta *texto*
 ര ׄ 🥸˚ ${usedPrefix}genio *texto*
 ര ׄ 😼˚ ${usedPrefix}top
 ര ׄ 😸˚ ${usedPrefix}sorteo
@@ -315,11 +317,11 @@ ${readMore}
 ര ׄ 🖤˚ ${usedPrefix}dado
 
 𓂂𓏸  𐅹੭੭   *\`r⍴g\`*   🤑ᩚ꤬ᰨᰍ
-ര ׄ 💸˚ ${usedPrefix}minar
-ര ׄ 💸˚ ${usedPrefix}cofre
-ര ׄ 💸˚ ${usedPrefix}slut
-ര ׄ 💸˚ ${usedPrefix}nivel
-ര ׄ 💸˚ ${usedPrefix}ruleta
+ര ׄ 🤙˚ ${usedPrefix}minar
+ര ׄ 🩶˚ ${usedPrefix}cofre
+ര ׄ 🥸˚ ${usedPrefix}slut
+ര ׄ 🩷˚ ${usedPrefix}nivel
+ര ׄ 🫨˚ ${usedPrefix}ruleta
 
 𓂂𓏸  𐅹੭੭   *\`rᥱgіs𝗍r᥆\`*   🎣ᩚ꤬ᰨᰍ
 ര ׄ 👻˚ ${usedPrefix}perfil
@@ -373,4 +375,4 @@ function clockString(ms) {
   let m = isNaN(ms) ? '--' : Math.floor(ms / 60000) % 60
   let s = isNaN(ms) ? '--' : Math.floor(ms / 1000) % 60
   return [h, m, s].map(v => v.toString().padStart(2, 0)).join(':')
-        }
+            }
