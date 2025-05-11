@@ -31,7 +31,6 @@ let handler = async (m, { conn, usedPrefix, usedPrefix: _p, __dirname, text, com
 ㅤ꒰͜͡${taguser}
 ㅤㅤ♡𑂳ᩙㅤ ּ ${saludo} ׄ ㅤタス
 ✨ *La eminencia en la sombra ha revelado sus secretos...* ✨
-
 🔮 *Usuario:* ${name}
 🏅 *Rango:* ${role}
 💎 *Gemas:* ${diamantes}
@@ -39,7 +38,6 @@ let handler = async (m, { conn, usedPrefix, usedPrefix: _p, __dirname, text, com
 🔥 *Exp:* ${exp}
 ⏳ *Activo por:* ${uptime}
 👥 *Miembros en la oscuridad:* ${totalreg}
-
 ❖『𝘾𝙤𝙢𝙖𝙣𝙙𝙤𝙨 𝙙𝙚 𝙡𝙖 𝙎𝙝𝙖𝙙𝙤𝙬 𝙂𝙖𝙧𝙙𝙚𝙣』❖
 𓂂𓏸  𐅹੭੭   *\`𝐌𝐄𝐍𝐔 𝐃𝐄 𝐋𝐀 𝐄𝐌𝐈𝐍𝐄𝐍𝐂𝐈𝐀\`* 🌑🖤
   ׄ 🔮 ${usedPrefix}shadowmenu - Revela los secretos de la oscuridad
@@ -66,13 +64,11 @@ let handler = async (m, { conn, usedPrefix, usedPrefix: _p, __dirname, text, com
 ര ׄ 📜˚ ${usedPrefix}manual *dominar los secretos de la Shadow Garden*
 𓂂𓏸  𐅹੭੭   *\`𝐀𝐋𝐌𝐀𝐂𝐄́𝐍 𝐃𝐄 𝐋𝐀 𝐄𝐌𝐈𝐍𝐄𝐍𝐂𝐈𝐀\`* 🌑🖤
 ⚔️ *Los conocimientos ocultos aguardan en la oscuridad...*
-
 👁‍🗨 *Invocación de datos desde las sombras:*
 🕶️ ${usedPrefix}playaudio *Extrae sonidos del abismo*
 🔮 ${usedPrefix}aplay *Desata el eco de la sombra*
 📽️ ${usedPrefix}aplayvideo *Revela visiones del dominio oscuro*
 🌀 ${usedPrefix}splay *Remanentes de la eminencia*
-
 ⚔️ *Descargas desde los dominios secretos:*
 💀 ${usedPrefix}ytmp4doc *Captura la esencia de la oscuridad en video*
 🌘 ${usedPrefix}ytmp3doc *Extrae los susurros de la sombra en audio*
@@ -80,7 +76,6 @@ let handler = async (m, { conn, usedPrefix, usedPrefix: _p, __dirname, text, com
 🔍 ${usedPrefix}pinterest *Visiones del inframundo*
 🔥 ${usedPrefix}capcut *Forja la estética de la eminencia*
 ✨ ${usedPrefix}pinvid *Testimonios de la sombra*
-
 🕶️ *Invocaciones de las redes ocultas:*
 👻 ${usedPrefix}ytmp4 *Recoge fragmentos de la oscuridad*
 ⚡ ${usedPrefix}ytmp3 *Accede a las voces enigmáticas*
@@ -92,7 +87,6 @@ let handler = async (m, { conn, usedPrefix, usedPrefix: _p, __dirname, text, com
 🌀 ${usedPrefix}playstore *Tecnologías de la Shadow Garden*
 𓂂𓏸  𐅹੭੭   *\`𝐈𝐍𝐕𝐄𝐒𝐓𝐈𝐆𝐀𝐂𝐈𝐎́𝐍 𝐄𝐍 𝐋𝐀 𝐎𝐒𝐂𝐔𝐑𝐈𝐃𝐀𝐃\`* 🌑🖤
 ⚔️ *Desentraña los secretos sellados en las sombras...*
-
 👁‍🗨 *Exploración del conocimiento oculto:*
 🔮 ${usedPrefix}scsearch *Los registros secretos de la eminencia*
 🕶️ ${usedPrefix}aplaysearch *Susurros de la sombra convertidos en eco*
@@ -105,7 +99,6 @@ let handler = async (m, { conn, usedPrefix, usedPrefix: _p, __dirname, text, com
 📂 ${usedPrefix}mercadolibre *Reliquias de la penumbra eterna*
 🕵️ ${usedPrefix}ffstalk *Rastreo de los movimientos ocultos*
 🌘 ${usedPrefix}animeplus *Archivos de guerreros en la sombra*
-
 𓂂𓏸  𐅹੭੭   *\`𝐋𝐀 𝐂𝐎𝐍𝐂𝐈𝐄𝐍𝐂𝐈𝐀 𝐃𝐄 𝐋𝐀 𝐒𝐎𝐌𝐁𝐑𝐀\`* 🤖💀
 👁‍🗨 *Activación de la inteligencia oscura:*
 🧠 ${usedPrefix}ia *Consulta el oráculo de la eminencia*
@@ -116,7 +109,6 @@ let handler = async (m, { conn, usedPrefix, usedPrefix: _p, __dirname, text, com
 ⚔️ ${usedPrefix}simi *Intercambio de sabiduría con los seguidores de la sombra*
 𓂂𓏸  𐅹੭੭   *\`𝐋𝐀 𝐋𝐈𝐒𝐓𝐀 𝐃𝐄 𝐋𝐀 𝐒𝐎𝐌𝐁𝐑𝐀\`* 🌑🖤
 ⚔️ *Registros de los discípulos de la eminencia...*
-
 👁‍🗨 *Clasificación de la oscuridad:*
 🔮 ${usedPrefix}infem4 *Guerreras del abismo*
 🕶️ ${usedPrefix}inmasc4 *Discípulos en entrenamiento*
@@ -130,18 +122,15 @@ let handler = async (m, { conn, usedPrefix, usedPrefix: _p, __dirname, text, com
 👑 ${usedPrefix}v6fem *Guías de la oscuridad infinita*
 💀 ${usedPrefix}v6masc *Maestros del sendero sombrío*
 🕶️ ${usedPrefix}v6mixto *Los elegidos por la eminencia*
-
 𓂂𓏸  𐅹੭੭   *\`𝐄𝐂𝐎𝐒 𝐃𝐄 𝐋𝐀 𝐄𝐌𝐈𝐍𝐄𝐍𝐂𝐈𝐀\`* 🌹👁‍🗨
 👑 ${usedPrefix}piropo *Mensajes ocultos en la penumbra*
 🛡️ ${usedPrefix}consejo *Susurros de la sabiduría oscura*
 🔮 ${usedPrefix}fraseromantica *Las palabras de la sombra eterna*
-
 𓂂𓏸  𐅹੭੭   *\`𝐂𝐎𝐍𝐕𝐄𝐑𝐒𝐈𝐎𝐍 𝐀 𝐋𝐀 𝐏𝐄𝐍𝐔𝐌𝐁𝐑𝐀\`* 🔄🕶️
 📜 ${usedPrefix}tourl *Invoca la transformación en la sombra*
 🕶️ ${usedPrefix}toptt *Desata la voz de la oscuridad*
 ⚡ ${usedPrefix}tomp3 *Extrae la esencia enigmática*
 👑 ${usedPrefix}toimg *Revela el artefacto oculto*
-
 𓂂𓏸  𐅹੭੭   *\`𝐇𝐄𝐑𝐑𝐀𝐌𝐈𝐄𝐍𝐓𝐀𝐒 𝐃𝐄 𝐋𝐀 𝐒𝐎𝐌𝐁𝐑𝐀\`* 🔧💀
 🕶️ ${usedPrefix}clima *Observa los signos del destino oscuro*
 📜 ${usedPrefix}readmore *Oculta fragmentos de la realidad*
@@ -152,7 +141,6 @@ let handler = async (m, { conn, usedPrefix, usedPrefix: _p, __dirname, text, com
 📂 ${usedPrefix}inspect *Analiza los dominios sellados*
 ⚡ ${usedPrefix}nuevonombrecanal *Renacimiento en la sombra*
 🌀 ${usedPrefix}nuevadescchannel *Reescribe el destino del abismo*
-
 𓂂𓏸  𐅹੭੭   *\`𝐂𝐀𝐌𝐀𝐑𝐀𝐒 𝐃𝐄 𝐋𝐀 𝐒𝐇𝐀𝐃𝐎𝐖 𝐆𝐀𝐑𝐃𝐄𝐍\`* 😼🔥
 🛡️ ${usedPrefix}add *Seleccionar nuevos discípulos*
 ⚔️ ${usedPrefix}grupo abrir/cerrar *Control total sobre la oscuridad*
@@ -173,7 +161,6 @@ let handler = async (m, { conn, usedPrefix, usedPrefix: _p, __dirname, text, com
 👁‍🗨 ${usedPrefix}fantasmas *Rastreo de almas errantes*
 𓂂𓏸  𐅹੭੭   *\`𝐄𝐅𝐄𝐂𝐓𝐎𝐒 𝐃𝐄 𝐋𝐀 𝐎𝐒𝐂𝐔𝐑𝐈𝐃𝐀𝐃\`* 👻🖤
 ⚔️ *Moldea la realidad con los susurros de la sombra...*
-
 👁‍🗨 *Manipulación del sonido y la esencia:*
 🔮 ${usedPrefix}bass *Resuena desde la profundidad del abismo*
 🕶️ ${usedPrefix}blown *Desgarra el velo de la penumbra*
@@ -196,7 +183,6 @@ let handler = async (m, { conn, usedPrefix, usedPrefix: _p, __dirname, text, com
 🛡️ ${usedPrefix}lowpass *Condensa el poder de la sombra*
 🔮 ${usedPrefix}underwater *Sumérgete en el dominio oculto*
 🔥 ${usedPrefix}iamatomic *Explosión de la esencia oscura*
-
 𓂂𓏸  𐅹੭੭   *\`𝐃𝐈𝐕𝐄𝐑𝐒𝐈𝐎́𝐍 𝐃𝐄 𝐋𝐀 𝐄𝐌𝐈𝐍𝐄𝐍𝐂𝐈𝐀\`* 🎭🔥
 👁‍🗨 *Interacción con los discípulos de la sombra:*
 🔮 ${usedPrefix}simi *Responde con la sabiduría de la oscuridad*
@@ -210,7 +196,6 @@ let handler = async (m, { conn, usedPrefix, usedPrefix: _p, __dirname, text, com
 🛡️ ${usedPrefix}pareja *Unión sellada por la sombra eterna*
 ⚔️ ${usedPrefix}love *Conexiones forjadas en la penumbra*
 🌘 ${usedPrefix}personalidad *Rasgos formados en la eminencia*
-
 𓂂𓏸  𐅹੭੭   *\`𝐏𝐑𝐔𝐄𝐁𝐀𝐒 𝐃𝐄 𝐋𝐀 𝐄𝐌𝐈𝐍𝐄𝐍𝐂𝐈𝐀\`* 🏆🕶️
 👁‍🗨 *Desafíos entre los discípulos de la sombra:*
 🔮 ${usedPrefix}pregunta *Prueba de conocimiento de la penumbra*
@@ -221,7 +206,6 @@ let handler = async (m, { conn, usedPrefix, usedPrefix: _p, __dirname, text, com
 💀 ${usedPrefix}trivia *Prueba de la mente iluminada por la sombra*
 𓂂𓏸  𐅹੭੭   *\`𝐀𝐍𝐈𝐌𝐄 𝐃𝐄 𝐋𝐀 𝐒𝐎𝐌𝐁𝐑𝐀\`* 🌑🖤
 ⚔️ *Invoca los gestos y expresiones dignos de la eminencia...*
-
 👁‍🗨 *Manifestaciones del dominio oscuro:*
 🔮 ${usedPrefix}saludo *Recibe la bendición de la sombra*
 🕶️ ${usedPrefix}buenasnoches *Susurros desde el abismo antes del descanso*
@@ -254,7 +238,6 @@ let handler = async (m, { conn, usedPrefix, usedPrefix: _p, __dirname, text, com
 🌑 ${usedPrefix}slap *Castigo impuesto por la sombra eterna*
 👑 ${usedPrefix}sleep *Descanso bajo la protección de la penumbra*
 🛡️ ${usedPrefix}think *Reflexión sobre el destino en la sombra*
-
 𓂂𓏸  𐅹੭੭   *\`𝐀𝐑𝐓𝐄𝐅𝐀𝐂𝐓𝐎𝐒 𝐃𝐄 𝐋𝐀 𝐒𝐇𝐀𝐃𝐎𝐖 𝐆𝐀𝐑𝐃𝐄𝐍\`* 🏆🕶️
 👁‍🗨 *Símbolos del poder oculto:*
 🔮 ${usedPrefix}sticker *Forja un emblema de la penumbra*
@@ -263,23 +246,18 @@ let handler = async (m, { conn, usedPrefix, usedPrefix: _p, __dirname, text, com
 📜 ${usedPrefix}dado *Predicción en manos de la sombra eterna*
 𓂂𓏸  𐅹੭੭   *\`𝐑𝐄𝐂𝐔𝐑𝐒𝐎𝐒 𝐃𝐄 𝐋𝐀 𝐒𝐎𝐌𝐁𝐑𝐀\`* 💎🕶️
 ⚔️ *Forja tu destino en la oscuridad...*
-
 👁‍🗨 *Extracción de poder en las sombras:*
 🔮 ${usedPrefix}minar *Recolecta la energía oculta en el abismo*
 🕶️ ${usedPrefix}cofre *Desbloquea los artefactos sellados*
 📡 ${usedPrefix}nivel *Evalúa tu rango dentro de la Shadow Garden*
 🎭 ${usedPrefix}ruleta *Deja que la oscuridad decida tu suerte*
-
 𓂂𓏸  𐅹੭੭   *\`𝐑𝐄𝐆𝐈𝐒𝐓𝐑𝐎𝐒 𝐃𝐄 𝐋𝐀 𝐄𝐌𝐈𝐍𝐄𝐍𝐂𝐈𝐀\`* 🔱👁‍🗨
 ⚔️ *Inscripción en los archivos de la sombra eterna...*
-
 👑 ${usedPrefix}perfil *Consulta tu identidad dentro del dominio oscuro*
 💀 ${usedPrefix}reg *Acepta el pacto con la eminencia*
 🕶️ ${usedPrefix}unreg *Desvanece tu presencia en la sombra*
-
 𓂂𓏸  𐅹੭੭   *\`𝐂𝐎𝐍𝐓𝐑𝐎𝐋 𝐃𝐄 𝐋𝐀 𝐒𝐇𝐀𝐃𝐎𝐖 𝐆𝐀𝐑𝐃𝐄𝐍\`* 🔮🛡️
 👁‍🗨 *Ejecuta órdenes en el reino de la oscuridad...*
-
 ⚡ ${usedPrefix}salir *Desconexión con el plano de la eminencia*
 🌑 ${usedPrefix}update *Expansión del conocimiento oculto*
 🔮 ${usedPrefix}blocklist *Lista de entidades expulsadas de la sombra*
@@ -288,8 +266,6 @@ let handler = async (m, { conn, usedPrefix, usedPrefix: _p, __dirname, text, com
 👑 ${usedPrefix}join *Ingreso a los círculos secretos de la eminencia*
 ⚔️ ${usedPrefix}chetar *Potencia tu influencia en la Shadow Garden*
 💀 ${usedPrefix}unbanuser *Liberación desde los límites del abismo*
-
-`algunos comandos como los nsfw aún no se agregan al menú pero ya están activos`
 `.trim()
 
         await conn.sendMessage(m.chat, {
@@ -328,4 +304,4 @@ function clockString(ms) {
   let m = isNaN(ms) ? '--' : Math.floor(ms / 60000) % 60
   let s = isNaN(ms) ? '--' : Math.floor(ms / 1000) % 60
   return [h, m, s].map(v => v.toString().padStart(2, 0)).join(':')
-            }
+        }
