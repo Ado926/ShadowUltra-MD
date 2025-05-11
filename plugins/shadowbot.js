@@ -22,9 +22,9 @@ const handler = async (m, { text, conn }) => {
     if (!data || !data.result) throw new Error('Respuesta vacía');
 
     await conn.reply(m.chat, `
-╭─〔 shadow ✦ 𝑹𝑬𝑺𝑷𝑼𝑬𝑺𝑻𝑨 〕─╮
+╭─〔 𝐒𝐡𝐚𝐝𝐨𝐰 ♥ 𝐑𝐞𝐬𝐩𝐮𝐞𝐬𝐭𝐚 〕─╮
 ${data.result.trim()}
-> Usando NightAPI 🌌 & Hecho por mi Bro  SoyMaycol 👻
+> Usando NightAPI 🌌 & Hecho por SoyMaycol y yosue XD
 ╰────────────────────────────╯`, m);
   } catch (err) {
     console.error('[ERROR en Hanako IA]', err);
