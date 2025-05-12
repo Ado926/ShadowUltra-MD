@@ -5,7 +5,7 @@ const {
   MessageRetryMap,
   makeCacheableSignalKeyStore,
   jidNormalizedUser
-} = await import('@whiskeysockets/baileys');
+} = await import('@whiskeysockets/baileys')
 import moment from 'moment-timezone';
 import NodeCache from 'node-cache';
 import readline from 'readline';
@@ -21,16 +21,17 @@ import { makeWASocket } from '../lib/simple.js';
 if (!(global.conns instanceof Array)) global.conns = [];
 
 let handler = async (m, { conn: _conn, args, usedPrefix, command, isOwner }) => {
-  const bot = global.db.data.settings[conn.user.jid] || {};
 
-  if (!bot.jadibotmd) return m.reply(
-    '⪛✰ ↫Shadow Code ↬ ✰⪜\n\n' +
-    '✐ 𝘾𝙤𝙣𝙚𝙭𝙞𝙤n 𝙑𝙞́𝙖 𝘾𝙤́𝙙𝙞𝙜𝙤 [ᴘᴏᴘᴜʟᴀʀ]\n\n' +
-    '✰ Usa este Código para convertirte en un Sub-Bot Temporal.\n\n' +
-    '✧ No es recomendable usar tu cuenta principal.'
-  );
+const bot = global.db.data.settings[conn.user.jid] || {};
+
+if (!bot.jadibotmd) return m.reply(' anda a pedir Code a otro lado de gil de mierda este comando está desactivado por mi creador');
 
   let parent = args[0] && args[0] == 'plz' ? _conn : await global.conn;
+
+/*  if (!((args[0] && args[0] == 'plz') || (await global.conn).user.jid == _conn.user.jid)) {
+    return m.reply(`Este comando solo puede ser usado en el bot principal! wa.me/${global.conn.user.jid.split`@`[0]}?text=${usedPrefix}code`);
+  }
+*/
 
   async function serbot() {
     let authFolderB = m.sender.split('@')[0];
@@ -76,7 +77,7 @@ let handler = async (m, { conn: _conn, args, usedPrefix, command, isOwner }) => 
       defaultQueryTimeoutMs: undefined,
       version
     };
-
+       
     let conn = makeWASocket(connectionOptions);
 
     if (methodCode && !conn.authState.creds.registered) {
@@ -85,31 +86,47 @@ let handler = async (m, { conn: _conn, args, usedPrefix, command, isOwner }) => 
       setTimeout(async () => {
         let codeBot = await conn.requestPairingCode(cleanedNumber);
         codeBot = codeBot?.match(/.{1,4}/g)?.join("-") || codeBot;
-        let txt = '⪛✰ ↫Shadow Code ↬ ✰⪜\n\n' +
-                  '✐ 𝘾𝙤𝙣𝙚𝙭𝙞𝙤n 𝙑𝙞́𝙖 𝘾𝙤́𝙙𝙞𝙜𝙤 [ᴘᴏᴘᴜʟᴀʀ]\n\n' +
-                  '✰ Usa este Código para convertirte en un Sub-Bot Temporal.\n\n' +
-                  '✧ No es recomendable usar tu cuenta principal.';
+            let txt = ` _*Usa este Código para convertirte en un Sub Bot*_\n`
+            txt += `*👻 Nota:* Este Código solo funciona en el número en el que se solicito...`;
         await parent.reply(m.chat, txt, m);
         await parent.reply(m.chat, codeBot, m);
         rl.close();
       }, 3000);
     }
-    
+
     conn.isInit = false;
+    let isInit = true;
 
     async function connectionUpdate(update) {
       const { connection, lastDisconnect, isNewLogin, qr } = update;
       if (isNewLogin) conn.isInit = true;
       const code = lastDisconnect?.error?.output?.statusCode || lastDisconnect?.error?.output?.payload?.statusCode;
 
+      if (code && code !== DisconnectReason.loggedOut && conn?.ws.socket == null) {
+        let i = global.conns.indexOf(conn);
+        if (i < 0) return console.log(await creloadHandler(true).catch(console.error));
+        delete global.conns[i];
+        global.conns.splice(i, 1);
+        fs.rmdirSync(userFolderPath, { recursive: true });
+        if (code !== DisconnectReason.connectionClosed) {
+          parent.sendMessage(m.chat, { text: "Conexión perdida.... ;(" }, { quoted: m });
+        }
+      }
+
+      if (global.db.data == null) loadDatabase();
+
       if (connection == 'open') {
         conn.isInit = true;
         global.conns.push(conn);
-        await parent.reply(m.chat, args[0] ? '✅ ¡Conexión establecida con éxito!' : '🍷 𝗖𝗼𝗻𝗲𝘅𝗶𝗼́𝗻 𝗲𝘅𝗶𝘁𝗼𝘀𝗮 𝗮 𝗪𝗵𝗮𝘁𝘀𝗔𝗽𝗽! 🌹', m);
+await parent.reply(m.chat, args[0] ? '✅ ¡Conexión establecida con éxito!':`𝗖𝗼𝗻𝗲𝘅𝗶𝗼́𝗻 𝗲𝘅𝗶𝘁𝗼𝘀𝗮 𝗮 𝗪𝗵𝗮𝘁𝘀𝗔𝗽𝗽! 🌹\n😋 Si se desconecta, usa *#delsesion* para cerrar sesión luego *#code* para un nuevo código.\nᴏᴘᴄɪᴏ́ɴ ᴀñᴀᴅɪᴅᴀ ᴘᴏʀ 𝗪𝗶𝗿𝗸 y no olvides seguir nuestro canal` https://whatsapp.com/channel/0029VbAXuUtB4hdYWC6m2R1h, m);
         await sleep(5000);
+        if (args[0]) return;
+
+        await parent.reply(conn.user.jid, ` 👻 La siguiente vez que se conecte envía el siguiente mensaje para iniciar sesión sin utilizar otro código 😈 `, m);
+        await parent.sendMessage(conn.user.jid, { text: usedPrefix + command + " " + Buffer.from(fs.readFileSync(`./ShadowJadiBot/${authFolderB}/creds.json`), "utf-8").toString("base64") }, { quoted: m });
       }
     }
-    
+
     setInterval(async () => {
       if (!conn.user) {
         try { conn.ws.close() } catch { }
@@ -121,6 +138,37 @@ let handler = async (m, { conn: _conn, args, usedPrefix, command, isOwner }) => 
       }
     }, 60000);
 
+    let handler = await import('../handler.js');
+    let creloadHandler = async function (restatConn) {
+      try {
+        const Handler = await import(`../handler.js?update=${Date.now()}`).catch(console.error);
+        if (Object.keys(Handler || {}).length) handler = Handler;
+      } catch (e) {
+        console.error(e);
+      }
+      if (restatConn) {
+        try { conn.ws.close() } catch { }
+        conn.ev.removeAllListeners();
+        conn = makeWASocket(connectionOptions);
+        isInit = true;
+      }
+
+      if (!isInit) {
+        conn.ev.off('messages.upsert', conn.handler);
+        conn.ev.off('connection.update', conn.connectionUpdate);
+        conn.ev.off('creds.update', conn.credsUpdate);
+      }
+
+      conn.handler = handler.handler.bind(conn);
+      conn.connectionUpdate = connectionUpdate.bind(conn);
+      conn.credsUpdate = saveCreds.bind(conn, true);
+
+      conn.ev.on('messages.upsert', conn.handler);
+      conn.ev.on('connection.update', conn.connectionUpdate);
+      conn.ev.on('creds.update', conn.credsUpdate);
+      isInit = false;
+      return true;
+    };
     creloadHandler(false);
   }
 
@@ -130,11 +178,11 @@ let handler = async (m, { conn: _conn, args, usedPrefix, command, isOwner }) => 
 handler.help = ['code'];
 handler.tags = ['serbot'];
 handler.command = ['code', 'Code', 'serbot code'];
-handler.rowner = false;
-handler.register = false;
+handler.rowner = false 
+handler.register = false 
 
 export default handler;
 
 function sleep(ms) {
   return new Promise(resolve => setTimeout(resolve, ms));
-                               }
+  }
