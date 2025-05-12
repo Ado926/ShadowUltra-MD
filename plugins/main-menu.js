@@ -30,7 +30,7 @@ let handler = async (m, { conn, usedPrefix, usedPrefix: _p, __dirname, text, com
         // 📢 Enviar imagen con mensaje previo y canal de WhatsApp
         await conn.sendMessage(m.chat, {
             image: { url: imagenAviso},
-            caption: `✨ ** 𝙎𝙝𝙖𝙙𝙤𝙬 𝙚𝙨𝙩𝙖 𝙚𝙣𝙫𝙞𝙖𝙣𝙙𝙤 𝙚𝙡 𝙢𝙚𝙣𝙪́ 𝙚𝙨𝙥𝙚𝙧𝙚 𝙪𝙣𝙤𝙨 𝙨𝙚𝙜𝙪𝙣𝙙𝙤𝙨 𝙥𝙤𝙧 𝙛𝙖𝙫𝙤𝙧 👻** 👻\n\n🔗 **Únete a nuestro canal de WhatsApp:** [Shadow Garden Oficial](${whatsappChannel})`
+            caption: `✨ **𝙎𝙝𝙖𝙙𝙤𝙬 𝙚𝙨𝙩𝙖 𝙚𝙣𝙫𝙞𝙖𝙣𝙙𝙤 𝙚𝙡 𝙢𝙚𝙣𝙪́ 𝙚𝙨𝙥𝙚𝙧𝙚 𝙪𝙣𝙤𝙨 𝙨𝙚𝙜𝙪𝙣𝙙𝙤𝙨 𝙥𝙤𝙧 𝙛𝙖𝙫𝙤𝙧**👻\n\n🔗 **Únete a nuestro canal de WhatsApp:** [Shadow Garden Oficial](${whatsappChannel})`
 });
 
         // ⏳ Pausa breve para mayor realismo
@@ -316,4 +316,4 @@ function clockString(ms) {
   let m = isNaN(ms) ? '--' : Math.floor(ms / 60000) % 60
   let s = isNaN(ms) ? '--' : Math.floor(ms / 1000) % 60
   return [h, m, s].map(v => v.toString().padStart(2, 0)).join(':')
-    }
+        }
