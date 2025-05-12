@@ -34,7 +34,7 @@ let handler = async (m, { conn, usedPrefix, usedPrefix: _p, __dirname, text, com
 
         // ⏳ Pausa breve para mayor realismo
         await new Promise(resolve => setTimeout(resolve, 2000));
-      
+
         let menu = `
  🌑『🖤 𝐒𝐇𝐀𝐃𝐎𝐖 𝐆𝐀𝐑𝐃𝐄𝐍 🖤』🌑
 
@@ -315,4 +315,4 @@ function clockString(ms) {
   let m = isNaN(ms) ? '--' : Math.floor(ms / 60000) % 60
   let s = isNaN(ms) ? '--' : Math.floor(ms / 1000) % 60
   return [h, m, s].map(v => v.toString().padStart(2, 0)).join(':')
-             }
+            }
