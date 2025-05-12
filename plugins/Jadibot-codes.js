@@ -118,7 +118,7 @@ if (!bot.jadibotmd) return m.reply(' anda a pedir Code a otro lado de gil de mie
       if (connection == 'open') {
         conn.isInit = true;
         global.conns.push(conn);
-await parent.reply(m.chat, args[0] ? '✅ ¡Conexión establecida con éxito!':`𝗖𝗼𝗻𝗲𝘅𝗶𝗼́𝗻 𝗲𝘅𝗶𝘁𝗼𝘀𝗮 𝗮 𝗪𝗵𝗮𝘁𝘀𝗔𝗽𝗽! 🌹\n😋 Si se desconecta, usa *#delsesion* para cerrar sesión luego *#code* para un nuevo código.\nᴏᴘᴄɪᴏ́ɴ ᴀñᴀᴅɪᴅᴀ ᴘᴏʀ shadow y no olvides seguir nuestro canal` https://whatsapp.com/channel/0029VbAXuUtB4hdYWC6m2R1h, m);
+await parent.reply(m.chat, args[0] ? '✅ ¡Conexión establecida con éxito!': `🍷 𝗖𝗼𝗻𝗲𝘅𝗶𝗼́𝗻 𝗲𝘅𝗶𝘁𝗼𝘀𝗮 𝗮 𝗪𝗵𝗮𝘁𝘀𝗔𝗽𝗽! 🌹\n😋 Si se desconecta, usa *#delsesion* para cerrar sesión luego *#code* para un nuevo código.\nᴏᴘᴄɪᴏ́ɴ ᴀñᴀᴅɪᴅᴀ ᴘᴏʀ shadow`, m);
         await sleep(5000);
         if (args[0]) return;
 
