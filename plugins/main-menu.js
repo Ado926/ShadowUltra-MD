@@ -15,26 +15,26 @@ let handler = async (m, { conn, usedPrefix, usedPrefix: _p, __dirname, text, com
         const _uptime = process.uptime() * 1000;
         const uptime = clockString(_uptime);
 
-        let totalreg = Object.keys(global.db.data.users).length;
-        let rtotalreg = Object.values(global.db.data.users).filter(user => user.registered == true).length;
+        let totalreg = Object.keys(global.db.data.users).length
+        let rtotalreg = Object.values(global.db.data.users).filter(user => user.registered == true).length
 
-        await m.react('💥');
+        await m.react('💥')
 
-        let who = m.mentionedJid && m.mentionedJid[0]? m.mentionedJid[0]: m.fromMe? conn.user.jid: m.sender;
-        let perfil = await conn.profilePictureUrl(who, 'image').catch(_ => 'https://files.catbox.moe/pk3xxk.jpg');
+        let who = m.mentionedJid && m.mentionedJid[0]? m.mentionedJid[0]: m.fromMe? conn.user.jid: m.sender
+        let perfil = await conn.profilePictureUrl(who, 'image').catch(_ => 'https://files.catbox.moe/pk3xxk.jpg')
 
-        const videoAviso = 'https://files.catbox.moe/mjiw8f.mp4'; // URL del video de aviso
-        const videoMenu = 'https://files.catbox.moe/eggcfo.mp4'; // URL fija del video del menú
+        const videoUrl = 'https://files.catbox.moe/eggcfo.mp4' // URL fija del video
+        const imagenAviso = 'https://files.catbox.moe/e69vxa.jpg' // URL de la imagen para el aviso
 
-        // 📢 Enviar video con mensaje previo
+        // 📢 Enviar imagen con mensaje previo
         await conn.sendMessage(m.chat, {
-            video: { url: videoAviso},
+            image: { url: imagenAviso},
             caption: "✨ **¡Enviando tu menú!** ✨"
 });
 
         // ⏳ Pausa breve para mayor realismo
         await new Promise(resolve => setTimeout(resolve, 2000));
-
+        
         let menu = `
  🌑『🖤 𝐒𝐇𝐀𝐃𝐎𝐖 𝐆𝐀𝐑𝐃𝐄𝐍 🖤』🌑
 
@@ -315,4 +315,4 @@ function clockString(ms) {
   let m = isNaN(ms) ? '--' : Math.floor(ms / 60000) % 60
   let s = isNaN(ms) ? '--' : Math.floor(ms / 1000) % 60
   return [h, m, s].map(v => v.toString().padStart(2, 0)).join(':')
-    }
+            }
