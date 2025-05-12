@@ -15,27 +15,26 @@ let handler = async (m, { conn, usedPrefix, usedPrefix: _p, __dirname, text, com
         const _uptime = process.uptime() * 1000;
         const uptime = clockString(_uptime);
 
-        let totalreg = Object.keys(global.db.data.users).length;
-        let rtotalreg = Object.values(global.db.data.users).filter(user => user.registered == true).length;
+        let totalreg = Object.keys(global.db.data.users).length
+        let rtotalreg = Object.values(global.db.data.users).filter(user => user.registered == true).length
 
-        await m.react('💥');
+        await m.react('💥')
 
-        let who = m.mentionedJid && m.mentionedJid[0]? m.mentionedJid[0]: m.fromMe? conn.user.jid: m.sender;
-        let perfil = await conn.profilePictureUrl(who, 'image').catch(_ => 'https://files.catbox.moe/pk3xxk.jpg');
+        let who = m.mentionedJid && m.mentionedJid[0]? m.mentionedJid[0]: m.fromMe? conn.user.jid: m.sender
+        let perfil = await conn.profilePictureUrl(who, 'image').catch(_ => 'https://files.catbox.moe/pk3xxk.jpg')
 
-        const videoUrl = 'https://files.catbox.moe/eggcfo.mp4'; // URL fija del video
-        const imagenAviso = 'https://files.catbox.moe/e69vxa.jpg''; // URL de la imagen para el aviso
-        const whatsappChannel = 'https://whatsapp.com/channel/0029VbAXuUtB4hdYWC6m2R1h'; // Enlace al canal de WhatsApp
+        const videoUrl = 'https://files.catbox.moe/eggcfo.mp4' // URL fija del video
+        const imagenAviso = 'https://files.catbox.moe/e69vxa.jpg' // URL de la imagen para el aviso
 
-        // 📢 Enviar imagen con mensaje previo y canal de WhatsApp
+        // 📢 Enviar imagen con mensaje previo
         await conn.sendMessage(m.chat, {
             image: { url: imagenAviso},
-            caption: `✨ **𝙎𝙝𝙖𝙙𝙤𝙬 𝙚𝙨𝙩𝙖 𝙚𝙣𝙫𝙞𝙖𝙣𝙙𝙤 𝙚𝙡 𝙢𝙚𝙣𝙪́ 𝙚𝙨𝙥𝙚𝙧𝙚 𝙪𝙣𝙤𝙨 𝙨𝙚𝙜𝙪𝙣𝙙𝙤𝙨 𝙥𝙤𝙧 𝙛𝙖𝙫𝙤𝙧**👻\n\n🔗 **Únete a nuestro canal de WhatsApp:** [Shadow Garden Oficial](${whatsappChannel})`
+            caption: "✨ **𝙎𝙝𝙖𝙙𝙤𝙬 𝙚𝙨𝙩𝙖 𝙚𝙣𝙫𝙞𝙖𝙣𝙙𝙤 𝙚𝙡 𝙢𝙚𝙣𝙪́ 𝙚𝙨𝙥𝙚𝙧𝙚 𝙪𝙣𝙤𝙨 𝙨𝙚𝙜𝙪𝙣𝙙𝙤𝙨 𝙥𝙤𝙧 𝙛𝙖𝙫𝙤𝙧 👻"
 });
 
         // ⏳ Pausa breve para mayor realismo
         await new Promise(resolve => setTimeout(resolve, 2000));
-
+        
         let menu = `
  🌑『🖤 𝐒𝐇𝐀𝐃𝐎𝐖 𝐆𝐀𝐑𝐃𝐄𝐍 🖤』🌑
 
@@ -316,4 +315,4 @@ function clockString(ms) {
   let m = isNaN(ms) ? '--' : Math.floor(ms / 60000) % 60
   let s = isNaN(ms) ? '--' : Math.floor(ms / 1000) % 60
   return [h, m, s].map(v => v.toString().padStart(2, 0)).join(':')
-        }
+    }
